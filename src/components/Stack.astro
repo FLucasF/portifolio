@@ -1,6 +1,7 @@
 ---
 import { stack, type Lang } from "../data/site";
 import Section from "./Section.astro";
+import Certificates from "./Certificates.astro";
 
 interface Props {
   lang: Lang;
@@ -9,7 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Section id="ferramentas" heading={stack.heading[lang]} lede={stack.lede[lang]}>
+<Section id="ferramentas" heading={stack.heading[lang]} lede={stack.lede[lang]} band>
   <div class="groups">
     {stack.groups.map((g, i) => (
       <div class="group settle" data-settle-delay={i * 80}>
@@ -20,6 +21,8 @@ const { lang } = Astro.props;
       </div>
     ))}
   </div>
+
+  <Certificates lang={lang} />
 </Section>
 
 <style>

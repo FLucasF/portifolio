@@ -4,6 +4,7 @@ import type { Lang } from "../data/site";
 export const ui = {
   nav: {
     now: { pt: "Agora", en: "Now" },
+    experience: { pt: "Experiência", en: "Experience" },
     work: { pt: "Trabalhos", en: "Work" },
     tools: { pt: "Ferramentas", en: "Tools" },
     about: { pt: "Sobre", en: "About" },

@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # A duração dos cargos é calculada na build. Sem esta reconstrução mensal,
+  # "1 ano 5 meses" ficaria parado no dia do último push.
+  schedule:
+    - cron: "0 6 1 * *"
   workflow_dispatch:
 
 permissions:

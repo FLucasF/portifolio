@@ -1,0 +1,135 @@
+---
+import { experience, type Lang } from "../data/site";
+import { duracao, periodo } from "../lib/tempo";
+import Section from "./Section.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+/* Datas resolvidas na build: o cargo em andamento conta até hoje. */
+const roles = experience.roles.map((r) => ({
+  ...r,
+  quando: periodo(r.inicio, r.fim, lang),
+  quanto: duracao(r.inicio, r.fim, lang),
+  atual: !r.fim,
+}));
+---
+
+<Section id="experiencia" heading={experience.heading[lang]} lede={experience.lede[lang]} band>
+  <ol class="linha">
+    {roles.map((r, i) => (
+      <li class="cargo settle" data-settle-delay={i * 70}>
+        <div class="quando">
+          <p class="tag periodo">
+            {r.atual && <span class="lampada" aria-hidden="true"></span>}
+            {r.quando}
+          </p>
+          <p class="tag duracao">{r.quanto}</p>
+        </div>
+
+        <div class="corpo">
+          <h3 class="display funcao">{r.role[lang]}</h3>
+          <p class="tag org">
+            {r.org} <span class="sep">·</span> {r.mode[lang]} <span class="sep">·</span> {r.place[lang]}
+          </p>
+          <p class="texto prose-measure">{r.body[lang]}</p>
+          <ul class="skills">
+            {r.skills.map((s) => <li class="tag skill">{s}</li>)}
+          </ul>
+        </div>
+      </li>
+    ))}
+  </ol>
+</Section>
+
+<style>
+  .linha {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid var(--ink);
+  }
+
+  .cargo {
+    display: grid;
+    gap: 0.75rem 2.5rem;
+    padding-block: 2rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .quando p {
+    margin: 0;
+  }
+
+  /* Tracking menor para o intervalo caber numa linha só na coluna. */
+  .periodo {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: 0.09em;
+  }
+
+  /* O mesmo marcador aceso da capa: aqui ele diz "ainda em curso". */
+  .lampada {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--sol);
+  }
+
+  .duracao {
+    margin-top: 0.3rem;
+    color: var(--muted);
+  }
+
+  .funcao {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.375rem, 4vw, 2rem);
+    font-weight: 800;
+  }
+
+  .org {
+    margin: 0 0 0.75rem;
+    color: var(--anil);
+  }
+
+  .sep {
+    color: var(--muted);
+  }
+
+  .texto {
+    margin: 0 0 1rem;
+    color: var(--muted);
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .skill {
+    border: 1px solid var(--rule);
+    padding: 0.2rem 0.5rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 768px) {
+    .cargo {
+      grid-template-columns: 15rem minmax(0, 1fr);
+    }
+
+    .quando {
+      padding-top: 0.55rem;
+    }
+  }
+</style>

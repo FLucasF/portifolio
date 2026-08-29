@@ -71,8 +71,8 @@ export const now = {
         en: "The Phoebus project, at the AYTY lab",
       },
       body: {
-        pt: "O AYTY é o laboratório de engenharia de software aplicada da UFPB Campus IV, em Rio Tinto. O projeto com a Phoebus Tecnologia existe desde 2017 e trabalha com pagamento eletrônico: e-commerce, PoS inteligente e dívida técnica.",
-        en: "AYTY is the applied software engineering lab at UFPB Campus IV, in Rio Tinto, Brazil. Its project with Phoebus Tecnologia has run since 2017 and works on electronic payments: e-commerce, smart PoS, and technical debt.",
+        pt: "Bolsista full stack, 30 horas por semana, remoto. Atuo nas duas pontas conforme a demanda aparece: componentes de back-end, interfaces de front-end e a documentação técnica que mantém o software sustentável.",
+        en: "Full stack research fellow, 30 hours a week, remote. I work at both ends as demand comes up: back-end components, front-end interfaces, and the technical documentation that keeps the software maintainable.",
       },
     },
     {
@@ -98,6 +98,149 @@ export const now = {
       },
     },
   ] satisfies NowItem[],
+};
+
+/* -------------------------------------------------------------------------- */
+/*  Experiência                                                               */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Os períodos guardam só o mês de início e o de fim. A duração em texto é
+ * calculada na build por `src/lib/tempo.ts`, então nada aqui precisa ser
+ * reescrito conforme o tempo passa.
+ */
+export type Cargo = {
+  slug: string;
+  role: Bi;
+  org: string;
+  /** Vínculo e regime, como "Meio período · Remoto". */
+  mode: Bi;
+  place: Bi;
+  inicio: string;
+  /** Ausente quando o cargo está em andamento. */
+  fim?: string;
+  body: Bi;
+  skills: string[];
+};
+
+export const experience = {
+  heading: { pt: "Experiência", en: "Experience" } satisfies Bi,
+  lede: {
+    pt: "Bolsa, estágio e monitoria, todos dentro da UFPB Campus IV ou em projeto que ela mantém com empresa.",
+    en: "Research fellowships, an internship, and a teaching assistantship, all inside UFPB Campus IV or in projects it runs with companies.",
+  } satisfies Bi,
+  roles: [
+    {
+      slug: "phoebus",
+      role: {
+        pt: "Bolsista desenvolvedor full stack",
+        en: "Full stack research fellow",
+      },
+      org: "Phoebus · Projeto AYTY",
+      mode: { pt: "Meio período · 30h · Remoto", en: "Part time · 30h · Remote" },
+      place: { pt: "Paraíba, Brasil", en: "Paraíba, Brazil" },
+      inicio: "2025-04",
+      body: {
+        pt: "O projeto AYTY é uma colaboração entre a UFPB Campus IV e a Phoebus. Atuo de forma versátil na solução de demandas: desenvolvo e mantenho componentes de back-end, implemento interfaces de front-end e escrevo a documentação técnica que garante a qualidade e a manutenção do software.",
+        en: "The AYTY project is a partnership between UFPB Campus IV and Phoebus. I work across whatever a demand needs: building and maintaining back-end components, implementing front-end interfaces, and writing the technical documentation that keeps the software correct and maintainable.",
+      },
+      skills: ["Java", "Spring Boot", "TypeScript", "Documentação técnica"],
+    },
+    {
+      slug: "a4s-embaralhado",
+      role: { pt: "Desenvolvedor de software", en: "Software developer" },
+      org: "apps4society",
+      mode: { pt: "Estágio · Remoto", en: "Internship · Remote" },
+      place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
+      inicio: "2024-08",
+      fim: "2025-04",
+      body: {
+        pt: "Construí o Embaralhado Indígena, a versão web do aplicativo Android criado no TCC de João Fidelis Freire de Oliveira. Fiz a interface em Angular com TypeScript e um microsserviço em Spring Boot com MySQL e MinIO para guardar as imagens. Tirar o jogo do Android e levá-lo para a web acabou com a exigência de instalar qualquer coisa, e esse era o ponto: ele ensina alfabetização com palavras da cultura indígena.",
+        en: "I built Embaralhado Indígena, the web version of an Android app created in the final-year project of João Fidelis Freire de Oliveira. I wrote the Angular and TypeScript interface and a Spring Boot microservice with MySQL and MinIO to hold the images. Moving the game off Android and onto the web removed the need to install anything, which was the point: it teaches literacy through words from indigenous culture.",
+      },
+      skills: ["Angular", "TypeScript", "Spring Boot", "MySQL", "MinIO", "Scrum", "Kanban"],
+    },
+    {
+      slug: "monitoria-java",
+      role: { pt: "Monitor de programação em Java", en: "Java teaching assistant" },
+      org: "Universidade Federal da Paraíba",
+      mode: { pt: "Bolsa · Híbrido", en: "Fellowship · Hybrid" },
+      place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
+      inicio: "2024-03",
+      fim: "2024-08",
+      body: {
+        pt: "Corrigi atividades, apoiei as aulas práticas presenciais e a distância e gravei videoaulas sobre Git e GitHub, com os slides que as acompanham. Ajudei a organizar os horários de monitoria entre os monitores, participei dos testes do sistema githubclass para o semestre seguinte e apresentei a experiência no ENID.",
+        en: "I graded coursework, supported practical classes on-site and online, and recorded video lessons on Git and GitHub with the slides that go with them. I helped schedule tutoring hours across the assistants, tested the githubclass system for the following term, and presented the experience at ENID.",
+      },
+      skills: ["Java", "POO", "Git", "GitHub"],
+    },
+    {
+      slug: "a4s-golpe",
+      role: { pt: "Desenvolvedor de software", en: "Software developer" },
+      org: "apps4society",
+      mode: { pt: "Bolsa", en: "Fellowship" },
+      place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
+      inicio: "2024-02",
+      fim: "2024-08",
+      body: {
+        pt: "Trabalhei no Evite o Golpe, que ensina a reconhecer fraude online. O aplicativo tinha nascido no MIT App Inventor e virou web em React, para rodar em celular e computador sem download. Corrigi bugs, implementei a randomização das perguntas e o retorno visual, e montei o formulário de avaliação. Testamos com estudantes e pessoas idosas, e o que voltou desses testes guiou as mudanças.",
+        en: "I worked on Evite o Golpe, which teaches people to recognise online fraud. The app had started in MIT App Inventor and moved to the web in React, so it runs on phones and computers with no download. I fixed bugs, implemented question randomisation and visual feedback, and built the feedback form. We tested with students and older people, and what came back from those sessions drove the changes.",
+      },
+      skills: ["React", "JavaScript", "MIT App Inventor"],
+    },
+    {
+      slug: "pensamento-computacional",
+      role: { pt: "Instrutor", en: "Instructor" },
+      org: "Universidade Federal da Paraíba",
+      mode: { pt: "Extensão", en: "Outreach" },
+      place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
+      inicio: "2023-06",
+      fim: "2023-12",
+      body: {
+        pt: "Oficinas e cursos de pensamento computacional para estudantes da educação básica de Rio Tinto, construindo aplicativos no MIT App Inventor 2. O alvo eram as habilidades por trás da programação: decompor um problema, reconhecer padrões, abstrair e montar o algoritmo. Ensinar isso foi o que mais me obrigou a entender o que eu achava que já sabia.",
+        en: "Workshops and short courses on computational thinking for basic-education students in Rio Tinto, building apps in MIT App Inventor 2. The target was the thinking behind programming: breaking a problem apart, spotting patterns, abstracting, and assembling an algorithm. Teaching it is what forced me to actually understand what I thought I already knew.",
+      },
+      skills: ["MIT App Inventor 2", "Ensino"],
+    },
+  ] satisfies Cargo[],
+};
+
+/* -------------------------------------------------------------------------- */
+/*  Certificados                                                              */
+/* -------------------------------------------------------------------------- */
+
+export type Certificado = {
+  title: string;
+  issuer: string;
+  code: string;
+  url: string;
+  date?: Bi;
+};
+
+export const certificates = {
+  heading: { pt: "Certificados", en: "Certificates" } satisfies Bi,
+  verify: { pt: "Ver credencial", en: "View credential" } satisfies Bi,
+  items: [
+    {
+      title: "Java COMPLETO: Programação Orientada a Objetos + Projetos",
+      issuer: "Udemy",
+      code: "UC-266b61cc-8ef2-4198-91d2-ce03b4a18af0",
+      url: "https://www.udemy.com/certificate/UC-266b61cc-8ef2-4198-91d2-ce03b4a18af0/",
+    },
+    {
+      title: "Formação Front-end: HTML, CSS, JavaScript, React e mais",
+      issuer: "Udemy",
+      code: "UC-44258552-37f6-48de-90aa-97ee380c7ca9",
+      url: "https://www.udemy.com/certificate/UC-44258552-37f6-48de-90aa-97ee380c7ca9/",
+    },
+    {
+      title: "Teste de aplicações modernas com Cypress",
+      issuer: "Udemy",
+      code: "UC-d2316daf-ccfb-45fe-bce1-b9f5dad386fc",
+      url: "https://www.udemy.com/certificate/UC-d2316daf-ccfb-45fe-bce1-b9f5dad386fc/",
+      date: { pt: "jun de 2024", en: "Jun 2024" },
+    },
+  ] satisfies Certificado[],
 };
 
 /* -------------------------------------------------------------------------- */

@@ -28,6 +28,12 @@ Quase tudo que você vai querer mudar está em um arquivo só:
 seção "Agora", a lista de projetos, as ferramentas e o texto do "Sobre". Cada
 texto é um par `{ pt, en }`. Se você editar um lado, edite o outro.
 
+As durações de cargo ("1 ano 5 meses") não são escritas à mão: cada entrada de
+`experience` guarda só `inicio` e `fim` no formato `AAAA-MM`, e
+[`src/lib/tempo.ts`](src/lib/tempo.ts) calcula o texto na build. Um cargo sem
+`fim` conta até hoje. Por isso o workflow também roda no dia 1º de cada mês:
+sem essa reconstrução, o número congelaria na data do último push.
+
 Três coisas para preencher assim que puder:
 
 1. `person.email` está vazio. Enquanto estiver vazio, o e-mail não aparece na
@@ -92,11 +98,14 @@ MSYS_NO_PATHCONV=1 BASE_PATH=/portfolio npm run build
 src/
   data/site.ts        conteúdo bilíngue, tipado
   i18n/ui.ts          textos de interface e ajudantes de idioma
+  lib/tempo.ts        duração e período dos cargos, calculados na build
   layouts/Base.astro  <head>, tema sem piscar, observador da animação
   components/
     Cover.astro       a capa: moldura, nome e ilustração
     Personagem.astro  a ilustração, otimizada pelo <Image> do Astro
     Section.astro     cabeçalho de seção reaproveitado pelas quatro seguintes
+    Experience.astro  cargos, com a duração vinda de lib/tempo.ts
+    Certificates.astro  credenciais, no fim da seção Ferramentas
     Now.astro  Work.astro  Stack.astro  About.astro  Contact.astro
     Header.astro  Footer.astro  Page.astro
   pages/

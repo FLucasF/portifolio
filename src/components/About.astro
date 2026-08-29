@@ -9,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Section id="sobre" heading={about.heading[lang]} band>
+<Section id="sobre" heading={about.heading[lang]}>
   <div class="about settle">
     {about.body[lang].map((paragraph, i) => (
       <p class:list={["para", i === 0 && "para-lead"]}>{paragraph}</p>

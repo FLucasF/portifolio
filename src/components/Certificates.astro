@@ -1,0 +1,98 @@
+---
+import { certificates, type Lang } from "../data/site";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<div class="certificados settle">
+  <h3 class="tag titulo">{certificates.heading[lang]}</h3>
+
+  <ul class="lista">
+    {certificates.items.map((c) => (
+      <li class="item">
+        <a class="link" href={c.url} target="_blank" rel="noopener noreferrer">
+          <span class="nome">{c.title}</span>
+          <span class="tag meta">
+            {c.issuer}
+            {c.date && <> <span class="sep">·</span> {c.date[lang]}</>}
+            <span class="sep">·</span> {c.code}
+          </span>
+          <span class="seta" aria-hidden="true">↗</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .certificados {
+    margin-top: 3.5rem;
+  }
+
+  .titulo {
+    margin: 0 0 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--ink);
+    color: var(--anil);
+  }
+
+  .lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .item {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.2rem 1rem;
+    padding-block: 0.9rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.18s ease, padding-inline-start 0.18s ease;
+  }
+
+  .link:hover {
+    color: var(--anil);
+    padding-inline-start: 0.5rem;
+  }
+
+  .nome {
+    grid-column: 1;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .meta {
+    grid-column: 1;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+  }
+
+  .sep {
+    opacity: 0.6;
+  }
+
+  .seta {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    color: var(--muted);
+  }
+
+  .link:hover .seta {
+    color: var(--anil);
+  }
+</style>
