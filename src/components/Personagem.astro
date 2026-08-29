@@ -1,0 +1,36 @@
+---
+/**
+ * Bloco da capa: a ilustração do Lucas acenando.
+ *
+ * O PNG de origem mora em src/assets, então o Astro gera os WebP responsivos
+ * na build e nada do arquivo pesado chega ao navegador.
+ */
+import { Image } from "astro:assets";
+import lucas from "../assets/lucas-acenando.png";
+---
+
+<div class="bloco">
+  <Image
+    class="figura"
+    src={lucas}
+    alt="Lucas Felipe sentado de pernas cruzadas com um notebook, acenando"
+    widths={[320, 480, 640, 900]}
+    sizes="(min-width: 880px) 26rem, 15rem"
+    format="webp"
+    quality={82}
+    loading="eager"
+    fetchpriority="high"
+  />
+</div>
+
+<style>
+  .bloco {
+    position: relative;
+  }
+
+  .figura {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>

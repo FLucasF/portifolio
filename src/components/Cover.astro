@@ -1,6 +1,6 @@
 ---
 import { person, cover, type Lang } from "../data/site";
-import Woodcut from "./Woodcut.astro";
+import Personagem from "./Personagem.astro";
 
 interface Props {
   lang: Lang;
@@ -40,8 +40,8 @@ const second = rest.join(" ");
           </div>
         </div>
 
-        <div class="cover-block" aria-hidden="false">
-          <Woodcut />
+        <div class="cover-block">
+          <Personagem />
         </div>
       </div>
     </div>

@@ -41,8 +41,12 @@ Outros pontos:
 - **Cores e fontes** — [`src/styles/global.css`](src/styles/global.css), no topo.
   Os tokens `--paper`, `--ink`, `--anil` e `--sol` definem os dois temas.
 - **Textos de navegação e rodapé** — [`src/i18n/ui.ts`](src/i18n/ui.ts).
-- **Imagem de compartilhamento** — [`scripts/og.mjs`](scripts/og.mjs). Depois de
-  mudar nome ou cargo, rode `npm run og` e faça commit do PNG novo.
+- **Ilustração da capa** — [`src/assets/lucas-acenando.png`](src/assets/lucas-acenando.png).
+  Para trocar, substitua o arquivo mantendo o fundo transparente. O Astro gera
+  os WebP responsivos sozinho na build.
+- **Imagem de compartilhamento** — [`scripts/og.mjs`](scripts/og.mjs). Ela compõe
+  a mesma ilustração sobre o fundo. Depois de trocar a ilustração, o nome ou o
+  cargo, rode `npm run og` e faça commit do PNG novo.
 
 ## Publicar no GitHub Pages
 
@@ -90,8 +94,8 @@ src/
   i18n/ui.ts          textos de interface e ajudantes de idioma
   layouts/Base.astro  <head>, tema sem piscar, observador da animação
   components/
-    Cover.astro       a capa: moldura, nome e bloco de xilogravura
-    Woodcut.astro     o sol, gerado por código a partir de uma geometria fixa
+    Cover.astro       a capa: moldura, nome e ilustração
+    Personagem.astro  a ilustração, otimizada pelo <Image> do Astro
     Section.astro     cabeçalho de seção reaproveitado pelas quatro seguintes
     Now.astro  Work.astro  Stack.astro  About.astro  Contact.astro
     Header.astro  Footer.astro  Page.astro
