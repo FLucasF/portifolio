@@ -1,0 +1,201 @@
+---
+/**
+ * Troca de idioma: um globo que abre a lista dos dois idiomas.
+ *
+ * É um padrão de divulgação (botão + lista), não um menu de ações: o conteúdo
+ * são dois links de navegação, então basta `aria-expanded` e o Tab já percorre
+ * a lista sozinho, sem precisar de `role="menu"` e das setas do teclado.
+ */
+import type { Lang } from "../data/site";
+import { ui } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const root = base.endsWith("/") ? base : `${base}/`;
+
+const opcoes = [
+  { code: "pt-BR", lang: "pt" as Lang, href: root },
+  { code: "en-US", lang: "en" as Lang, href: `${root}en/` },
+];
+
+const atual = opcoes.find((o) => o.lang === lang)!;
+---
+
+<div class="lang" data-lang-menu>
+  <button
+    type="button"
+    class="botao"
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-controls="lista-idiomas"
+  >
+    <span class="atual">{atual.code}</span>
+    <span class="sr-only">— {ui.lang.label[lang]}</span>
+    <svg class="globo" viewBox="0 0 20 20" aria-hidden="true">
+      <circle cx="10" cy="10" r="8" />
+      <path d="M2 10h16" />
+      <ellipse cx="10" cy="10" rx="3.5" ry="8" />
+      <path d="M3.7 5.6q6.3 2.3 12.6 0" />
+      <path d="M3.7 14.4q6.3-2.3 12.6 0" />
+    </svg>
+  </button>
+
+  <ul class="lista" id="lista-idiomas" hidden>
+    {opcoes.map((o) => (
+      <li>
+        <a
+          class="opcao tag"
+          href={o.href}
+          hreflang={o.code}
+          lang={o.code}
+          aria-current={o.lang === lang ? "true" : undefined}
+        >
+          <span class="marca" aria-hidden="true">{o.lang === lang ? "●" : ""}</span>
+          {o.code}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  for (const raiz of document.querySelectorAll<HTMLElement>("[data-lang-menu]")) {
+    const botao = raiz.querySelector<HTMLButtonElement>("button");
+    const lista = raiz.querySelector<HTMLElement>("ul");
+    if (!botao || !lista) continue;
+
+    const abrir = (sim: boolean) => {
+      botao.setAttribute("aria-expanded", String(sim));
+      lista.hidden = !sim;
+    };
+
+    botao.addEventListener("click", () => {
+      abrir(botao.getAttribute("aria-expanded") !== "true");
+    });
+
+    // Clique fora fecha. O clique no próprio menu não conta.
+    document.addEventListener("click", (evento) => {
+      if (!raiz.contains(evento.target as Node)) abrir(false);
+    });
+
+    // Esc fecha e devolve o foco ao botão, senão ele se perde na página.
+    raiz.addEventListener("keydown", (evento) => {
+      if (evento.key !== "Escape") return;
+      abrir(false);
+      botao.focus();
+    });
+
+    // Sair da lista com Tab também fecha.
+    raiz.addEventListener("focusout", () => {
+      window.setTimeout(() => {
+        if (!raiz.contains(document.activeElement)) abrir(false);
+      }, 0);
+    });
+  }
+</script>
+
+<style>
+  .lang {
+    position: relative;
+    display: flex;
+  }
+
+  .botao {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 1.75rem;
+    padding: 0 0.15rem;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.18s ease;
+  }
+
+  .botao:hover,
+  .botao[aria-expanded="true"] {
+    color: var(--anil);
+  }
+
+  .atual {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+
+  .globo {
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  /* A lista repete a moldura do folheto: canto vivo e filete de tinta. */
+  .lista {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 10;
+    min-width: 7rem;
+    margin: 0;
+    padding: 0.25rem;
+    list-style: none;
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    box-shadow: 3px 4px 0 0 var(--anil);
+  }
+
+  .lista[hidden] {
+    display: none;
+  }
+
+  /* Código de idioma tem caixa própria: pt-BR, não PT-BR. */
+  .opcao {
+    text-transform: none;
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.55rem;
+    color: var(--muted);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .opcao:hover {
+    background: var(--anil-wash);
+    color: var(--anil);
+  }
+
+  .opcao[aria-current] {
+    color: var(--ink);
+  }
+
+  .marca {
+    width: 0.5rem;
+    font-size: 0.5rem;
+    color: var(--sol);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

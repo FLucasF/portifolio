@@ -9,13 +9,15 @@ export const ui = {
     tools: { pt: "Ferramentas", en: "Tools" },
     about: { pt: "Sobre", en: "About" },
     contact: { pt: "Contato", en: "Contact" },
+    /** Rótulo do próprio menu, para quem navega por leitor de tela. */
+    sections: { pt: "Seções do site", en: "Site sections" },
   },
   theme: {
     toLight: { pt: "Usar tema claro", en: "Switch to light theme" },
     toDark: { pt: "Usar tema escuro", en: "Switch to dark theme" },
   },
   lang: {
-    switchTo: { pt: "Read in English", en: "Ler em português" },
+    label: { pt: "Escolher idioma", en: "Choose language" },
   },
   skip: { pt: "Ir para o conteúdo", en: "Skip to content" },
   rights: {
@@ -42,5 +44,3 @@ export function href(path: string, lang: Lang, base: string): string {
   const clean = path.replace(/^\//, "");
   return `${prefix}${clean}`;
 }
-
-export const otherLang = (lang: Lang): Lang => (lang === "pt" ? "en" : "pt");

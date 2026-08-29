@@ -1,0 +1,131 @@
+---
+/**
+ * Troca de tema. Sol no claro, lua no escuro.
+ *
+ * Os dois ícones vão no HTML e o CSS mostra um de cada vez, porque o tema pode
+ * vir do sistema — sem escolha salva não há atributo em `<html>` para o script
+ * ler, e só a media query sabe qual está valendo.
+ */
+import type { Lang } from "../data/site";
+import { ui } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<button type="button" id="theme-toggle" class="botao" aria-live="polite">
+  <span class="sr-only" data-label-light={ui.theme.toLight[lang]} data-label-dark={ui.theme.toDark[lang]}>
+    {ui.theme.toDark[lang]}
+  </span>
+
+  <svg class="icone sol" viewBox="0 0 20 20" aria-hidden="true">
+    <circle cx="10" cy="10" r="4.2" />
+    <path
+      d="M10 1v2.4M10 16.6V19M1 10h2.4M16.6 10H19M3.6 3.6l1.7 1.7M14.7 14.7l1.7 1.7M16.4 3.6l-1.7 1.7M5.3 14.7l-1.7 1.7"
+    />
+  </svg>
+
+  <svg class="icone lua" viewBox="0 0 20 20" aria-hidden="true">
+    <path d="M16.3 12.4A7 7 0 0 1 7.6 3.7 7 7 0 1 0 16.3 12.4Z" />
+  </svg>
+</button>
+
+<script>
+  const raiz = document.documentElement;
+  const botao = document.getElementById("theme-toggle");
+  const rotulo = botao?.querySelector<HTMLElement>("[data-label-light]");
+
+  function atual(): "light" | "dark" {
+    const escolhido = raiz.getAttribute("data-theme");
+    if (escolhido === "light" || escolhido === "dark") return escolhido;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+
+  function sincroniza() {
+    if (!rotulo) return;
+    rotulo.textContent =
+      atual() === "dark" ? (rotulo.dataset.labelLight ?? "") : (rotulo.dataset.labelDark ?? "");
+  }
+
+  botao?.addEventListener("click", () => {
+    const proximo = atual() === "dark" ? "light" : "dark";
+    raiz.setAttribute("data-theme", proximo);
+    try {
+      localStorage.setItem("theme", proximo);
+    } catch (e) {
+      /* Sem armazenamento: a escolha vale só para esta visita. */
+    }
+    sincroniza();
+  });
+
+  sincroniza();
+</script>
+
+<style>
+  .botao {
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.18s ease;
+  }
+
+  .botao:hover {
+    color: var(--anil);
+  }
+
+  .icone {
+    grid-area: 1 / 1;
+    width: 1.125rem;
+    height: 1.125rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Claro é o padrão: sol à mostra, lua guardada. */
+  .lua {
+    display: none;
+  }
+
+  :global(:root[data-theme="dark"]) .sol {
+    display: none;
+  }
+
+  :global(:root[data-theme="dark"]) .lua {
+    display: block;
+  }
+
+  /* Tema vindo do sistema, sem escolha salva. */
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .sol {
+      display: none;
+    }
+
+    :global(:root:not([data-theme="light"])) .lua {
+      display: block;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
