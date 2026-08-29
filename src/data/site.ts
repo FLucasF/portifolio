@@ -77,28 +77,6 @@ export const now = {
         en: "Full stack research fellow, 30 hours a week, remote. I work at both ends as demand comes up: back-end components, front-end interfaces, and the technical documentation that keeps the software maintainable.",
       },
     },
-    {
-      label: { pt: "Construindo", en: "Building" },
-      title: {
-        pt: "NutriPlan, meu trabalho de conclusão de curso",
-        en: "NutriPlan, my final-year project",
-      },
-      body: {
-        pt: "Software de gestão para nutricionistas: agenda, prontuário, plano alimentar e exportação em PDF. Spring Boot 3.4 sobre Java 21 no servidor, React 18 com TypeScript e Vite na tela.",
-        en: "Practice-management software for nutritionists: scheduling, patient charts, meal plans, and PDF export. Spring Boot 3.4 on Java 21 for the server, React 18 with TypeScript and Vite for the screen.",
-      },
-    },
-    {
-      label: { pt: "Estudando", en: "Studying" },
-      title: {
-        pt: "Arquitetura de backend e teste automatizado",
-        en: "Backend architecture and automated testing",
-      },
-      body: {
-        pt: "Modelagem de domínio, separação de camadas e cobertura de testes em Java. Do lado da interface, Cypress para teste de ponta a ponta.",
-        en: "Domain modelling, layer separation, and test coverage in Java. On the interface side, Cypress for end-to-end testing.",
-      },
-    },
   ] satisfies NowItem[],
 };
 
