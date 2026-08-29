@@ -26,6 +26,11 @@ export const person = {
     pt: "Ciência da Computação — UFPB Campus IV",
     en: "Computer Science — UFPB Campus IV",
   } satisfies Bi,
+  /** Onde ele está hoje. Aparece na tarja da capa, ao lado do marcador aceso. */
+  current: {
+    pt: "Projeto Phoebus · Laboratório AYTY · UFPB Campus IV",
+    en: "Phoebus project · AYTY Lab · UFPB Campus IV",
+  } satisfies Bi,
 };
 
 /* -------------------------------------------------------------------------- */
@@ -39,8 +44,8 @@ export const cover = {
     en: "Chapbook no. 01 · Paraíba, Brazil · 2026",
   } satisfies Bi,
   lede: {
-    pt: "Java e Spring Boot no servidor, React e Angular na tela. Quase tudo que construí até aqui foi software de impacto social na UFPB: jogo de língua indígena, educação contra golpes, gestão escolar e gestão de consultório.",
-    en: "Java and Spring Boot on the server, React and Angular on the screen. Nearly everything I have built so far is social-impact software at UFPB: an indigenous-language game, scam-awareness education, school management, and clinic management.",
+    pt: "Java e Spring Boot no servidor, React e Angular na tela. Hoje trabalho com pagamento eletrônico no laboratório AYTY, da UFPB. Antes disso, quase tudo que construí foi software de impacto social: jogo de língua indígena, educação contra golpes e gestão escolar.",
+    en: "Java and Spring Boot on the server, React and Angular on the screen. Today I work on electronic payments at UFPB's AYTY lab. Before that, nearly everything I built was social-impact software: an indigenous-language game, scam-awareness education, and school management.",
   } satisfies Bi,
   ctaWork: { pt: "Ver os trabalhos", en: "See the work" } satisfies Bi,
   ctaContact: { pt: "Falar comigo", en: "Get in touch" } satisfies Bi,
@@ -59,6 +64,17 @@ export const now = {
     en: "Updated August 2026",
   } satisfies Bi,
   items: [
+    {
+      label: { pt: "Trabalhando", en: "Working on" },
+      title: {
+        pt: "Projeto Phoebus, no laboratório AYTY",
+        en: "The Phoebus project, at the AYTY lab",
+      },
+      body: {
+        pt: "O AYTY é o laboratório de engenharia de software aplicada da UFPB Campus IV, em Rio Tinto. O projeto com a Phoebus Tecnologia existe desde 2017 e trabalha com pagamento eletrônico: e-commerce, PoS inteligente e dívida técnica.",
+        en: "AYTY is the applied software engineering lab at UFPB Campus IV, in Rio Tinto, Brazil. Its project with Phoebus Tecnologia has run since 2017 and works on electronic payments: e-commerce, smart PoS, and technical debt.",
+      },
+    },
     {
       label: { pt: "Construindo", en: "Building" },
       title: {
@@ -79,17 +95,6 @@ export const now = {
       body: {
         pt: "Modelagem de domínio, separação de camadas e cobertura de testes em Java. Do lado da interface, Cypress para teste de ponta a ponta.",
         en: "Domain modelling, layer separation, and test coverage in Java. On the interface side, Cypress for end-to-end testing.",
-      },
-    },
-    {
-      label: { pt: "Disponível para", en: "Open to" },
-      title: {
-        pt: "Vaga de desenvolvedor júnior ou estágio",
-        en: "Junior developer or internship roles",
-      },
-      body: {
-        pt: "Presencial na Paraíba ou remoto. Backend em Java, interface em React ou Angular, ou as duas pontas.",
-        en: "On-site in Paraíba or remote. Java backend, React or Angular interface, or both ends.",
       },
     },
   ] satisfies NowItem[],
@@ -117,8 +122,8 @@ const BACK: Bi = { pt: "Servidor", en: "Backend" };
 export const work = {
   heading: { pt: "Trabalhos", en: "Work" } satisfies Bi,
   lede: {
-    pt: "Cinco projetos que dizem mais sobre como eu trabalho, do mais recente ao mais antigo.",
-    en: "Five projects that say the most about how I work, newest first.",
+    pt: "Os projetos que dizem mais sobre como eu trabalho, do mais recente ao mais antigo.",
+    en: "The projects that say the most about how I work, newest first.",
   } satisfies Bi,
   all: { pt: "Todos os repositórios", en: "All repositories" } satisfies Bi,
   live: { pt: "No ar", en: "Live" } satisfies Bi,
@@ -145,7 +150,7 @@ export const work = {
         pt: "Gerenciador Escolar AYTY",
         en: "AYTY School Manager",
       },
-      kind: { pt: "As duas pontas", en: "Both ends" },
+      kind: { pt: "Laboratório AYTY · UFPB", en: "AYTY Lab · UFPB" },
       body: {
         pt: "Gestão de turmas, alunos e registros de uma escola. Construí a interface em Angular 19 com TypeScript e a API em Java, o que me obrigou a desenhar o contrato entre as duas antes de escrever qualquer tela.",
         en: "Class, student, and record management for a school. I built the Angular 19 interface in TypeScript and the Java API, which forced me to design the contract between them before writing a single screen.",
@@ -244,13 +249,13 @@ export const about = {
   body: {
     pt: [
       "Estudo Ciência da Computação na UFPB, Campus IV, no interior da Paraíba. Comecei a programar em 2022 e o que me prendeu foi o backend: modelar o domínio direito, deixar as regras num lugar só e não espalhar lógica pela tela.",
-      "A maior parte dos meus projetos nasceu no Apps4Society, o programa de extensão da universidade que faz software para demanda real de comunidade. Isso mudou o jeito que eu penso interface. Quando o usuário é uma pessoa idosa aprendendo a reconhecer um golpe, ou uma criança aprendendo palavras em língua indígena, não sobra espaço para tela confusa.",
-      "Termino o curso construindo o NutriPlan e procuro a primeira vaga em tempo integral.",
+      "Boa parte do que construí nasceu dentro de laboratório da universidade. No Apps4Society, que faz software para demanda real de comunidade, aprendi a pensar interface de outro jeito: quando o usuário é uma pessoa idosa aprendendo a reconhecer um golpe, ou uma criança aprendendo palavras em língua indígena, não sobra espaço para tela confusa. Hoje estou no AYTY, o laboratório de engenharia de software aplicada do Campus IV, no projeto com a Phoebus Tecnologia.",
+      "Hoje divido o tempo entre o projeto Phoebus, no laboratório AYTY, e o NutriPlan, que fecha o curso.",
     ],
     en: [
       "I study Computer Science at UFPB, Campus IV, in the interior of Paraíba, Brazil. I started programming in 2022, and what held me was the backend: modelling the domain properly, keeping the rules in one place, and not scattering logic across the screen.",
-      "Most of my projects began at Apps4Society, the university outreach programme that builds software for real community needs. That changed how I think about interfaces. When your user is an older person learning to spot a scam, or a child learning words in an indigenous language, there is no room left for a confusing screen.",
-      "I am finishing my degree building NutriPlan, and looking for my first full-time role.",
+      "Much of what I have built began inside a university lab. At Apps4Society, which builds software for real community needs, I learned to think about interfaces differently: when your user is an older person learning to spot a scam, or a child learning words in an indigenous language, there is no room left for a confusing screen. Today I am at AYTY, the applied software engineering lab at Campus IV, on the Phoebus Tecnologia project.",
+      "Today I split my time between the Phoebus project at the AYTY lab and NutriPlan, which closes out my degree.",
     ],
   } as Record<Lang, string[]>,
 };
@@ -258,7 +263,7 @@ export const about = {
 export const contact = {
   heading: { pt: "Contato", en: "Contact" } satisfies Bi,
   lede: {
-    pt: "Aberto a vaga de desenvolvedor júnior e estágio, na Paraíba ou remoto.",
-    en: "Open to junior developer and internship roles, in Paraíba or remote.",
+    pt: "Para falar sobre um projeto ou trocar ideia sobre código, estou nestes dois lugares.",
+    en: "To talk about a project, or just talk shop, I am in these two places.",
   } satisfies Bi,
 };
