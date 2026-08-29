@@ -24,9 +24,10 @@ O site sobe em <http://localhost:4321>. A versão em inglês fica em `/en/`.
 
 Quase tudo que você vai querer mudar está em um arquivo só:
 
-**[`src/data/site.ts`](src/data/site.ts)** — nome, contatos, textos da capa, a
-seção "Agora", a lista de projetos, as ferramentas e o texto do "Sobre". Cada
-texto é um par `{ pt, en }`. Se você editar um lado, edite o outro.
+**[`src/data/site.ts`](src/data/site.ts)** — nome, contatos, textos da capa e de
+todas as seções, na ordem em que aparecem: Sobre, Agora, Experiência, Projetos,
+Ferramentas, Certificados e Contato. Cada texto é um par `{ pt, en }`. Se você
+editar um lado, edite o outro.
 
 As durações de cargo ("1 ano 5 meses") não são escritas à mão: cada entrada de
 `experience` guarda só `inicio` e `fim` no formato `AAAA-MM`, e
