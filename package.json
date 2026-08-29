@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "og": "node scripts/og.mjs"
+    "og": "node scripts/og.mjs",
+    "favicon": "node scripts/favicon.mjs"
   },
   "dependencies": {
     "astro": "^5.16.2"

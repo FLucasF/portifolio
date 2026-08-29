@@ -37,7 +37,9 @@ const fonts =
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang={lang === "pt" ? "en" : "pt-BR"} href={alternate} />
     <link rel="alternate" hreflang={lang === "pt" ? "pt-BR" : "en"} href={canonical} />
-    <link rel="icon" href={`${root}favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href={`${root}favicon-32.png`} />
+    <link rel="icon" type="image/png" sizes="192x192" href={`${root}favicon-192.png`} />
+    <link rel="apple-touch-icon" href={`${root}apple-touch-icon.png`} />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

@@ -19,6 +19,7 @@ O site sobe em <http://localhost:4321>. A versão em inglês fica em `/en/`.
 | `npm run build` | Gera o site estático em `dist/` |
 | `npm run preview` | Serve o `dist/` para conferir antes de publicar |
 | `npm run og` | Regera `public/og.png`, a imagem de compartilhamento |
+| `npm run favicon` | Regera os ícones de aba a partir da ilustração |
 
 ## Onde mexer
 
@@ -50,7 +51,11 @@ Outros pontos:
 - **Textos de navegação e rodapé** — [`src/i18n/ui.ts`](src/i18n/ui.ts).
 - **Ilustração da capa** — [`src/assets/lucas-acenando.png`](src/assets/lucas-acenando.png).
   Para trocar, substitua o arquivo mantendo o fundo transparente. O Astro gera
-  os WebP responsivos sozinho na build.
+  os WebP responsivos sozinho na build. Depois rode `npm run favicon` e
+  `npm run og`, que recortam dela o ícone de aba e a imagem de compartilhamento.
+- **Ícone de aba** — [`scripts/favicon.mjs`](scripts/favicon.mjs). Ele recorta o
+  rosto da ilustração; se você trocar o desenho, ajuste `CORTE` para o novo
+  enquadramento.
 - **Imagem de compartilhamento** — [`scripts/og.mjs`](scripts/og.mjs). Ela compõe
   a mesma ilustração sobre o fundo. Depois de trocar a ilustração, o nome ou o
   cargo, rode `npm run og` e faça commit do PNG novo.
