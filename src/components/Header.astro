@@ -1,5 +1,5 @@
 ---
-import { person, type Lang } from "../data/site";
+import type { Lang } from "../data/site";
 import { ui, otherLang } from "../i18n/ui";
 
 interface Props {
@@ -23,10 +23,6 @@ const nav = [
 
 <header class="site-head">
   <div class="shell head-row">
-    <a href={lang === "pt" ? root : `${root}en/`} class="mark" aria-label={person.fullName}>
-      <span class="display mark-text">{person.name}</span>
-    </a>
-
     <nav class="head-nav" aria-label={ui.nav.work[lang]}>
       {nav.map((item) => (
         <a href={`#${item.id}`} class="tag head-link">{item.label}</a>
@@ -98,19 +94,8 @@ const nav = [
   .head-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
     height: 3.5rem;
-  }
-
-  .mark {
-    text-decoration: none;
-    color: var(--ink);
-  }
-
-  .mark-text {
-    font-size: 1.5rem;
-    letter-spacing: 0.01em;
   }
 
   .head-nav {
@@ -132,6 +117,7 @@ const nav = [
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-inline-start: auto;
   }
 
   .theme-btn {

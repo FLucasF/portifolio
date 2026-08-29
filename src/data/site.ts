@@ -38,6 +38,8 @@ export const person = {
 /* -------------------------------------------------------------------------- */
 
 export const cover = {
+  /** O nome grande da capa. Nome próprio não se traduz, então é uma string só. */
+  headline: "Lucas",
   /** Linha de crédito da moldura, no estilo da lombada de um folheto. */
   edition: {
     pt: "Folheto nº 01 · Paraíba, Brasil · 2026",
