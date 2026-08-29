@@ -1,0 +1,116 @@
+---
+/**
+ * Bloco de xilogravura da capa: um sol nordestino cujo disco foi vazado em
+ * linhas horizontais de comprimento irregular. De longe são marcas de goiva,
+ * de perto são linhas de texto com a margem direita solta.
+ *
+ * A cor de anil sai deslocada da tinta preta de propósito, do jeito que sai
+ * uma capa de folheto impressa fora de registro.
+ */
+
+const CX = 110;
+const CY = 110;
+const DISC = 54;
+const RAY_INNER = 57;
+
+/* Jitter fixo. Nada aqui é aleatório em tempo de execução: o mesmo bloco sai
+   igual em toda build. */
+const RAY_COUNT = 20;
+const lengths = [98, 79, 92, 83, 101, 76, 95, 81, 90, 86, 99, 77, 93, 84, 97, 80, 91, 87, 94, 78];
+const widths = [5.4, 3.4, 4.8, 3.8, 5.6, 3.2, 5.0, 3.6, 4.6, 4.0, 5.2, 3.3, 4.9, 3.9, 5.5, 3.5, 4.7, 4.1, 5.1, 3.7];
+const skews = [0.7, -0.5, 0.4, -0.8, 0.6, -0.3, 0.9, -0.6, 0.3, -0.4, 0.8, -0.7, 0.5, -0.35, 0.75, -0.55, 0.45, -0.65, 0.85, -0.45];
+
+const polar = (r: number, deg: number) => {
+  const rad = ((deg - 90) * Math.PI) / 180;
+  return [CX + r * Math.cos(rad), CY + r * Math.sin(rad)];
+};
+
+const rays = Array.from({ length: RAY_COUNT }, (_, i) => {
+  const angle = (360 / RAY_COUNT) * i;
+  const w = widths[i];
+  const len = lengths[i];
+  const skew = skews[i];
+  const [ax, ay] = polar(RAY_INNER, angle - w);
+  const [bx, by] = polar(RAY_INNER, angle + w);
+
+  /* Raio par termina em ponta, raio ímpar termina cego. A alternância é o que
+     tira o desenho do compasso e devolve a mão. */
+  if (i % 2 === 0) {
+    const [tx, ty] = polar(len, angle + skew);
+    return `${ax.toFixed(1)},${ay.toFixed(1)} ${tx.toFixed(1)},${ty.toFixed(1)} ${bx.toFixed(1)},${by.toFixed(1)}`;
+  }
+  const [cx1, cy1] = polar(len, angle - w * 0.42 + skew);
+  const [cx2, cy2] = polar(len, angle + w * 0.42 + skew);
+  return `${ax.toFixed(1)},${ay.toFixed(1)} ${cx1.toFixed(1)},${cy1.toFixed(1)} ${cx2.toFixed(1)},${cy2.toFixed(1)} ${bx.toFixed(1)},${by.toFixed(1)}`;
+});
+
+/* As linhas vazadas no disco. Comprimento variável e duas quebras, como um
+   bloco de texto composto. */
+const CARVE_R = 45;
+const fills = [0.94, 0.78, 0.99, 0.62, 0.88, 0.97, 0.71, 0.93, 0.55, 0.9, 0.83, 0.68];
+const gaps = new Set([4, 9]);
+
+const carves = Array.from({ length: 13 }, (_, i) => {
+  const y = CY - 39 + i * 6.5;
+  const half = Math.sqrt(Math.max(CARVE_R * CARVE_R - (y - CY) ** 2, 0));
+  if (half < 6 || gaps.has(i)) return null;
+  const x1 = CX - half;
+  const x2 = x1 + half * 2 * fills[i % fills.length];
+  return { y, x1, x2 };
+}).filter((c): c is { y: number; x1: number; x2: number } => c !== null);
+
+const block = { rays, carves };
+---
+
+<svg
+  class="woodcut"
+  viewBox="0 0 220 220"
+  role="img"
+  aria-label="Sol de xilogravura com o disco vazado em linhas"
+>
+  <defs>
+    <g id="sun-block">
+      {block.rays.map((points) => <polygon points={points} />)}
+      <circle cx={CX} cy={CY} r={DISC} />
+    </g>
+  </defs>
+
+  <!-- Camada de anil, fora de registro. -->
+  <g transform="translate(5.5 6.5)" class="wc-anil">
+    <use href="#sun-block" />
+  </g>
+
+  <!-- Camada de tinta, com o disco vazado. -->
+  <g class="wc-ink">
+    <use href="#sun-block" />
+    <g class="wc-carve">
+      {block.carves.map((c) => (
+        <line x1={c.x1} y1={c.y} x2={c.x2} y2={c.y} />
+      ))}
+    </g>
+  </g>
+</svg>
+
+<style>
+  .woodcut {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  .wc-anil {
+    fill: var(--anil);
+    opacity: 0.85;
+  }
+
+  .wc-ink {
+    fill: var(--ink);
+  }
+
+  .wc-carve line {
+    stroke: var(--paper);
+    stroke-width: 3.4;
+    stroke-linecap: butt;
+  }
+</style>

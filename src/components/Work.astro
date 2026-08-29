@@ -1,0 +1,176 @@
+---
+import { work, person, type Lang } from "../data/site";
+import Section from "./Section.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Section id="trabalhos" heading={work.heading[lang]} lede={work.lede[lang]} band>
+  <ol class="ledger">
+    {work.projects.map((p, i) => (
+      <li class="entry settle" data-settle-delay={i * 70}>
+        <div class="entry-meta">
+          <p class="tag year">{p.year}</p>
+          <p class="tag kind">{p.kind[lang]}</p>
+        </div>
+
+        <div class="entry-main">
+          <div class="entry-title-row">
+            <h3 class="display entry-title">{p.title[lang]}</h3>
+            {p.live && (
+              <a class="tag live" href={p.live} target="_blank" rel="noopener noreferrer">
+                <span class="live-dot" aria-hidden="true"></span>
+                {work.live[lang]}
+              </a>
+            )}
+          </div>
+
+          <p class="entry-body prose-measure">{p.body[lang]}</p>
+
+          <ul class="chips">
+            {p.stack.map((s) => <li class="tag chip">{s}</li>)}
+          </ul>
+
+          <p class="entry-links">
+            {p.repos.map((r) => (
+              <a class="tag link-underline repo" href={r.url} target="_blank" rel="noopener noreferrer">
+                {r.label[lang]} ↗
+              </a>
+            ))}
+          </p>
+        </div>
+      </li>
+    ))}
+  </ol>
+
+  <p class="all-repos settle">
+    <a class="tag link-underline" href={person.github} target="_blank" rel="noopener noreferrer">
+      {work.all[lang]} ↗
+    </a>
+  </p>
+</Section>
+
+<style>
+  .ledger {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid var(--ink);
+    counter-reset: none;
+  }
+
+  .entry {
+    display: grid;
+    gap: 1rem 2.5rem;
+    padding-block: 2.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .entry-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .year {
+    margin: 0;
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .kind {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .entry-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.625rem;
+  }
+
+  .entry-title {
+    margin: 0;
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-weight: 800;
+  }
+
+  .live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--anil);
+    text-decoration: none;
+    border: 1px solid currentColor;
+    padding: 0.25rem 0.55rem;
+    transition: background-color 0.18s ease, color 0.18s ease;
+  }
+
+  .live:hover {
+    background: var(--anil);
+    color: var(--paper);
+  }
+
+  .live-dot {
+    width: 5px;
+    height: 5px;
+    background: currentColor;
+    border-radius: 50%;
+  }
+
+  .entry-body {
+    margin: 0 0 1.125rem;
+    color: var(--muted);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    list-style: none;
+    margin: 0 0 1.125rem;
+    padding: 0;
+  }
+
+  .chip {
+    border: 1px solid var(--rule);
+    padding: 0.2rem 0.5rem;
+    color: var(--muted);
+  }
+
+  .entry-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 0;
+  }
+
+  .repo {
+    color: var(--ink);
+  }
+
+  .all-repos {
+    margin: 2.25rem 0 0;
+  }
+
+  @media (min-width: 768px) {
+    .entry {
+      grid-template-columns: 11rem minmax(0, 1fr);
+    }
+
+    .entry-meta {
+      display: block;
+      padding-top: 0.6rem;
+    }
+
+    .year {
+      margin-bottom: 0.35rem;
+    }
+  }
+</style>

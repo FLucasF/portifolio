@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Folheto — sistema visual
+   Papel kraft, tinta de prensa e uma segunda cor de anil, como a capa de um
+   folheto de cordel. O tipo condensado faz o papel do tipo de madeira da capa,
+   o serifado faz o miolo impresso e a monoespaçada carrega os dados.
+   ========================================================================== */
+
+@theme {
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-prose: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --color-paper: #e9e1ce;
+  --color-paper-2: #e1d7bd;
+  --color-ink: #17140f;
+  --color-muted: #6b6250;
+  --color-anil: #1b4a87;
+  --color-sol: #b8801a;
+  --color-rule: #c6bba0;
+}
+
+:root {
+  --paper: #e9e1ce;
+  --paper-2: #e1d7bd;
+  --ink: #17140f;
+  --muted: #6b6250;
+  --anil: #1b4a87;
+  --anil-wash: rgba(27, 74, 135, 0.09);
+  --sol: #b8801a;
+  --rule: #c6bba0;
+  --grain: 0.05;
+
+  color-scheme: light;
+}
+
+:root:not([data-theme="light"]) {
+  @media (prefers-color-scheme: dark) {
+    --paper: #14120f;
+    --paper-2: #1c1915;
+    --ink: #e9e1ce;
+    --muted: #968c78;
+    --anil: #85b5ef;
+    --anil-wash: rgba(133, 181, 239, 0.12);
+    --sol: #e0ac45;
+    --rule: #322c24;
+    --grain: 0.07;
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #14120f;
+  --paper-2: #1c1915;
+  --ink: #e9e1ce;
+  --muted: #968c78;
+  --anil: #85b5ef;
+  --anil-wash: rgba(133, 181, 239, 0.12);
+  --sol: #e0ac45;
+  --rule: #322c24;
+  --grain: 0.07;
+
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-prose);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* A fibra do papel. Um ruído fixo por cima de tudo, sem capturar o ponteiro. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--anil);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--anil);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* --------------------------------------------------------------------------
+   Tipo
+   -------------------------------------------------------------------------- */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  font-stretch: condensed;
+}
+
+/* Rótulo de dado: ano, linguagem, seção. Sempre pequeno, sempre espaçado. */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.prose-measure {
+  max-width: 62ch;
+}
+
+/* --------------------------------------------------------------------------
+   Estruturas de página
+   -------------------------------------------------------------------------- */
+
+.shell {
+  width: 100%;
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Cabeçalho de seção: filete grosso e um rótulo assentado sobre ele. */
+.section-rule {
+  border-top: 2px solid var(--ink);
+  padding-top: 0.75rem;
+}
+
+.link-underline {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient(var(--anil), var(--anil));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  transition: background-size 0.22s ease, color 0.22s ease;
+}
+
+.link-underline:hover {
+  color: var(--anil);
+  background-size: 100% 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Movimento
+   Uma única ideia: o conteúdo assenta no papel, como folha caindo na prensa.
+   -------------------------------------------------------------------------- */
+
+/* O estado escondido só existe quando o script assumiu o controle. Sem
+   JavaScript, ou antes dele rodar, tudo já está no papel. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-settle .settle {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  .js-settle .settle.is-set {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+}

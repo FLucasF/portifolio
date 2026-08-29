@@ -1,0 +1,25 @@
+---
+import type { Lang } from "../data/site";
+import Base from "../layouts/Base.astro";
+import Cover from "./Cover.astro";
+import Now from "./Now.astro";
+import Work from "./Work.astro";
+import Stack from "./Stack.astro";
+import About from "./About.astro";
+import Contact from "./Contact.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Base lang={lang}>
+  <Cover lang={lang} />
+  <Now lang={lang} />
+  <Work lang={lang} />
+  <Stack lang={lang} />
+  <About lang={lang} />
+  <Contact lang={lang} />
+</Base>

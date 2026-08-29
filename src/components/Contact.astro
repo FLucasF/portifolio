@@ -1,0 +1,85 @@
+---
+import { contact, person, type Lang } from "../data/site";
+import Section from "./Section.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const channels = [
+  { label: "LinkedIn", value: "in/lucas-felipe-gomes-pedrosa", url: person.linkedin },
+  { label: "GitHub", value: `@${person.githubHandle}`, url: person.github },
+  ...(person.email
+    ? [{ label: "E-mail", value: person.email, url: `mailto:${person.email}` }]
+    : []),
+];
+---
+
+<Section id="contato" heading={contact.heading[lang]} lede={contact.lede[lang]}>
+  <ul class="channels">
+    {channels.map((c, i) => (
+      <li class="channel settle" data-settle-delay={i * 80}>
+        <a class="channel-link" href={c.url} target="_blank" rel="noopener noreferrer">
+          <span class="tag channel-label">{c.label}</span>
+          <span class="display channel-value">{c.value}</span>
+          <span class="channel-arrow" aria-hidden="true">↗</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .channels {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid var(--ink);
+  }
+
+  .channel {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .channel-link {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.25rem 1rem;
+    padding-block: 1.5rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.2s ease, padding-inline-start 0.2s ease;
+  }
+
+  .channel-link:hover {
+    color: var(--anil);
+    padding-inline-start: 0.75rem;
+  }
+
+  .channel-label {
+    grid-column: 1;
+    color: var(--muted);
+  }
+
+  .channel-value {
+    grid-column: 1;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-weight: 700;
+    text-transform: none;
+    overflow-wrap: anywhere;
+  }
+
+  .channel-arrow {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    font-size: 1.5rem;
+    color: var(--muted);
+  }
+
+  .channel-link:hover .channel-arrow {
+    color: var(--anil);
+  }
+</style>

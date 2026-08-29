@@ -1,0 +1,65 @@
+---
+import { stack, type Lang } from "../data/site";
+import Section from "./Section.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Section id="ferramentas" heading={stack.heading[lang]} lede={stack.lede[lang]}>
+  <div class="groups">
+    {stack.groups.map((g, i) => (
+      <div class="group settle" data-settle-delay={i * 80}>
+        <h3 class="tag group-title">{g.title[lang]}</h3>
+        <ul class="items">
+          {g.items.map((item) => <li class="item">{item}</li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .groups {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .group-title {
+    margin: 0 0 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--ink);
+    color: var(--anil);
+  }
+
+  .items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .item {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    padding-block: 0.15rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .item:last-child {
+    border-bottom: 0;
+  }
+
+  @media (min-width: 720px) {
+    .groups {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 3rem;
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import { about, type Lang } from "../data/site";
+import Section from "./Section.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<Section id="sobre" heading={about.heading[lang]} band>
+  <div class="about settle">
+    {about.body[lang].map((paragraph, i) => (
+      <p class:list={["para", i === 0 && "para-lead"]}>{paragraph}</p>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .about {
+    max-width: 64ch;
+  }
+
+  .para {
+    margin: 0 0 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  .para:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Capitular: o primeiro parágrafo abre como o miolo de um folheto. */
+  .para-lead::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 4.25rem;
+    line-height: 0.76;
+    padding: 0.06em 0.14em 0 0;
+    color: var(--anil);
+  }
+</style>

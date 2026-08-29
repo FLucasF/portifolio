@@ -1,0 +1,45 @@
+---
+import { person, type Lang } from "../data/site";
+import { ui } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const year = 2026;
+---
+
+<footer class="site-foot">
+  <div class="shell foot-row">
+    <p class="tag">© {year} {person.fullName} · {person.place[lang]}</p>
+    <p class="tag foot-note">
+      <a class="link-underline" href={`${person.github}/tree/main`} target="_blank" rel="noopener noreferrer">
+        {ui.rights[lang]}
+      </a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-foot {
+    border-top: 2px solid var(--ink);
+    padding-block: 2rem;
+  }
+
+  .foot-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    justify-content: space-between;
+    color: var(--muted);
+  }
+
+  .foot-row p {
+    margin: 0;
+  }
+
+  .foot-note a {
+    color: inherit;
+  }
+</style>
