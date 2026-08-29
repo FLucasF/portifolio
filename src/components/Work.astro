@@ -9,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Section id="trabalhos" heading={work.heading[lang]} lede={work.lede[lang]}>
+<Section id="projetos" heading={work.heading[lang]} lede={work.lede[lang]}>
   <ol class="ledger">
     {work.projects.map((p, i) => (
       <li class="entry settle" data-settle-delay={i * 70}>

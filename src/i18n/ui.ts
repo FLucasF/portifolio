@@ -5,7 +5,7 @@ export const ui = {
   nav: {
     now: { pt: "Agora", en: "Now" },
     experience: { pt: "Experiência", en: "Experience" },
-    work: { pt: "Trabalhos", en: "Work" },
+    work: { pt: "Projetos", en: "Projects" },
     tools: { pt: "Ferramentas", en: "Tools" },
     about: { pt: "Sobre", en: "About" },
     contact: { pt: "Contato", en: "Contact" },

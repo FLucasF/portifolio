@@ -47,7 +47,7 @@ export const cover = {
     pt: "Java e Spring Boot no servidor, React e Angular na tela. Hoje trabalho com pagamento eletrônico no laboratório AYTY, da UFPB. Antes disso, quase tudo que construí foi software de impacto social: jogo de língua indígena, educação contra golpes e gestão escolar.",
     en: "Java and Spring Boot on the server, React and Angular on the screen. Today I work on electronic payments at UFPB's AYTY lab. Before that, nearly everything I built was social-impact software: an indigenous-language game, scam-awareness education, and school management.",
   } satisfies Bi,
-  ctaWork: { pt: "Ver os trabalhos", en: "See the work" } satisfies Bi,
+  ctaWork: { pt: "Ver os projetos", en: "See the projects" } satisfies Bi,
   ctaContact: { pt: "Falar comigo", en: "Get in touch" } satisfies Bi,
 };
 
@@ -244,7 +244,7 @@ export const certificates = {
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Trabalhos                                                                 */
+/*  Projetos                                                                  */
 /* -------------------------------------------------------------------------- */
 
 export type Project = {
@@ -263,7 +263,7 @@ const FRONT: Bi = { pt: "Interface", en: "Frontend" };
 const BACK: Bi = { pt: "Servidor", en: "Backend" };
 
 export const work = {
-  heading: { pt: "Trabalhos", en: "Work" } satisfies Bi,
+  heading: { pt: "Projetos", en: "Projects" } satisfies Bi,
   lede: {
     pt: "Os projetos que dizem mais sobre como eu trabalho, do mais recente ao mais antigo.",
     en: "The projects that say the most about how I work, newest first.",
