@@ -55,43 +55,44 @@ Outros pontos:
   a mesma ilustração sobre o fundo. Depois de trocar a ilustração, o nome ou o
   cargo, rode `npm run og` e faça commit do PNG novo.
 
-## Publicar no GitHub Pages
+## Publicação
 
-O workflow em [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
-publica a cada push na `main`. Falta escolher entre dois endereços.
+O site está no ar em **<https://flucasf.github.io/portifolio/>** (inglês em
+`/en/`). O workflow em [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+publica a cada push na `main` e também no dia 1º de cada mês, para que as
+durações de cargo não congelem.
 
-### Endereço limpo: `flucasf.github.io`
-
-Crie um repositório chamado exatamente **`FLucasF.github.io`** e mande este
-projeto para lá. Em *Settings → Pages*, ponha **Source: GitHub Actions**. Não
-precisa configurar mais nada — os valores padrão do workflow já servem.
-
-### Em subpasta: `flucasf.github.io/portfolio`
-
-Use um repositório com outro nome, por exemplo `portfolio`. Além de *Settings →
-Pages → Source: GitHub Actions*, vá em *Settings → Secrets and variables →
-Actions → Variables* e crie duas variáveis de repositório:
+Como o site mora numa subpasta, e não na raiz do domínio, o endereço e o
+prefixo vêm de duas variáveis de repositório já configuradas em *Settings →
+Secrets and variables → Actions → Variables*:
 
 | Nome | Valor |
 | --- | --- |
 | `SITE_URL` | `https://flucasf.github.io` |
-| `BASE_PATH` | `/portfolio` |
+| `BASE_PATH` | `/portifolio` |
 
-Sem essas duas, o site publica em subpasta mas monta os links como se estivesse
-na raiz, e o CSS não carrega.
+Sem elas o site publica em subpasta mas monta os links como se estivesse na
+raiz, e o CSS não carrega.
 
 Para conferir localmente como fica em subpasta, no PowerShell:
 
 ```bash
-$env:BASE_PATH="/portfolio"; npm run build; Remove-Item Env:BASE_PATH
+$env:BASE_PATH="/portifolio"; npm run build; Remove-Item Env:BASE_PATH
 ```
 
 No Git Bash, prefixe com `MSYS_NO_PATHCONV=1`, senão ele transforma
-`/portfolio` num caminho do Windows antes de o Astro ver:
+`/portifolio` num caminho do Windows antes de o Astro ver:
 
 ```bash
-MSYS_NO_PATHCONV=1 BASE_PATH=/portfolio npm run build
+MSYS_NO_PATHCONV=1 BASE_PATH=/portifolio npm run build
 ```
+
+### Mudar para o endereço limpo
+
+Se um dia você criar o repositório `FLucasF.github.io`, o site passa a
+responder em `flucasf.github.io` sem subpasta. Nesse caso basta apagar as duas
+variáveis: os padrões do workflow (`https://flucasf.github.io` e `/`) já
+servem.
 
 ## Estrutura
 
