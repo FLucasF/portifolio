@@ -344,21 +344,21 @@ export const work = {
 export const stack = {
   heading: { pt: "Ferramentas", en: "Tools" } satisfies Bi,
   lede: {
-    pt: "O que eu uso hoje, agrupado por onde roda.",
-    en: "What I reach for today, grouped by where it runs.",
+    pt: "O que eu uso hoje.",
+    en: "What I reach for today.",
   } satisfies Bi,
   groups: [
     {
-      title: { pt: "No servidor", en: "On the server" } satisfies Bi,
-      items: ["Java", "Spring Boot", "Javalin", "PostgreSQL", "JWT", "MinIO", "Maven"],
+      title: { pt: "Front-end", en: "Frontend" } satisfies Bi,
+      items: ["TypeScript", "React", "Angular", "Astro", "Tailwind CSS", "SCSS", "Vite", "Cypress"],
     },
     {
-      title: { pt: "Na tela", en: "On the screen" } satisfies Bi,
-      items: ["TypeScript", "React", "Angular", "Astro", "Tailwind CSS", "SCSS", "Vite"],
+      title: { pt: "Back-end", en: "Backend" } satisfies Bi,
+      items: ["Java", "Spring Boot", "Javalin", "Thymeleaf", "PostgreSQL", "MySQL", "JWT", "MinIO", "Maven", "JUnit"],
     },
     {
-      title: { pt: "Na oficina", en: "In the workshop" } satisfies Bi,
-      items: ["Git", "Docker", "Cypress", "JUnit", "Thymeleaf", "Python"],
+      title: { pt: "Gerais", en: "General" } satisfies Bi,
+      items: ["Git", "GitHub", "Docker", "Python", "Scrum", "Kanban"],
     },
   ],
 };
