@@ -66,6 +66,8 @@ export type Cargo = {
   slug: string;
   role: Bi;
   org: string;
+  /** Site do laboratório ou do projeto, quando existe um público. */
+  orgUrl?: string;
   /** Vínculo e regime, como "Meio período · Remoto". */
   mode: Bi;
   place: Bi;
@@ -102,7 +104,8 @@ export const experience = {
     {
       slug: "a4s-embaralhado",
       role: { pt: "Desenvolvedor de software", en: "Software developer" },
-      org: "apps4society",
+      org: "Apps4Society",
+      orgUrl: "https://a4s.dev.br/",
       mode: { pt: "Bolsista · Remoto", en: "Fellow · Remote" },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2024-08",
@@ -130,7 +133,8 @@ export const experience = {
     {
       slug: "a4s-golpe",
       role: { pt: "Desenvolvedor de software", en: "Software developer" },
-      org: "apps4society",
+      org: "Apps4Society",
+      orgUrl: "https://a4s.dev.br/",
       mode: { pt: "Voluntário", en: "Volunteer" },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2024-02",
@@ -144,8 +148,9 @@ export const experience = {
     {
       slug: "pensamento-computacional",
       role: { pt: "Instrutor", en: "Instructor" },
-      org: "Universidade Federal da Paraíba",
-      mode: { pt: "Extensão", en: "Outreach" },
+      org: "A4SMaker",
+      orgUrl: "https://sites.google.com/dcx.ufpb.br/a4smaker",
+      mode: { pt: "Extensão · UFPB", en: "Outreach · UFPB" },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2023-06",
       fim: "2023-12",

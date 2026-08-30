@@ -33,7 +33,13 @@ const roles = experience.roles.map((r) => ({
         <div class="corpo">
           <h3 class="display funcao">{r.role[lang]}</h3>
           <p class="meta-line org">
-            <span class="empresa">{r.org}</span>
+            {r.orgUrl ? (
+              <a class="empresa" href={r.orgUrl} target="_blank" rel="noopener noreferrer">
+                {r.org} <span aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              <span class="empresa">{r.org}</span>
+            )}
             <span class="sep" aria-hidden="true">·</span> {r.mode[lang]}
             <span class="sep" aria-hidden="true">·</span> {r.place[lang]}
           </p>
@@ -103,6 +109,16 @@ const roles = experience.roles.map((r) => ({
   .empresa {
     color: var(--anil);
     font-weight: 600;
+  }
+
+  a.empresa {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.18s ease;
+  }
+
+  a.empresa:hover {
+    border-bottom-color: currentColor;
   }
 
   .sep {
