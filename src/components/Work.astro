@@ -21,6 +21,12 @@ const { lang } = Astro.props;
         <div class="entry-main">
           <div class="entry-title-row">
             <h3 class="display entry-title">{p.title[lang]}</h3>
+            {p.emCurso && (
+              <span class="tag construindo">
+                <span class="lampada" aria-hidden="true"></span>
+                {work.building[lang]}
+              </span>
+            )}
             {p.live && (
               <a class="tag live" href={p.live} target="_blank" rel="noopener noreferrer">
                 {work.live[lang]} <span aria-hidden="true">↗</span>
@@ -30,9 +36,11 @@ const { lang } = Astro.props;
 
           <p class="entry-body prose-measure">{p.body[lang]}</p>
 
-          <ul class="chips">
-            {p.stack.map((s) => <li class="tag chip">{s}</li>)}
-          </ul>
+          {p.stack.length > 0 && (
+            <ul class="chips">
+              {p.stack.map((s) => <li class="tag chip">{s}</li>)}
+            </ul>
+          )}
 
           {p.repos.length > 0 && (
             <p class="entry-links">
@@ -99,6 +107,21 @@ const { lang } = Astro.props;
     margin: 0;
     font-size: clamp(1.75rem, 5vw, 2.75rem);
     font-weight: 800;
+  }
+
+  .construindo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--muted);
+  }
+
+  .lampada {
+    width: 6px;
+    height: 6px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--sol);
   }
 
   .live {

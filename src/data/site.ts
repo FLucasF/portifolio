@@ -230,6 +230,8 @@ export type Project = {
   stack: string[];
   repos: { label: Bi; url: string }[];
   live?: string;
+  /** Ainda em desenvolvimento: acende o mesmo marcador âmbar da experiência. */
+  emCurso?: boolean;
 };
 
 const CODE: Bi = { pt: "Código", en: "Code" };
@@ -244,7 +246,21 @@ export const work = {
   } satisfies Bi,
   all: { pt: "Todos os repositórios", en: "All repositories" } satisfies Bi,
   live: { pt: "No ar", en: "Live" } satisfies Bi,
+  building: { pt: "Em construção", en: "In progress" } satisfies Bi,
   projects: [    {
+      slug: "ol-dcx",
+      year: "2026",
+      title: { pt: "OL DCX", en: "OL DCX" },
+      kind: { pt: "Projeto pessoal", en: "Personal project" },
+      emCurso: true,
+      body: {
+        pt: "Um classificados fechado para quem estuda no DCX, o Departamento de Ciências Exatas do Campus IV. A ideia é dar lugar próprio ao que já acontece nos grupos de WhatsApp: doar o que não se usa mais, repassar livro de disciplina, vender geladinho e brigadeiro entre uma aula e outra.",
+        en: "A classifieds board closed to students of DCX, the exact sciences department at Campus IV. The idea is to give a proper home to what already happens in WhatsApp groups: giving away what you no longer use, passing on a course book, selling ice pops and brigadeiros between classes.",
+      },
+      stack: [],
+      repos: [],
+    },
+    {
       slug: "coranil",
       year: "2026",
       title: { pt: "Tintas Coranil", en: "Tintas Coranil" },
