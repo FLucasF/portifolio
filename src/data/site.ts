@@ -235,8 +235,8 @@ export type Project = {
 };
 
 const CODE: Bi = { pt: "Código", en: "Code" };
-const FRONT: Bi = { pt: "Interface", en: "Frontend" };
-const BACK: Bi = { pt: "Servidor", en: "Backend" };
+const FRONT: Bi = { pt: "Front-end", en: "Frontend" };
+const BACK: Bi = { pt: "Back-end", en: "Backend" };
 
 export const work = {
   heading: { pt: "Projetos", en: "Projects" } satisfies Bi,
