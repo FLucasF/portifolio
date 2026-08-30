@@ -34,13 +34,15 @@ const { lang } = Astro.props;
             {p.stack.map((s) => <li class="tag chip">{s}</li>)}
           </ul>
 
-          <p class="entry-links">
-            {p.repos.map((r) => (
-              <a class="tag link-underline repo" href={r.url} target="_blank" rel="noopener noreferrer">
-                {r.label[lang]} ↗
-              </a>
-            ))}
-          </p>
+          {p.repos.length > 0 && (
+            <p class="entry-links">
+              {p.repos.map((r) => (
+                <a class="tag link-underline repo" href={r.url} target="_blank" rel="noopener noreferrer">
+                  {r.label[lang]} ↗
+                </a>
+              ))}
+            </p>
+          )}
         </div>
       </li>
     ))}
@@ -87,8 +89,8 @@ const { lang } = Astro.props;
 
   .entry-title-row {
     display: flex;
-    align-items: baseline;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.75rem 1rem;
     flex-wrap: wrap;
     margin-bottom: 0.625rem;
   }
@@ -163,7 +165,7 @@ const { lang } = Astro.props;
 
   @media (min-width: 768px) {
     .entry {
-      grid-template-columns: 11rem minmax(0, 1fr);
+      grid-template-columns: 13rem minmax(0, 1fr);
     }
 
     .entry-meta {

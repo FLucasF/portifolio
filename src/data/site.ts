@@ -241,7 +241,8 @@ export const work = {
         en: "Practice-management system for a nutrition clinic: patient records, scheduling, charting, meal-plan building, and PDF export. JWT authentication, and a domain layer that knows nothing about the web layer.",
       },
       stack: ["Java 21", "Spring Boot 3.4", "JWT", "React 18", "TypeScript", "Vite"],
-      repos: [{ label: CODE, url: "https://github.com/FLucasF/Job-Manager" }],
+      /* Sem link: o repositório do NutriPlan não é para mostrar. */
+      repos: [],
     },    {
       slug: "ayty",
       year: "2025",
