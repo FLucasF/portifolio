@@ -245,6 +245,19 @@ export const work = {
   all: { pt: "Todos os repositórios", en: "All repositories" } satisfies Bi,
   live: { pt: "No ar", en: "Live" } satisfies Bi,
   projects: [    {
+      slug: "coranil",
+      year: "2026",
+      title: { pt: "Tintas Coranil", en: "Tintas Coranil" },
+      kind: { pt: "Site para cliente", en: "Client website" },
+      body: {
+        pt: "Site de uma loja de tintas em João Pessoa que vende direto da fábrica. Catálogo de produtos e marcas, cartela de cores para escolher na tela e pedido de orçamento que sai pelo WhatsApp, que é por onde a loja atende de verdade.",
+        en: "Website for a paint shop in João Pessoa that sells factory-direct. Product and brand catalogue, an on-screen colour chart, and a quote request that leaves through WhatsApp, which is how the shop actually takes orders.",
+      },
+      stack: ["React", "Vite", "Tailwind CSS"],
+      repos: [],
+      live: "https://flucasf.github.io/Loja-tinta/",
+    },
+    {
       slug: "nutriplan",
       year: "2026",
       title: { pt: "NutriPlan", en: "NutriPlan" },
@@ -266,10 +279,10 @@ export const work = {
         pt: "Gerenciador Escolar AYTY",
         en: "AYTY School Manager",
       },
-      kind: { pt: "Laboratório AYTY · UFPB", en: "AYTY Lab · UFPB" },
+      kind: { pt: "Seleção do laboratório AYTY", en: "AYTY lab selection" },
       body: {
-        pt: "Gestão de turmas, alunos e registros de uma escola. Construí a interface em Angular 19 com TypeScript e a API em Java, o que me obrigou a desenhar o contrato entre as duas antes de escrever qualquer tela.",
-        en: "Class, student, and record management for a school. I built the Angular 19 interface in TypeScript and the Java API, which forced me to design the contract between them before writing a single screen.",
+        pt: "Gestão de turmas, alunos e registros de uma escola. Construí a interface em Angular 19 com TypeScript e a API em Java, o que me obrigou a desenhar o contrato entre as duas antes de escrever qualquer tela. Foi com ele que passei na seleção do laboratório AYTY.",
+        en: "Class, student, and record management for a school. I built the Angular 19 interface in TypeScript and the Java API, which forced me to design the contract between them before writing a single screen. It is the project that got me into the AYTY lab.",
       },
       stack: ["Angular 19", "TypeScript", "Java", "Spring Boot"],
       repos: [
@@ -283,7 +296,7 @@ export const work = {
         pt: "Armazenamento de arquivos com MinIO",
         en: "File storage with MinIO",
       },
-      kind: { pt: "Infraestrutura", en: "Infrastructure" },
+      kind: { pt: "Apps4Society · UFPB", en: "Apps4Society · UFPB" },
       body: {
         pt: "Integração de armazenamento de objetos com MinIO em serviços Spring Boot, para tirar os arquivos enviados pelo usuário do disco da aplicação e deixar o deploy descartável.",
         en: "Object-storage integration with MinIO in Spring Boot services, to move user uploads off the application disk and make the deployment disposable.",
