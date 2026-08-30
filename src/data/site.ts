@@ -65,9 +65,8 @@ export const cover = {
 export type Cargo = {
   slug: string;
   role: Bi;
-  org: string;
-  /** Site do laboratório ou do projeto, quando existe um público. */
-  orgUrl?: string;
+  /** Quem estava por trás. Cada parte leva o seu link, quando há um público. */
+  orgs: { name: string; url?: string }[];
   /** Vínculo e regime, como "Meio período · Remoto". */
   mode: Bi;
   place: Bi;
@@ -91,7 +90,10 @@ export const experience = {
         pt: "Bolsista desenvolvedor full stack",
         en: "Full stack research fellow",
       },
-      org: "Phoebus · Projeto AYTY",
+      orgs: [
+        { name: "Phoebus", url: "https://www.phoebus.com.br/" },
+        { name: "Projeto AYTY", url: "https://ayty.org/" },
+      ],
       mode: { pt: "Meio período · 30h · Remoto", en: "Part time · 30h · Remote" },
       place: { pt: "Paraíba, Brasil", en: "Paraíba, Brazil" },
       inicio: "2025-04",
@@ -104,9 +106,11 @@ export const experience = {
     {
       slug: "a4s-embaralhado",
       role: { pt: "Desenvolvedor de software", en: "Software developer" },
-      org: "Apps4Society",
-      orgUrl: "https://a4s.dev.br/",
-      mode: { pt: "Bolsista · Remoto", en: "Fellow · Remote" },
+      orgs: [{ name: "Apps4Society", url: "https://a4s.dev.br/" }],
+      mode: {
+        pt: "Projeto de Extensão · Bolsista · UFPB · Remoto",
+        en: "Outreach project · Fellow · UFPB · Remote",
+      },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2024-08",
       fim: "2025-04",
@@ -119,8 +123,11 @@ export const experience = {
     {
       slug: "monitoria-java",
       role: { pt: "Monitor de programação em Java", en: "Java teaching assistant" },
-      org: "Universidade Federal da Paraíba",
-      mode: { pt: "Bolsista · Híbrido", en: "Fellow · Hybrid" },
+      orgs: [{ name: "Universidade Federal da Paraíba" }],
+      mode: {
+        pt: "Monitoria · Bolsista · Híbrido",
+        en: "Teaching assistantship · Fellow · Hybrid",
+      },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2024-03",
       fim: "2024-08",
@@ -133,9 +140,11 @@ export const experience = {
     {
       slug: "a4s-golpe",
       role: { pt: "Desenvolvedor de software", en: "Software developer" },
-      org: "Apps4Society",
-      orgUrl: "https://a4s.dev.br/",
-      mode: { pt: "Voluntário", en: "Volunteer" },
+      orgs: [{ name: "Apps4Society", url: "https://a4s.dev.br/" }],
+      mode: {
+        pt: "Projeto de Extensão · Voluntário · UFPB",
+        en: "Outreach project · Volunteer · UFPB",
+      },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2024-02",
       fim: "2024-08",
@@ -148,9 +157,11 @@ export const experience = {
     {
       slug: "pensamento-computacional",
       role: { pt: "Instrutor", en: "Instructor" },
-      org: "A4SMaker",
-      orgUrl: "https://sites.google.com/dcx.ufpb.br/a4smaker",
-      mode: { pt: "Extensão · UFPB", en: "Outreach · UFPB" },
+      orgs: [{ name: "A4SMaker", url: "https://sites.google.com/dcx.ufpb.br/a4smaker" }],
+      mode: {
+        pt: "Projeto de Extensão · Voluntário · UFPB",
+        en: "Outreach project · Volunteer · UFPB",
+      },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2023-06",
       fim: "2023-12",

@@ -33,13 +33,18 @@ const roles = experience.roles.map((r) => ({
         <div class="corpo">
           <h3 class="display funcao">{r.role[lang]}</h3>
           <p class="meta-line org">
-            {r.orgUrl ? (
-              <a class="empresa" href={r.orgUrl} target="_blank" rel="noopener noreferrer">
-                {r.org} <span aria-hidden="true">↗</span>
-              </a>
-            ) : (
-              <span class="empresa">{r.org}</span>
-            )}
+            {r.orgs.map((o, i) => (
+              <>
+                {i > 0 && <span class="sep" aria-hidden="true">·</span>}
+                {o.url ? (
+                  <a class="empresa" href={o.url} target="_blank" rel="noopener noreferrer">
+                    {o.name} <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <span class="empresa">{o.name}</span>
+                )}
+              </>
+            ))}
             <span class="sep" aria-hidden="true">·</span> {r.mode[lang]}
             <span class="sep" aria-hidden="true">·</span> {r.place[lang]}
           </p>
