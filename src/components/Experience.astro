@@ -32,8 +32,10 @@ const roles = experience.roles.map((r) => ({
 
         <div class="corpo">
           <h3 class="display funcao">{r.role[lang]}</h3>
-          <p class="tag org">
-            {r.org} <span class="sep">·</span> {r.mode[lang]} <span class="sep">·</span> {r.place[lang]}
+          <p class="meta-line org">
+            <span class="empresa">{r.org}</span>
+            <span class="sep" aria-hidden="true">·</span> {r.mode[lang]}
+            <span class="sep" aria-hidden="true">·</span> {r.place[lang]}
           </p>
           <p class="texto prose-measure">{r.body[lang]}</p>
           <ul class="skills">
@@ -95,12 +97,16 @@ const roles = experience.roles.map((r) => ({
   }
 
   .org {
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.9rem;
+  }
+
+  .empresa {
     color: var(--anil);
+    font-weight: 600;
   }
 
   .sep {
-    color: var(--muted);
+    opacity: 0.5;
   }
 
   .texto {

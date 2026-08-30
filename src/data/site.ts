@@ -42,8 +42,8 @@ export const cover = {
   headline: "Lucas",
   /** Linha de crédito da moldura, no estilo da lombada de um folheto. */
   edition: {
-    pt: "Folheto nº 01 · Paraíba, Brasil · 2026",
-    en: "Chapbook no. 01 · Paraíba, Brazil · 2026",
+    pt: "Paraíba, Brasil",
+    en: "Paraíba, Brazil",
   } satisfies Bi,
   lede: {
     pt: "Java e Spring Boot no servidor, React e Angular na tela. Hoje trabalho com pagamento eletrônico no laboratório AYTY, da UFPB. Antes disso, quase tudo que construí foi software de impacto social: jogo de língua indígena, educação contra golpes e gestão escolar.",
@@ -51,33 +51,6 @@ export const cover = {
   } satisfies Bi,
   ctaWork: { pt: "Ver os projetos", en: "See the projects" } satisfies Bi,
   ctaContact: { pt: "Falar comigo", en: "Get in touch" } satisfies Bi,
-};
-
-/* -------------------------------------------------------------------------- */
-/*  Agora                                                                     */
-/* -------------------------------------------------------------------------- */
-
-export type NowItem = { label: Bi; title: Bi; body: Bi };
-
-export const now = {
-  heading: { pt: "Agora", en: "Now" } satisfies Bi,
-  note: {
-    pt: "Atualizado em agosto de 2026",
-    en: "Updated August 2026",
-  } satisfies Bi,
-  items: [
-    {
-      label: { pt: "Trabalhando", en: "Working on" },
-      title: {
-        pt: "Projeto Phoebus, no laboratório AYTY",
-        en: "The Phoebus project, at the AYTY lab",
-      },
-      body: {
-        pt: "Bolsista full stack, 30 horas por semana, remoto. Atuo nas duas pontas conforme a demanda aparece: componentes de back-end, interfaces de front-end e a documentação técnica que mantém o software sustentável.",
-        en: "Full stack research fellow, 30 hours a week, remote. I work at both ends as demand comes up: back-end components, front-end interfaces, and the technical documentation that keeps the software maintainable.",
-      },
-    },
-  ] satisfies NowItem[],
 };
 
 /* -------------------------------------------------------------------------- */
@@ -135,8 +108,8 @@ export const experience = {
       inicio: "2024-08",
       fim: "2025-04",
       body: {
-        pt: "Construí o Embaralhado Indígena, a versão web do aplicativo Android criado no TCC de João Fidelis Freire de Oliveira. Fiz a interface em Angular com TypeScript e um microsserviço em Spring Boot com MySQL e MinIO para guardar as imagens. Tirar o jogo do Android e levá-lo para a web acabou com a exigência de instalar qualquer coisa, e esse era o ponto: ele ensina alfabetização com palavras da cultura indígena.",
-        en: "I built Embaralhado Indígena, the web version of an Android app created in the final-year project of João Fidelis Freire de Oliveira. I wrote the Angular and TypeScript interface and a Spring Boot microservice with MySQL and MinIO to hold the images. Moving the game off Android and onto the web removed the need to install anything, which was the point: it teaches literacy through words from indigenous culture.",
+        pt: "Portei o Embaralhado Indígena do Android para a web e cuidei das duas pontas: a interface em Angular com TypeScript e um microsserviço em Spring Boot, com MySQL e MinIO para as imagens. O aplicativo original saiu do trabalho de conclusão de João Fidelis Freire de Oliveira.",
+        en: "I ported Embaralhado Indígena from Android to the web and handled both ends: the Angular and TypeScript interface, and a Spring Boot microservice with MySQL and MinIO for the images. The original app came out of João Fidelis Freire de Oliveira's final-year project.",
       },
       skills: ["Angular", "TypeScript", "Spring Boot", "MySQL", "MinIO", "Scrum", "Kanban"],
     },
@@ -163,8 +136,8 @@ export const experience = {
       inicio: "2024-02",
       fim: "2024-08",
       body: {
-        pt: "Trabalhei no Evite o Golpe, que ensina a reconhecer fraude online. O aplicativo tinha nascido no MIT App Inventor e virou web em React, para rodar em celular e computador sem download. Corrigi bugs, implementei a randomização das perguntas e o retorno visual, e montei o formulário de avaliação. Testamos com estudantes e pessoas idosas, e o que voltou desses testes guiou as mudanças.",
-        en: "I worked on Evite o Golpe, which teaches people to recognise online fraud. The app had started in MIT App Inventor and moved to the web in React, so it runs on phones and computers with no download. I fixed bugs, implemented question randomisation and visual feedback, and built the feedback form. We tested with students and older people, and what came back from those sessions drove the changes.",
+        pt: "Ajudei a tirar o Evite o Golpe do MIT App Inventor e refazê-lo em React. Corrigi bugs, implementei a randomização das perguntas e o retorno visual, e montei o formulário de avaliação. Testamos com estudantes e pessoas idosas, e o que voltou desses testes guiou as mudanças.",
+        en: "I helped move Evite o Golpe off MIT App Inventor and rebuild it in React. I fixed bugs, implemented question randomisation and visual feedback, and built the feedback form. We tested with students and older people, and what came back from those sessions drove the changes.",
       },
       skills: ["React", "JavaScript", "MIT App Inventor"],
     },
@@ -192,6 +165,7 @@ export const experience = {
 export type Certificado = {
   title: string;
   issuer: string;
+  /** Só monta a URL. O código não aparece na tela: ninguém lê um UUID. */
   code: string;
   url: string;
   date?: Bi;
@@ -199,6 +173,10 @@ export type Certificado = {
 
 export const certificates = {
   heading: { pt: "Certificados", en: "Certificates" } satisfies Bi,
+  lede: {
+    pt: "Cursos que fiz por fora da graduação. Cada um abre a credencial na Udemy.",
+    en: "Courses I took outside my degree. Each one opens its credential on Udemy.",
+  } satisfies Bi,
   verify: { pt: "Ver credencial", en: "View credential" } satisfies Bi,
   items: [
     {
@@ -250,8 +228,7 @@ export const work = {
   } satisfies Bi,
   all: { pt: "Todos os repositórios", en: "All repositories" } satisfies Bi,
   live: { pt: "No ar", en: "Live" } satisfies Bi,
-  projects: [
-    {
+  projects: [    {
       slug: "nutriplan",
       year: "2026",
       title: { pt: "NutriPlan", en: "NutriPlan" },
@@ -265,8 +242,7 @@ export const work = {
       },
       stack: ["Java 21", "Spring Boot 3.4", "JWT", "React 18", "TypeScript", "Vite"],
       repos: [{ label: CODE, url: "https://github.com/FLucasF/Job-Manager" }],
-    },
-    {
+    },    {
       slug: "ayty",
       year: "2025",
       title: {
@@ -282,6 +258,23 @@ export const work = {
       repos: [
         { label: FRONT, url: "https://github.com/FLucasF/AYTY_gerenciador-escolar-front" },
         { label: BACK, url: "https://github.com/FLucasF/AYTY_gerenciador-escolar-back" },
+      ],
+    },    {
+      slug: "minio",
+      year: "2025",
+      title: {
+        pt: "Armazenamento de arquivos com MinIO",
+        en: "File storage with MinIO",
+      },
+      kind: { pt: "Infraestrutura", en: "Infrastructure" },
+      body: {
+        pt: "Integração de armazenamento de objetos com MinIO em serviços Spring Boot, para tirar os arquivos enviados pelo usuário do disco da aplicação e deixar o deploy descartável.",
+        en: "Object-storage integration with MinIO in Spring Boot services, to move user uploads off the application disk and make the deployment disposable.",
+      },
+      stack: ["Java", "Spring Boot", "MinIO", "Docker"],
+      repos: [
+        { label: { pt: "Apps4Society", en: "Apps4Society" }, url: "https://github.com/FLucasF/minIO_apps4society" },
+        { label: { pt: "Spring Boot", en: "Spring Boot" }, url: "https://github.com/FLucasF/MinIO" },
       ],
     },
     {
@@ -315,24 +308,6 @@ export const work = {
       stack: ["React", "JavaScript", "Vite"],
       repos: [{ label: CODE, url: "https://github.com/FLucasF/EviteOgolpeWEB" }],
       live: "https://eviteogolpe.a4s.dev.br/EviteOgolpeWEB/",
-    },
-    {
-      slug: "minio",
-      year: "2025",
-      title: {
-        pt: "Armazenamento de arquivos com MinIO",
-        en: "File storage with MinIO",
-      },
-      kind: { pt: "Infraestrutura", en: "Infrastructure" },
-      body: {
-        pt: "Integração de armazenamento de objetos com MinIO em serviços Spring Boot, para tirar os arquivos enviados pelo usuário do disco da aplicação e deixar o deploy descartável.",
-        en: "Object-storage integration with MinIO in Spring Boot services, to move user uploads off the application disk and make the deployment disposable.",
-      },
-      stack: ["Java", "Spring Boot", "MinIO", "Docker"],
-      repos: [
-        { label: { pt: "Apps4Society", en: "Apps4Society" }, url: "https://github.com/FLucasF/minIO_apps4society" },
-        { label: { pt: "Spring Boot", en: "Spring Boot" }, url: "https://github.com/FLucasF/MinIO" },
-      ],
     },
   ] satisfies Project[],
 };

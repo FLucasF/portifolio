@@ -3,10 +3,10 @@ import type { Lang } from "../data/site";
 import Base from "../layouts/Base.astro";
 import Cover from "./Cover.astro";
 import About from "./About.astro";
-import Now from "./Now.astro";
 import Experience from "./Experience.astro";
 import Work from "./Work.astro";
 import Stack from "./Stack.astro";
+import Certificates from "./Certificates.astro";
 import Contact from "./Contact.astro";
 
 interface Props {
@@ -19,9 +19,9 @@ const { lang } = Astro.props;
 <Base lang={lang}>
   <Cover lang={lang} />
   <About lang={lang} />
-  <Now lang={lang} />
   <Experience lang={lang} />
   <Work lang={lang} />
   <Stack lang={lang} />
+  <Certificates lang={lang} />
   <Contact lang={lang} />
 </Base>

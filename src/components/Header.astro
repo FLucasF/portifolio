@@ -12,10 +12,11 @@ const { lang } = Astro.props;
 
 const nav = [
   { id: "sobre", label: ui.nav.about[lang] },
-  { id: "agora", label: ui.nav.now[lang] },
   { id: "experiencia", label: ui.nav.experience[lang] },
   { id: "projetos", label: ui.nav.work[lang] },
   { id: "ferramentas", label: ui.nav.tools[lang] },
+  { id: "certificados", label: ui.nav.certificates[lang] },
+  { id: "contato", label: ui.nav.contact[lang] },
 ];
 ---
 
@@ -30,16 +31,85 @@ const nav = [
     <div class="head-tools">
       <LangMenu lang={lang} />
       <ThemeToggle lang={lang} />
+
+      <button
+        type="button"
+        class="indice-botao"
+        data-indice-abre
+        aria-expanded="false"
+        aria-controls="indice"
+      >
+        <span class="sr-only">{ui.nav.openIndex[lang]}</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true" class="indice-icone">
+          <path d="M3 5.5h14M3 10h14M3 14.5h14" />
+        </svg>
+      </button>
     </div>
   </div>
 </header>
+
+<!-- Índice de bolso: a lista de seções para quem não tem a barra larga. -->
+<div class="indice" id="indice" hidden>
+  <div class="indice-topo shell">
+    <p class="tag indice-titulo">{ui.nav.index[lang]}</p>
+    <button type="button" class="indice-botao" data-indice-fecha>
+      <span class="sr-only">{ui.nav.closeIndex[lang]}</span>
+      <svg viewBox="0 0 20 20" aria-hidden="true" class="indice-icone">
+        <path d="M5 5l10 10M15 5L5 15" />
+      </svg>
+    </button>
+  </div>
+
+  <nav class="indice-lista shell" aria-label={ui.nav.sections[lang]}>
+    {nav.map((item, i) => (
+      <a href={`#${item.id}`} class="indice-link">
+        <span class="tag indice-num">{String(i + 1).padStart(2, "0")}</span>
+        <span class="display indice-nome">{item.label}</span>
+      </a>
+    ))}
+  </nav>
+</div>
+
+<script>
+  const painel = document.getElementById("indice");
+  const abre = document.querySelector<HTMLButtonElement>("[data-indice-abre]");
+  const fecha = document.querySelector<HTMLButtonElement>("[data-indice-fecha]");
+
+  if (painel && abre) {
+    const alterna = (aberto: boolean) => {
+      painel.hidden = !aberto;
+      abre.setAttribute("aria-expanded", String(aberto));
+      // Trava a rolagem atrás do painel, senão a página desliza por baixo.
+      document.body.style.overflow = aberto ? "hidden" : "";
+      if (aberto) painel.querySelector<HTMLAnchorElement>("a")?.focus();
+      else abre.focus();
+    };
+
+    abre.addEventListener("click", () => alterna(true));
+    fecha?.addEventListener("click", () => alterna(false));
+
+    // Escolher uma seção fecha o painel: o destino está atrás dele.
+    painel.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => alterna(false)),
+    );
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !painel.hidden) alterna(false);
+    });
+
+    // Voltar à barra larga com o painel aberto o deixaria preso na tela.
+    window.matchMedia("(min-width: 900px)").addEventListener("change", (e) => {
+      if (e.matches && !painel.hidden) alterna(false);
+    });
+  }
+</script>
 
 <style>
   .site-head {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--rule);
   }
@@ -53,10 +123,13 @@ const nav = [
 
   .head-nav {
     display: none;
-    gap: 1.75rem;
+    gap: 1.5rem;
   }
 
   .head-link {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
     color: var(--muted);
     text-decoration: none;
     transition: color 0.18s ease;
@@ -66,18 +139,117 @@ const nav = [
     color: var(--anil);
   }
 
-  /* Sem a marca à esquerda, o `auto` é o que prende os controles à direita —
-     inclusive abaixo de 900px, onde o menu de seções some. */
   .head-tools {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.25rem;
     margin-inline-start: auto;
+  }
+
+  /* 44px de alvo, o mínimo para o polegar, sem inchar o desenho do ícone. */
+  .indice-botao {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.18s ease;
+  }
+
+  .indice-botao:hover {
+    color: var(--anil);
+  }
+
+  .indice-icone {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+
+  .indice {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    overflow-y: auto;
+  }
+
+  .indice[hidden] {
+    display: none;
+  }
+
+  .indice-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+    flex: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .indice-titulo {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .indice-lista {
+    padding-block: 1.5rem 3rem;
+  }
+
+  .indice-link {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding-block: 0.9rem;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .indice-link:hover .indice-nome {
+    color: var(--anil);
+  }
+
+  /* A numeração aqui é verdadeira: é a ordem das seções na página. */
+  .indice-num {
+    color: var(--anil);
+    flex: none;
+  }
+
+  .indice-nome {
+    font-size: 2rem;
+    font-weight: 800;
+    transition: color 0.18s ease;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
   }
 
   @media (min-width: 900px) {
     .head-nav {
       display: flex;
+    }
+
+    .indice-botao[data-indice-abre] {
+      display: none;
     }
   }
 </style>

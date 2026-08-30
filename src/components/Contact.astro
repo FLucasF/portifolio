@@ -9,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 
 const channels = [
-  { label: "LinkedIn", value: "in/lucas-felipe-gomes-pedrosa", url: person.linkedin },
+  { label: "LinkedIn", value: person.fullName, url: person.linkedin },
   { label: "GitHub", value: `@${person.githubHandle}`, url: person.github },
   ...(person.email
     ? [{ label: "E-mail", value: person.email, url: `mailto:${person.email}` }]

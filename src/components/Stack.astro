@@ -1,7 +1,6 @@
 ---
 import { stack, type Lang } from "../data/site";
 import Section from "./Section.astro";
-import Certificates from "./Certificates.astro";
 
 interface Props {
   lang: Lang;
@@ -21,8 +20,6 @@ const { lang } = Astro.props;
       </div>
     ))}
   </div>
-
-  <Certificates lang={lang} />
 </Section>
 
 <style>

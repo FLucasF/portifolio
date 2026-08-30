@@ -168,7 +168,9 @@ const { lang } = Astro.props;
   }
 
   .btn {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
     padding: 0.8rem 1.4rem;
     text-decoration: none;
     border: 1px solid var(--ink);
@@ -194,9 +196,20 @@ const { lang } = Astro.props;
     color: var(--paper);
   }
 
+  /* A ilustração ganha um chão chapado. Sem ele ela flutua no papel, e o
+     sombreado suave dela briga com a moldura de filete duro em volta. */
   .cover-block {
+    position: relative;
     order: -1;
     max-width: 15rem;
+  }
+
+  .cover-block::before {
+    content: "";
+    position: absolute;
+    inset: 22% -1rem 0 -1rem;
+    background: var(--paper-2);
+    z-index: 0;
   }
 
   @media (min-width: 880px) {

@@ -3,14 +3,17 @@ import type { Lang } from "../data/site";
 /** Textos da moldura do site: navegação, botões e rodapé. */
 export const ui = {
   nav: {
-    now: { pt: "Agora", en: "Now" },
     experience: { pt: "Experiência", en: "Experience" },
     work: { pt: "Projetos", en: "Projects" },
     tools: { pt: "Ferramentas", en: "Tools" },
     about: { pt: "Sobre", en: "About" },
     contact: { pt: "Contato", en: "Contact" },
+    certificates: { pt: "Certificados", en: "Certificates" },
     /** Rótulo do próprio menu, para quem navega por leitor de tela. */
     sections: { pt: "Seções do site", en: "Site sections" },
+    index: { pt: "Índice", en: "Index" },
+    openIndex: { pt: "Abrir o índice das seções", en: "Open the section index" },
+    closeIndex: { pt: "Fechar o índice", en: "Close the index" },
   },
   theme: {
     toLight: { pt: "Usar tema claro", en: "Switch to light theme" },
@@ -21,8 +24,8 @@ export const ui = {
   },
   skip: { pt: "Ir para o conteúdo", en: "Skip to content" },
   rights: {
-    pt: "Feito com Astro. Código aberto no GitHub.",
-    en: "Built with Astro. Source on GitHub.",
+    pt: "Feito com Astro",
+    en: "Built with Astro",
   },
   meta: {
     description: {

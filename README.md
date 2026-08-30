@@ -26,7 +26,7 @@ O site sobe em <http://localhost:4321>. A versão em inglês fica em `/en/`.
 Quase tudo que você vai querer mudar está em um arquivo só:
 
 **[`src/data/site.ts`](src/data/site.ts)** — nome, contatos, textos da capa e de
-todas as seções, na ordem em que aparecem: Sobre, Agora, Experiência, Projetos,
+todas as seções, na ordem em que aparecem: Sobre, Experiência, Projetos,
 Ferramentas, Certificados e Contato. Cada texto é um par `{ pt, en }`. Se você
 editar um lado, edite o outro.
 
@@ -111,9 +111,10 @@ src/
     Cover.astro       a capa: moldura, nome e ilustração
     Personagem.astro  a ilustração, otimizada pelo <Image> do Astro
     Section.astro     cabeçalho de seção reaproveitado pelas quatro seguintes
+    Header.astro      barra fixa e o índice de bolso abaixo de 900px
     Experience.astro  cargos, com a duração vinda de lib/tempo.ts
-    Certificates.astro  credenciais, no fim da seção Ferramentas
-    Now.astro  Work.astro  Stack.astro  About.astro  Contact.astro
+    Certificates.astro  credenciais
+    Work.astro  Stack.astro  About.astro  Contact.astro
     Header.astro  Footer.astro  Page.astro
   pages/
     index.astro       português, na raiz
