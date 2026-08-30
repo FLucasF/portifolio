@@ -106,8 +106,8 @@ export type Cargo = {
 export const experience = {
   heading: { pt: "Experiência", en: "Experience" } satisfies Bi,
   lede: {
-    pt: "Bolsa, voluntariado e monitoria, todos dentro da UFPB Campus IV ou em projeto que ela mantém com empresa.",
-    en: "Fellowships, volunteer work, and a teaching assistantship, all inside UFPB Campus IV or in projects it runs with companies.",
+    pt: "Bolsista, voluntário e monitor, sempre dentro da UFPB Campus IV ou em projeto que ela mantém com empresa.",
+    en: "Research fellow, volunteer, and teaching assistant, always inside UFPB Campus IV or in projects it runs with companies.",
   } satisfies Bi,
   roles: [
     {
@@ -130,7 +130,7 @@ export const experience = {
       slug: "a4s-embaralhado",
       role: { pt: "Desenvolvedor de software", en: "Software developer" },
       org: "apps4society",
-      mode: { pt: "Bolsa · Remoto", en: "Fellowship · Remote" },
+      mode: { pt: "Bolsista · Remoto", en: "Fellow · Remote" },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2024-08",
       fim: "2025-04",
@@ -144,7 +144,7 @@ export const experience = {
       slug: "monitoria-java",
       role: { pt: "Monitor de programação em Java", en: "Java teaching assistant" },
       org: "Universidade Federal da Paraíba",
-      mode: { pt: "Bolsa · Híbrido", en: "Fellowship · Hybrid" },
+      mode: { pt: "Bolsista · Híbrido", en: "Fellow · Hybrid" },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
       inicio: "2024-03",
       fim: "2024-08",
@@ -373,12 +373,10 @@ export const about = {
     pt: [
       "Estudo Ciência da Computação na UFPB, Campus IV, no interior da Paraíba. Comecei a programar em 2022 e o que me prendeu foi o backend: modelar o domínio direito, deixar as regras num lugar só e não espalhar lógica pela tela.",
       "Boa parte do que construí nasceu dentro de laboratório da universidade. No Apps4Society, que faz software para demanda real de comunidade, aprendi a pensar interface de outro jeito: quando o usuário é uma pessoa idosa aprendendo a reconhecer um golpe, ou uma criança aprendendo palavras em língua indígena, não sobra espaço para tela confusa. Hoje estou no AYTY, o laboratório de engenharia de software aplicada do Campus IV, no projeto com a Phoebus Tecnologia.",
-      "Hoje divido o tempo entre o projeto Phoebus, no laboratório AYTY, e o NutriPlan, que construo por fora.",
     ],
     en: [
       "I study Computer Science at UFPB, Campus IV, in the interior of Paraíba, Brazil. I started programming in 2022, and what held me was the backend: modelling the domain properly, keeping the rules in one place, and not scattering logic across the screen.",
       "Much of what I have built began inside a university lab. At Apps4Society, which builds software for real community needs, I learned to think about interfaces differently: when your user is an older person learning to spot a scam, or a child learning words in an indigenous language, there is no room left for a confusing screen. Today I am at AYTY, the applied software engineering lab at Campus IV, on the Phoebus Tecnologia project.",
-      "Today I split my time between the Phoebus project at the AYTY lab and NutriPlan, which I build on my own time.",
     ],
   } as Record<Lang, string[]>,
 };
