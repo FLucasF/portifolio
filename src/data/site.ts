@@ -281,6 +281,7 @@ export const work = {
         pt: "Projeto pessoal",
         en: "Personal project",
       },
+      emCurso: true,
       body: {
         pt: "Sistema de gestão para consultório de nutrição: cadastro de paciente, agendamento, prontuário, montagem de plano alimentar e exportação em PDF. Autenticação por JWT e uma camada de domínio que não conhece a camada web.",
         en: "Practice-management system for a nutrition clinic: patient records, scheduling, charting, meal-plan building, and PDF export. JWT authentication, and a domain layer that knows nothing about the web layer.",
