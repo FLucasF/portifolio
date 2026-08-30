@@ -22,6 +22,20 @@ const { lang } = Astro.props;
     max-width: 64ch;
   }
 
+  /* Em tela larga o texto vira duas colunas. Uma coluna só usava metade do
+     espaço; esticá-la até a borda daria linhas de ~120 caracteres, longas
+     demais para o olho achar o começo da seguinte. */
+  @media (min-width: 900px) {
+    .about {
+      max-width: none;
+      columns: 2;
+      column-gap: 4rem;
+      column-rule: 1px solid var(--rule);
+      orphans: 3;
+      widows: 3;
+    }
+  }
+
   .para {
     margin: 0 0 1.25rem;
     font-size: 1.125rem;
