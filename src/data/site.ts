@@ -79,10 +79,6 @@ export type Cargo = {
 
 export const experience = {
   heading: { pt: "Experiência", en: "Experience" } satisfies Bi,
-  lede: {
-    pt: "Bolsista, voluntário e monitor, sempre dentro da UFPB Campus IV ou em projeto que ela mantém com empresa.",
-    en: "Research fellow, volunteer, and teaching assistant, always inside UFPB Campus IV or in projects it runs with companies.",
-  } satisfies Bi,
   roles: [
     {
       slug: "phoebus",

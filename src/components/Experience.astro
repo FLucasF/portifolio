@@ -18,7 +18,7 @@ const roles = experience.roles.map((r) => ({
 }));
 ---
 
-<Section id="experiencia" heading={experience.heading[lang]} lede={experience.lede[lang]}>
+<Section id="experiencia" heading={experience.heading[lang]}>
   <ol class="linha">
     {roles.map((r, i) => (
       <li class="cargo settle" data-settle-delay={i * 70}>
