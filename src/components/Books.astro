@@ -81,16 +81,18 @@ const estante = books.items.map((livro) => ({
 
   /* Filete em volta da capa: numa página de tinta chapada, uma foto impressa
      ganha fio de contorno. É o que impede a capa de flutuar no papel. */
-  .capa {
+  .capa,
+  .capa-vazia {
     width: 100%;
-    height: auto;
+    aspect-ratio: 7 / 10;
     display: block;
     border: 1px solid var(--ink);
     background: var(--paper-2);
   }
 
-  .capa-vazia {
-    aspect-ratio: 35 / 50;
+  .capa {
+    height: auto;
+    object-fit: contain;
   }
 
   .ficha {

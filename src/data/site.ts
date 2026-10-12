@@ -254,10 +254,10 @@ export const work = {
       kind: { pt: "Projeto pessoal", en: "Personal project" },
       emCurso: true,
       body: {
-        pt: "Um classificados fechado para quem estuda no DCX, o Departamento de Ciências Exatas do Campus IV. A ideia é dar lugar próprio ao que já acontece nos grupos de WhatsApp: doar o que não se usa mais, repassar livro de disciplina, vender geladinho e brigadeiro entre uma aula e outra.",
-        en: "A classifieds board closed to students of DCX, the exact sciences department at Campus IV. The idea is to give a proper home to what already happens in WhatsApp groups: giving away what you no longer use, passing on a course book, selling ice pops and brigadeiros between classes.",
+        pt: "Classificados fechado para a comunidade do DCX, inspirado na OLX e sem pagamento dentro do site: doação, item usado, livro de disciplina, geladinho e brigadeiro. Substitui a lista de e-mails do Mercado DCX por um catálogo buscável com chat, e o acordo segue entre as pessoas.",
+        en: "A classifieds board closed to the DCX community, modelled on OLX and with no payment inside the site: donations, used items, course books, ice pops and brigadeiros. It replaces the Mercado DCX mailing list with a searchable catalogue and chat, and the deal stays between the people involved.",
       },
-      stack: [],
+      stack: ["Next.js 16", "React 19", "TypeScript", "Prisma", "PostgreSQL", "Zod", "Tailwind CSS", "Playwright"],
       repos: [],
     },
     {
