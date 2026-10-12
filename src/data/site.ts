@@ -397,25 +397,15 @@ export type Livro = {
   isbn: string;
   title: string;
   author: string;
-  /** Uma linha sobre o que ficou do livro. Opcional. */
-  note?: Bi;
 };
 
 export const books = {
-  heading: { pt: "Livros", en: "Books" } satisfies Bi,
-  lede: {
-    pt: "O que me ensinou o que eu sei hoje, fora da sala de aula.",
-    en: "What taught me what I know today, outside the classroom.",
-  } satisfies Bi,
+  heading: { pt: "Livros lidos", en: "Books I have read" } satisfies Bi,
   items: [
     {
       isbn: "8582603371",
       title: "Java para Iniciantes",
       author: "Herbert Schildt",
-      note: {
-        pt: "Por onde comecei em Java, antes da faculdade cobrar.",
-        en: "Where I started with Java, before university asked for it.",
-      },
     },
   ] satisfies Livro[],
 };

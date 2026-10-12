@@ -32,7 +32,7 @@ const estante = books.items.map((livro) => ({
 }));
 ---
 
-<Section id="livros" heading={books.heading[lang]} lede={books.lede[lang]}>
+<Section id="livros" heading={books.heading[lang]}>
   <ul class="estante">
     {estante.map((livro, i) => (
       <li class="livro settle" data-settle-delay={i * 70}>
@@ -54,7 +54,6 @@ const estante = books.items.map((livro) => ({
         <div class="ficha">
           <h3 class="display titulo">{livro.title}</h3>
           <p class="meta-line autor">{livro.author}</p>
-          {livro.note && <p class="nota">{livro.note[lang]}</p>}
         </div>
       </li>
     ))}
@@ -109,13 +108,6 @@ const estante = books.items.map((livro) => ({
 
   .autor {
     margin: 0;
-  }
-
-  .nota {
-    margin: 0.35rem 0 0;
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    color: var(--muted);
   }
 
   @media (min-width: 720px) {
