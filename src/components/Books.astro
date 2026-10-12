@@ -1,0 +1,124 @@
+---
+/**
+ * Estante. As capas vêm de src/assets/livros, nomeadas pelo ISBN, e o Astro
+ * as otimiza na build — o visitante nunca fala com a Amazon.
+ *
+ * O glob é eager porque o nome do arquivo sai de um dado, e o <Image> precisa
+ * do módulo da imagem em mãos, não de um caminho montado em tempo de execução.
+ */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { books, type Lang } from "../data/site";
+import Section from "./Section.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const capas = import.meta.glob<{ default: ImageMetadata }>("../assets/livros/*.jpg", {
+  eager: true,
+});
+
+/* O texto alternativo acompanha a língua da página; antes saía sempre em
+   português, inclusive em /en/. */
+const descreve = (titulo: string, autor: string) =>
+  lang === "pt" ? `Capa de ${titulo}, de ${autor}` : `Cover of ${titulo} by ${autor}`;
+
+const estante = books.items.map((livro) => ({
+  ...livro,
+  capa: capas[`../assets/livros/${livro.isbn}.jpg`]?.default,
+}));
+---
+
+<Section id="livros" heading={books.heading[lang]} lede={books.lede[lang]}>
+  <ul class="estante">
+    {estante.map((livro, i) => (
+      <li class="livro settle" data-settle-delay={i * 70}>
+        {livro.capa ? (
+          <Image
+            class="capa"
+            src={livro.capa}
+            alt={descreve(livro.title, livro.author)}
+            widths={[180, 260, 360]}
+            sizes="(min-width: 720px) 11rem, 8rem"
+            format="webp"
+            quality={82}
+            loading="lazy"
+          />
+        ) : (
+          <div class="capa capa-vazia" aria-hidden="true"></div>
+        )}
+
+        <div class="ficha">
+          <h3 class="display titulo">{livro.title}</h3>
+          <p class="meta-line autor">{livro.author}</p>
+          {livro.note && <p class="nota">{livro.note[lang]}</p>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .estante {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    gap: 2.5rem 1.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .livro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  /* Filete em volta da capa: numa página de tinta chapada, uma foto impressa
+     ganha fio de contorno. É o que impede a capa de flutuar no papel. */
+  .capa {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--ink);
+    background: var(--paper-2);
+  }
+
+  .capa-vazia {
+    aspect-ratio: 35 / 50;
+  }
+
+  .ficha {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .titulo {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .autor {
+    margin: 0;
+  }
+
+  .nota {
+    margin: 0.35rem 0 0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  @media (min-width: 720px) {
+    .estante {
+      grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+      gap: 3rem 2.25rem;
+    }
+  }
+</style>

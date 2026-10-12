@@ -20,6 +20,7 @@ O site sobe em <http://localhost:4321>. A versão em inglês fica em `/en/`.
 | `npm run preview` | Serve o `dist/` para conferir antes de publicar |
 | `npm run og` | Regera `public/og.png`, a imagem de compartilhamento |
 | `npm run favicon` | Regera os ícones de aba a partir da ilustração |
+| `npm run capas` | Baixa a capa dos livros que ainda não têm arquivo |
 
 ## Onde mexer
 
@@ -53,6 +54,11 @@ Outros pontos:
   Para trocar, substitua o arquivo mantendo o fundo transparente. O Astro gera
   os WebP responsivos sozinho na build. Depois rode `npm run favicon` e
   `npm run og`, que recortam dela o ícone de aba e a imagem de compartilhamento.
+- **Livros** — acrescente o livro em `books.items` com o **ISBN-10** e rode
+  `npm run capas`. A capa é baixada uma vez para `src/assets/livros/<isbn>.jpg`
+  e versionada, então o site não depende de serviço externo no ar: o visitante
+  nunca fala com a Amazon. Se a origem não tiver a capa daquele ISBN, o script
+  avisa e o livro aparece sem imagem, sem quebrar a página.
 - **Ícone de aba** — [`scripts/favicon.mjs`](scripts/favicon.mjs). Ele recorta o
   rosto da ilustração; se você trocar o desenho, ajuste `CORTE` para o novo
   enquadramento.

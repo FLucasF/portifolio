@@ -9,6 +9,7 @@ export const ui = {
     about: { pt: "Sobre", en: "About" },
     contact: { pt: "Contato", en: "Contact" },
     certificates: { pt: "Certificados", en: "Certificates" },
+    books: { pt: "Livros", en: "Books" },
     /** Rótulo do próprio menu, para quem navega por leitor de tela. */
     sections: { pt: "Seções do site", en: "Site sections" },
     index: { pt: "Índice", en: "Index" },
