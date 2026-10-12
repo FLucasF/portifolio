@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 <Section id="sobre" heading={about.heading[lang]} band>
   <div class="about settle">
     {about.body[lang].map((paragraph, i) => (
-      <p class:list={["para", i === 0 && "para-lead"]}>{paragraph}</p>
+      <p class:list={["para", "texto-justo", i === 0 && "para-lead"]}>{paragraph}</p>
     ))}
   </div>
 </Section>

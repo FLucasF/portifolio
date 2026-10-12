@@ -48,7 +48,7 @@ const roles = experience.roles.map((r) => ({
             <span class="sep" aria-hidden="true">·</span> {r.mode[lang]}
             <span class="sep" aria-hidden="true">·</span> {r.place[lang]}
           </p>
-          <p class="texto prose-measure">{r.body[lang]}</p>
+          <p class="texto prose-measure texto-justo">{r.body[lang]}</p>
           <ul class="skills">
             {r.skills.map((s) => <li class="tag skill">{s}</li>)}
           </ul>

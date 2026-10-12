@@ -62,9 +62,12 @@ const estante = books.items.map((livro) => ({
 </Section>
 
 <style>
+  /* Coluna de largura fixa em vez de 1fr: é o que permite centrar a fileira.
+     Com 1fr a trilha se estica e "centrar" não teria efeito nenhum. */
   .estante {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+    grid-template-columns: repeat(auto-fit, 9rem);
+    justify-content: center;
     gap: 2.5rem 1.75rem;
     list-style: none;
     margin: 0;
@@ -117,7 +120,8 @@ const estante = books.items.map((livro) => ({
 
   @media (min-width: 720px) {
     .estante {
-      grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+      grid-template-columns: repeat(auto-fit, 11rem);
+      justify-content: start;
       gap: 3rem 2.25rem;
     }
   }

@@ -151,6 +151,22 @@ body::after {
   max-width: 62ch;
 }
 
+/* Em tela estreita o texto corrido vai justificado: a borda direita limpa é o
+   que dá a ele cara de documento. Só funciona com hifenização junto — sem ela,
+   35 caracteres por linha não dão folga para distribuir o espaço e abrem rios
+   entre as palavras.
+
+   Blocos mais estreitos que isso, como a nota de um livro na grade de capas,
+   ficam de fora de propósito: ali não há folga nem com hífen. */
+@media (max-width: 719px) {
+  .texto-justo {
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    hyphenate-limit-chars: 6 3 3;
+  }
+}
+
 /* --------------------------------------------------------------------------
    Estruturas de página
    -------------------------------------------------------------------------- */
