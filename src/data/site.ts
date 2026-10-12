@@ -230,6 +230,8 @@ export type Project = {
   stack: string[];
   repos: { label: Bi; url: string }[];
   live?: string;
+  /** Ressalva sobre o endereço no ar, como demora de primeira carga. */
+  liveNote?: Bi;
   /** Ainda em desenvolvimento: acende o mesmo marcador âmbar da experiência. */
   emCurso?: boolean;
 };
@@ -254,8 +256,8 @@ export const work = {
       kind: { pt: "Projeto pessoal", en: "Personal project" },
       emCurso: true,
       body: {
-        pt: "Classificados fechado para a comunidade do DCX, inspirado na OLX e sem pagamento dentro do site: doação, item usado, livro de disciplina, geladinho e brigadeiro. Substitui a lista de e-mails do Mercado DCX por um catálogo buscável com chat, e o acordo segue entre as pessoas.",
-        en: "A classifieds board closed to the DCX community, modelled on OLX and with no payment inside the site: donations, used items, course books, ice pops and brigadeiros. It replaces the Mercado DCX mailing list with a searchable catalogue and chat, and the deal stays between the people involved.",
+        pt: "Classificados fechado para a comunidade do DCX, inspirado na OLX e sem pagamento dentro do site: doação, item usado, livro de disciplina, geladinho e brigadeiro. Substitui a lista de e-mails do Mercado DCX por um catálogo buscável com chat, e o acordo segue entre as pessoas. Comecei rápido e sem método, só para aprender a conduzir a IA, e recomecei com contrato para entender na prática o que um harness muda no desenvolvimento: hierarquia de autoridade entre os documentos, spec aprovada antes de qualquer código e dois agentes revisores separados de quem implementa. O andaime está de pé; a aplicação ainda não.",
+        en: "A classifieds board closed to the DCX community, modelled on OLX and with no payment inside the site: donations, used items, course books, ice pops and brigadeiros. It replaces the Mercado DCX mailing list with a searchable catalogue and chat, and the deal stays between the people involved. I started fast and without method, just to learn how to drive the AI, then started over with a contract to see first-hand what a harness changes in development: an authority hierarchy between documents, a spec approved before any code, and two review agents kept apart from the one that implements. The scaffolding is up; the application is not.",
       },
       stack: ["Next.js 16", "React 19", "TypeScript", "Prisma", "PostgreSQL", "Zod", "Tailwind CSS", "Playwright"],
       repos: [],
@@ -283,12 +285,17 @@ export const work = {
       },
       emCurso: true,
       body: {
-        pt: "Sistema de gestão para consultório de nutrição: cadastro de paciente, agendamento, prontuário, montagem de plano alimentar e exportação em PDF. Autenticação por JWT e uma camada de domínio que não conhece a camada web.",
-        en: "Practice-management system for a nutrition clinic: patient records, scheduling, charting, meal-plan building, and PDF export. JWT authentication, and a domain layer that knows nothing about the web layer.",
+        pt: "Sistema de gestão para consultório de nutrição: cadastro de paciente, agendamento, prontuário, montagem de plano alimentar e exportação em PDF. Autenticação por JWT e uma camada de domínio que não conhece a camada web. Construí com IA, mas sob método: requisitos, modelo de dados e cenários BDD escritos antes do código, 32 arquivos de teste no servidor e Playwright cobrindo os fluxos de ponta a ponta.",
+        en: "Practice-management system for a nutrition clinic: patient records, scheduling, charting, meal-plan building, and PDF export. JWT authentication, and a domain layer that knows nothing about the web layer. I built it with AI, but under method: requirements, data model, and BDD scenarios written before the code, 32 test files on the server, and Playwright covering the flows end to end.",
       },
       stack: ["Java 21", "Spring Boot 3.4", "JWT", "React 18", "TypeScript", "Vite"],
-      /* Sem link: o repositório do NutriPlan não é para mostrar. */
+      /* Sem link de código: o repositório do NutriPlan não é para mostrar. */
       repos: [],
+      live: "https://nutri-o57k.onrender.com/",
+      liveNote: {
+        pt: "Hospedado em plano gratuito que hiberna sem uso. A primeira abertura leva cerca de um minuto enquanto o servidor sobe; depois disso responde normal.",
+        en: "Hosted on a free tier that sleeps when idle. The first load takes about a minute while the server wakes up; after that it responds normally.",
+      },
     },    {
       slug: "ayty",
       year: "2025",

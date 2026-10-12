@@ -36,6 +36,8 @@ const { lang } = Astro.props;
 
           <p class="entry-body prose-measure texto-justo">{p.body[lang]}</p>
 
+          {p.liveNote && <p class="meta-line ressalva">{p.liveNote[lang]}</p>}
+
           {p.stack.length > 0 && (
             <ul class="chips">
               {p.stack.map((s) => <li class="tag chip">{s}</li>)}
@@ -144,6 +146,14 @@ const { lang } = Astro.props;
   .entry-body {
     margin: 0 0 1.125rem;
     color: var(--muted);
+  }
+
+  /* Ressalva do endereço no ar: avisa antes de a pessoa achar que caiu. */
+  .ressalva {
+    max-width: 52ch;
+    margin: -0.5rem 0 1.125rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--sol);
   }
 
   .chips {
