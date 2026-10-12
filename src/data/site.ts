@@ -407,6 +407,11 @@ export const books = {
       title: "Java para Iniciantes",
       author: "Herbert Schildt",
     },
+    {
+      isbn: "8575225634",
+      title: "Entendendo Algoritmos",
+      author: "Aditya Y. Bhargava",
+    },
   ] satisfies Livro[],
 };
 
