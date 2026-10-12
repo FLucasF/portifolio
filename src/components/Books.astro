@@ -90,9 +90,15 @@ const estante = books.items.map((livro) => ({
     background: var(--paper-2);
   }
 
+  /* "cover" preenche a caixa inteira. Era "contain", que encaixava a capa
+     inteira e deixava tarja do fundo em volta — no tema escuro essa tarja é
+     quase preta e aparecia como moldura.
+
+     O corte é de uns 2% na borda, onde capa de livro só tem margem: as
+     proporções reais ficam todas entre 0,62 e 0,75, perto da caixa de 0,70. */
   .capa {
     height: auto;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .ficha {
