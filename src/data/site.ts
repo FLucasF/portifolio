@@ -387,11 +387,11 @@ export const stack = {
         },
         {
           title: { pt: "Back-end", en: "Backend" } satisfies Bi,
-          items: ["Java", "Spring Boot", "Oracle SQL", "MongoDB", "Kafka"],
+          items: ["Java", "Spring Boot", "Spring Cloud", "Eureka", "Oracle SQL", "MongoDB", "Kafka", "Flyway"],
         },
         {
           title: { pt: "Gerais", en: "General" } satisfies Bi,
-          items: ["Docker", "Docusaurus"],
+          items: ["Docker", "Maven", "Gradle", "Docusaurus"],
         },
       ] satisfies GrupoFerramentas[],
     },
@@ -404,7 +404,7 @@ export const stack = {
         },
         {
           title: { pt: "Back-end", en: "Backend" } satisfies Bi,
-          items: ["PostgreSQL", "MySQL", "SQLite", "Prisma", "JPA", "Flyway", "OAuth2", "Maven", "Javalin", "Thymeleaf", "MinIO", "Spring Cloud"],
+          items: ["PHP", "Laravel", "Symfony", "PostgreSQL", "MySQL", "SQLite", "Prisma", "Javalin", "Thymeleaf", "MinIO"],
         },
         {
           title: { pt: "Gerais", en: "General" } satisfies Bi,
