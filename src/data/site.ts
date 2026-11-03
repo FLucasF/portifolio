@@ -254,8 +254,8 @@ export const work = {
       title: { pt: "Ordo", en: "Ordo" },
       kind: { pt: "Projeto pessoal", en: "Personal project" },
       body: {
-        pt: "App de produtividade para Windows e Android, no espírito do TickTick. Tarefas com áreas, sublistas e adição por linguagem natural, calendário, matriz de Eisenhower, Pomodoro, hábitos, finanças com cartão e parcela, dieta ligada à tabela TACO, diário e estatísticas. Roda sem conta, sem login e sem servidor: os dados ficam no aparelho, e a troca entre aparelhos vai por Wi-Fi ou backup.",
-        en: "A productivity app for Windows and Android, in the spirit of TickTick. Tasks with areas, sublists and natural-language entry, a calendar, an Eisenhower matrix, Pomodoro, habits, finances with cards and instalments, diet wired to the Brazilian TACO food table, a diary, and statistics. It runs with no account, no login and no server: the data stays on the device, and moving between devices goes over Wi-Fi or a backup.",
+        pt: "App de produtividade para Windows e Android. Tarefas com áreas, sublistas e adição por linguagem natural, calendário, matriz de Eisenhower, Pomodoro, hábitos, finanças com cartão e parcela, dieta ligada à tabela TACO, diário e estatísticas. Roda sem conta, sem login e sem servidor: os dados ficam no aparelho, e a troca entre aparelhos vai por Wi-Fi ou backup.",
+        en: "A productivity app for Windows and Android. Tasks with areas, sublists and natural-language entry, a calendar, an Eisenhower matrix, Pomodoro, habits, finances with cards and instalments, diet wired to the Brazilian TACO food table, a diary, and statistics. It runs with no account, no login and no server: the data stays on the device, and moving between devices goes over Wi-Fi or a backup.",
       },
       stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLite"],
       repos: [{ label: CODE, url: "https://github.com/FLucasF/Ordo" }],
