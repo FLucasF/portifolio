@@ -254,8 +254,8 @@ export const work = {
       title: { pt: "Ordo", en: "Ordo" },
       kind: { pt: "Projeto pessoal", en: "Personal project" },
       body: {
-        pt: "App de produtividade para Windows e Android. Tarefas com áreas, sublistas e adição por linguagem natural, calendário, matriz de Eisenhower, Pomodoro, hábitos, finanças com cartão e parcela, dieta ligada à tabela TACO, diário e estatísticas. Roda sem conta, sem login e sem servidor: os dados ficam no aparelho, e a troca entre aparelhos vai por Wi-Fi ou backup. São 581 testes em 97 arquivos, organizados pelas mesmas camadas do código.",
-        en: "A productivity app for Windows and Android. Tasks with areas, sublists and natural-language entry, a calendar, an Eisenhower matrix, Pomodoro, habits, finances with cards and instalments, diet wired to the Brazilian TACO food table, a diary, and statistics. It runs with no account, no login and no server: the data stays on the device, and moving between devices goes over Wi-Fi or a backup. It carries 581 tests across 97 files, organised by the same layers as the code.",
+        pt: "App de produtividade para Windows e Android. Tarefas com áreas, sublistas e adição por linguagem natural, calendário, matriz de Eisenhower, Pomodoro, hábitos, finanças com cartão e parcela, dieta ligada à tabela TACO, diário e estatísticas. Roda sem conta, sem login e sem servidor: os dados ficam no aparelho, e a troca entre aparelhos vai por Wi-Fi ou backup. Testado com flutter_test e integration_test, nas mesmas camadas do código.",
+        en: "A productivity app for Windows and Android. Tasks with areas, sublists and natural-language entry, a calendar, an Eisenhower matrix, Pomodoro, habits, finances with cards and instalments, diet wired to the Brazilian TACO food table, a diary, and statistics. It runs with no account, no login and no server: the data stays on the device, and moving between devices goes over Wi-Fi or a backup. Tested with flutter_test and integration_test, along the same layers as the code.",
       },
       stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLite"],
       repos: [{ label: CODE, url: "https://github.com/FLucasF/Ordo" }],
@@ -297,8 +297,8 @@ export const work = {
       },
       emCurso: true,
       body: {
-        pt: "Sistema de gestão para consultório de nutrição: cadastro de paciente, agendamento, prontuário, montagem de plano alimentar e exportação em PDF. Autenticação por JWT e uma camada de domínio que não conhece a camada web. Construí com IA, mas sob método: requisitos, modelo de dados e cenários BDD escritos antes do código, 32 arquivos de teste no servidor e Playwright cobrindo os fluxos de ponta a ponta.",
-        en: "Practice-management system for a nutrition clinic: patient records, scheduling, charting, meal-plan building, and PDF export. JWT authentication, and a domain layer that knows nothing about the web layer. I built it with AI, but under method: requirements, data model, and BDD scenarios written before the code, 32 test files on the server, and Playwright covering the flows end to end.",
+        pt: "Sistema de gestão para consultório de nutrição: cadastro de paciente, agendamento, prontuário, montagem de plano alimentar e exportação em PDF. Autenticação por JWT e uma camada de domínio que não conhece a camada web. Construí com IA, mas sob método: requisitos, modelo de dados e cenários BDD escritos antes do código, testes de servidor com JUnit e Spring Boot Test, e Playwright cobrindo os fluxos de ponta a ponta.",
+        en: "Practice-management system for a nutrition clinic: patient records, scheduling, charting, meal-plan building, and PDF export. JWT authentication, and a domain layer that knows nothing about the web layer. I built it with AI, but under method: requirements, data model, and BDD scenarios written before the code, server tests with JUnit and Spring Boot Test, and Playwright covering the flows end to end.",
       },
       stack: ["Java 21", "Spring Boot 3.4", "JWT", "React 18", "TypeScript", "Vite"],
       /* Sem link de código: o repositório do NutriPlan não é para mostrar. */
