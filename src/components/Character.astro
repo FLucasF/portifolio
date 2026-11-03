@@ -6,12 +6,12 @@
  * na build e nada do arquivo pesado chega ao navegador.
  */
 import { Image } from "astro:assets";
-import lucas from "../assets/lucas-acenando.png";
+import lucas from "../assets/lucas-waving.png";
 ---
 
-<div class="bloco">
+<div class="wrapper">
   <Image
-    class="figura"
+    class="illustration"
     src={lucas}
     alt="Lucas Felipe sentado de pernas cruzadas com um notebook, acenando"
     widths={[320, 480, 640, 900]}
@@ -24,11 +24,11 @@ import lucas from "../assets/lucas-acenando.png";
 </div>
 
 <style>
-  .bloco {
+  .wrapper {
     position: relative;
   }
 
-  .figura {
+  .illustration {
     width: 100%;
     height: auto;
     display: block;

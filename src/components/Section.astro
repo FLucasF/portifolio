@@ -8,17 +8,17 @@ interface Props {
 }
 
 const { id, heading, lede, note, band = false } = Astro.props;
-const tituloId = `${id}-titulo`;
+const titleId = `${id}-title`;
 ---
 
-<section id={id} class:list={["section", band && "section-band"]} aria-labelledby={tituloId}>
+<section id={id} class:list={["section", band && "section-band"]} aria-labelledby={titleId}>
   <div class="shell">
     <header class="section-head settle">
       <div class="section-rule head-line">
-        <h2 class="display section-title" id={tituloId}>{heading}</h2>
+        <h2 class="display section-title" id={titleId}>{heading}</h2>
         {note && <p class="tag section-note">{note}</p>}
       </div>
-      {lede && <p class="section-lede prose-measure texto-justo">{lede}</p>}
+      {lede && <p class="section-lede prose-measure text-justified">{lede}</p>}
     </header>
 
     <div class="section-body">

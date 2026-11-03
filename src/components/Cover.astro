@@ -1,6 +1,6 @@
 ---
 import { person, cover, type Lang } from "../data/site";
-import Personagem from "./Personagem.astro";
+import Character from "./Character.astro";
 
 interface Props {
   lang: Lang;
@@ -27,16 +27,16 @@ const { lang } = Astro.props;
 
           <p class="display role">{person.role[lang]}</p>
 
-          <p class="lede prose-measure texto-justo">{cover.lede[lang]}</p>
+          <p class="lede prose-measure text-justified">{cover.lede[lang]}</p>
 
           <div class="actions">
-            <a href="#projetos" class="btn btn-solid tag">{cover.ctaWork[lang]}</a>
-            <a href="#contato" class="btn btn-line tag">{cover.ctaContact[lang]}</a>
+            <a href="#projects" class="btn btn-solid tag">{cover.ctaWork[lang]}</a>
+            <a href="#contact" class="btn btn-line tag">{cover.ctaContact[lang]}</a>
           </div>
         </div>
 
         <div class="cover-block">
-          <Personagem />
+          <Character />
         </div>
       </div>
     </div>
@@ -107,9 +107,9 @@ const { lang } = Astro.props;
     width: 7px;
     height: 7px;
     flex: none;
-    background: var(--sol);
+    background: var(--sun);
     border-radius: 50%;
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--sol) 70%, transparent);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--sun) 70%, transparent);
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -120,7 +120,7 @@ const { lang } = Astro.props;
 
   @keyframes lamp {
     0% {
-      box-shadow: 0 0 0 0 color-mix(in srgb, var(--sol) 60%, transparent);
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--sun) 60%, transparent);
     }
     70% {
       box-shadow: 0 0 0 8px transparent;
@@ -139,7 +139,7 @@ const { lang } = Astro.props;
   .ornament {
     height: 10px;
     margin: 1.5rem 0;
-    background-color: var(--anil);
+    background-color: var(--indigo);
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='10'%3E%3Cpath d='M10 0.8 L14.2 5 L10 9.2 L5.8 5 Z'/%3E%3Crect x='0' y='4.4' width='3.4' height='1.2'/%3E%3Crect x='16.6' y='4.4' width='3.4' height='1.2'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='10'%3E%3Cpath d='M10 0.8 L14.2 5 L10 9.2 L5.8 5 Z'/%3E%3Crect x='0' y='4.4' width='3.4' height='1.2'/%3E%3Crect x='16.6' y='4.4' width='3.4' height='1.2'/%3E%3C/svg%3E");
     -webkit-mask-repeat: repeat-x;
@@ -191,8 +191,8 @@ const { lang } = Astro.props;
   }
 
   .btn-line:hover {
-    background: var(--anil);
-    border-color: var(--anil);
+    background: var(--indigo);
+    border-color: var(--indigo);
     color: var(--paper);
   }
 

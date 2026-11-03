@@ -1,6 +1,6 @@
 ---
 import { experience, type Lang } from "../data/site";
-import { duracao, periodo } from "../lib/tempo";
+import { duration, period } from "../lib/time";
 import Section from "./Section.astro";
 
 interface Props {
@@ -12,43 +12,43 @@ const { lang } = Astro.props;
 /* Datas resolvidas na build: o cargo em andamento conta até hoje. */
 const roles = experience.roles.map((r) => ({
   ...r,
-  quando: periodo(r.inicio, r.fim, lang),
-  quanto: duracao(r.inicio, r.fim, lang),
-  atual: !r.fim,
+  when: period(r.start, r.end, lang),
+  duration: duration(r.start, r.end, lang),
+  current: !r.end,
 }));
 ---
 
-<Section id="experiencia" heading={experience.heading[lang]}>
-  <ol class="linha">
+<Section id="experience" heading={experience.heading[lang]}>
+  <ol class="timeline">
     {roles.map((r, i) => (
-      <li class="cargo settle" data-settle-delay={i * 70}>
-        <div class="quando">
-          <p class="tag periodo">
-            {r.atual && <span class="lampada" aria-hidden="true"></span>}
-            {r.quando}
+      <li class="position settle" data-settle-delay={i * 70}>
+        <div class="when">
+          <p class="tag period">
+            {r.current && <span class="lamp" aria-hidden="true"></span>}
+            {r.when}
           </p>
-          <p class="tag duracao">{r.quanto}</p>
+          <p class="tag duration">{r.duration}</p>
         </div>
 
-        <div class="corpo">
-          <h3 class="display funcao">{r.role[lang]}</h3>
+        <div class="details">
+          <h3 class="display job-title">{r.role[lang]}</h3>
           <p class="meta-line org">
             {r.orgs.map((o, i) => (
               <>
                 {i > 0 && <span class="sep" aria-hidden="true">·</span>}
                 {o.url ? (
-                  <a class="empresa" href={o.url} target="_blank" rel="noopener noreferrer">
+                  <a class="company" href={o.url} target="_blank" rel="noopener noreferrer">
                     {o.name} <span aria-hidden="true">↗</span>
                   </a>
                 ) : (
-                  <span class="empresa">{o.name}</span>
+                  <span class="company">{o.name}</span>
                 )}
               </>
             ))}
             <span class="sep" aria-hidden="true">·</span> {r.mode[lang]}
             <span class="sep" aria-hidden="true">·</span> {r.place[lang]}
           </p>
-          <p class="texto prose-measure texto-justo">{r.body[lang]}</p>
+          <p class="text prose-measure text-justified">{r.body[lang]}</p>
           <ul class="skills">
             {r.skills.map((s) => <li class="tag skill">{s}</li>)}
           </ul>
@@ -59,26 +59,26 @@ const roles = experience.roles.map((r) => ({
 </Section>
 
 <style>
-  .linha {
+  .timeline {
     list-style: none;
     margin: 0;
     padding: 0;
     border-top: 2px solid var(--ink);
   }
 
-  .cargo {
+  .position {
     display: grid;
     gap: 0.75rem 2.5rem;
     padding-block: 2rem;
     border-bottom: 1px solid var(--rule);
   }
 
-  .quando p {
+  .when p {
     margin: 0;
   }
 
   /* Tracking menor para o intervalo caber numa linha só na coluna. */
-  .periodo {
+  .period {
     display: flex;
     align-items: center;
     gap: 0.45rem;
@@ -88,20 +88,20 @@ const roles = experience.roles.map((r) => ({
   }
 
   /* O mesmo marcador aceso da capa: aqui ele diz "ainda em curso". */
-  .lampada {
+  .lamp {
     width: 6px;
     height: 6px;
     flex: none;
     border-radius: 50%;
-    background: var(--sol);
+    background: var(--sun);
   }
 
-  .duracao {
+  .duration {
     margin-top: 0.3rem;
     color: var(--muted);
   }
 
-  .funcao {
+  .job-title {
     margin: 0 0 0.4rem;
     font-size: clamp(1.375rem, 4vw, 2rem);
     font-weight: 800;
@@ -111,18 +111,18 @@ const roles = experience.roles.map((r) => ({
     margin: 0 0 0.9rem;
   }
 
-  .empresa {
-    color: var(--anil);
+  .company {
+    color: var(--indigo);
     font-weight: 600;
   }
 
-  a.empresa {
+  a.company {
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border-color 0.18s ease;
   }
 
-  a.empresa:hover {
+  a.company:hover {
     border-bottom-color: currentColor;
   }
 
@@ -130,7 +130,7 @@ const roles = experience.roles.map((r) => ({
     opacity: 0.5;
   }
 
-  .texto {
+  .text {
     margin: 0 0 1rem;
     color: var(--muted);
   }
@@ -151,11 +151,11 @@ const roles = experience.roles.map((r) => ({
   }
 
   @media (min-width: 768px) {
-    .cargo {
+    .position {
       grid-template-columns: 15rem minmax(0, 1fr);
     }
 
-    .quando {
+    .when {
       padding-top: 0.55rem;
     }
   }

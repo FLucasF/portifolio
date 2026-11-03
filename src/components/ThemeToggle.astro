@@ -16,56 +16,56 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<button type="button" id="theme-toggle" class="botao" aria-live="polite">
+<button type="button" id="theme-toggle" class="button" aria-live="polite">
   <span class="sr-only" data-label-light={ui.theme.toLight[lang]} data-label-dark={ui.theme.toDark[lang]}>
     {ui.theme.toDark[lang]}
   </span>
 
-  <svg class="icone sol" viewBox="0 0 20 20" aria-hidden="true">
+  <svg class="icon sun" viewBox="0 0 20 20" aria-hidden="true">
     <circle cx="10" cy="10" r="4.2" />
     <path
       d="M10 1v2.4M10 16.6V19M1 10h2.4M16.6 10H19M3.6 3.6l1.7 1.7M14.7 14.7l1.7 1.7M16.4 3.6l-1.7 1.7M5.3 14.7l-1.7 1.7"
     />
   </svg>
 
-  <svg class="icone lua" viewBox="0 0 20 20" aria-hidden="true">
+  <svg class="icon moon" viewBox="0 0 20 20" aria-hidden="true">
     <path d="M16.3 12.4A7 7 0 0 1 7.6 3.7 7 7 0 1 0 16.3 12.4Z" />
   </svg>
 </button>
 
 <script>
-  const raiz = document.documentElement;
-  const botao = document.getElementById("theme-toggle");
-  const rotulo = botao?.querySelector<HTMLElement>("[data-label-light]");
+  const root = document.documentElement;
+  const button = document.getElementById("theme-toggle");
+  const label = button?.querySelector<HTMLElement>("[data-label-light]");
 
-  function atual(): "light" | "dark" {
-    const escolhido = raiz.getAttribute("data-theme");
-    if (escolhido === "light" || escolhido === "dark") return escolhido;
+  function currentTheme(): "light" | "dark" {
+    const chosen = root.getAttribute("data-theme");
+    if (chosen === "light" || chosen === "dark") return chosen;
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
   }
 
-  function sincroniza() {
-    if (!rotulo) return;
-    rotulo.textContent =
-      atual() === "dark" ? (rotulo.dataset.labelLight ?? "") : (rotulo.dataset.labelDark ?? "");
+  function syncLabel() {
+    if (!label) return;
+    label.textContent =
+      currentTheme() === "dark" ? (label.dataset.labelLight ?? "") : (label.dataset.labelDark ?? "");
   }
 
-  botao?.addEventListener("click", () => {
-    const proximo = atual() === "dark" ? "light" : "dark";
-    raiz.setAttribute("data-theme", proximo);
+  button?.addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
     try {
-      localStorage.setItem("theme", proximo);
+      localStorage.setItem("theme", next);
     } catch (e) {
       /* Sem armazenamento: a escolha vale só para esta visita. */
     }
-    sincroniza();
+    syncLabel();
   });
 
-  sincroniza();
+  syncLabel();
 </script>
 
 <style>
-  .botao {
+  .button {
     display: grid;
     place-items: center;
     width: 2.75rem;
@@ -78,11 +78,11 @@ const { lang } = Astro.props;
     transition: color 0.18s ease;
   }
 
-  .botao:hover {
-    color: var(--anil);
+  .button:hover {
+    color: var(--indigo);
   }
 
-  .icone {
+  .icon {
     grid-area: 1 / 1;
     width: 1.125rem;
     height: 1.125rem;
@@ -94,25 +94,25 @@ const { lang } = Astro.props;
   }
 
   /* Claro é o padrão: sol à mostra, lua guardada. */
-  .lua {
+  .moon {
     display: none;
   }
 
-  :global(:root[data-theme="dark"]) .sol {
+  :global(:root[data-theme="dark"]) .sun {
     display: none;
   }
 
-  :global(:root[data-theme="dark"]) .lua {
+  :global(:root[data-theme="dark"]) .moon {
     display: block;
   }
 
   /* Tema vindo do sistema, sem escolha salva. */
   @media (prefers-color-scheme: dark) {
-    :global(:root:not([data-theme="light"])) .sol {
+    :global(:root:not([data-theme="light"])) .sun {
       display: none;
     }
 
-    :global(:root:not([data-theme="light"])) .lua {
+    :global(:root:not([data-theme="light"])) .moon {
       display: block;
     }
   }

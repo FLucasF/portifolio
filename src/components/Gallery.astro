@@ -10,7 +10,7 @@
  * a galeria; sem script, a pessoa ainda abre a tela. E, como um <dialog>
  * fechado não é renderizado, nenhuma imagem é baixada antes do clique.
  *
- * As capturas vêm da pasta src/assets/telas/<slug>/, na ordem do nome do
+ * As capturas vêm da pasta src/assets/screens/<slug>/, na ordem do nome do
  * arquivo. Projeto sem imagem na pasta não mostra botão nenhum.
  */
 import { Image } from "astro:assets";
@@ -20,78 +20,78 @@ import { ui } from "../i18n/ui";
 
 interface Props {
   slug: string;
-  titulo: string;
-  legendas?: Record<string, Bi>;
+  title: string;
+  captions?: Record<string, Bi>;
   lang: Lang;
 }
 
-const { slug, titulo, legendas = {}, lang } = Astro.props;
+const { slug, title, captions = {}, lang } = Astro.props;
 
-const arquivos = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/telas/*/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}",
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/screens/*/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}",
   { eager: true },
 );
 
-const pasta = `../assets/telas/${slug}/`;
+const folder = `../assets/screens/${slug}/`;
 
-const quadros = Object.entries(arquivos)
-  .filter(([caminho]) => caminho.startsWith(pasta))
-  .map(([caminho, modulo]) => ({ nome: caminho.slice(pasta.length), img: modulo.default }))
-  .sort((a, b) => a.nome.localeCompare(b.nome, undefined, { numeric: true }))
-  .map((q) => ({ ...q, legenda: legendas[q.nome]?.[lang] }));
+const slides = Object.entries(files)
+  .filter(([path]) => path.startsWith(folder))
+  .map(([path, mod]) => ({ name: path.slice(folder.length), img: mod.default }))
+  .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+  .map((q) => ({ ...q, caption: captions[q.name]?.[lang] }));
 
-const id = `telas-${slug}`;
+const id = `screens-${slug}`;
 ---
 
-{quadros.length > 0 && (
+{slides.length > 0 && (
   <>
-    <a class="tag gatilho" href={quadros[0].img.src} data-abre-galeria={id}>
-      <span>{quadros.length}&nbsp;{(quadros.length === 1 ? ui.galeria.tela : ui.galeria.telas)[lang]}</span>
-      <svg class="olho" viewBox="0 0 20 20" aria-hidden="true">
+    <a class="tag trigger" href={slides[0].img.src} data-open-gallery={id}>
+      <span>{slides.length}&nbsp;{(slides.length === 1 ? ui.gallery.screen : ui.gallery.screens)[lang]}</span>
+      <svg class="eye" viewBox="0 0 20 20" aria-hidden="true">
         <path d="M2 10s3-5.5 8-5.5S18 10 18 10s-3 5.5-8 5.5S2 10 2 10z" />
         <circle cx="10" cy="10" r="2.25" />
       </svg>
     </a>
 
-    <dialog class="galeria" id={id} aria-label={ui.galeria.titulo[lang]}>
-      <div class="painel">
-        <header class="topo">
-          <p class="tag contador" data-contador>1 / {quadros.length}</p>
-          <button type="button" class="botao" data-fecha>
-            <span class="sr-only">{ui.galeria.fechar[lang]}</span>
+    <dialog class="gallery" id={id} aria-label={ui.gallery.title[lang]}>
+      <div class="panel">
+        <header class="top">
+          <p class="tag counter" data-counter>1 / {slides.length}</p>
+          <button type="button" class="button" data-close>
+            <span class="sr-only">{ui.gallery.close[lang]}</span>
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" /></svg>
           </button>
         </header>
 
-        <div class="palco">
-          {quadros.map((q, i) => (
-            <figure class="quadro" data-quadro hidden={i > 0}>
+        <div class="stage">
+          {slides.map((q, i) => (
+            <figure class="slide" data-slide hidden={i > 0}>
               <Image
-                class="tela"
+                class="screen"
                 style={`--w: ${q.img.width}; --h: ${q.img.height}`}
                 src={q.img}
-                alt={q.legenda ?? `${titulo}, ${ui.galeria.tela[lang]} ${i + 1} ${ui.galeria.de[lang]} ${quadros.length}`}
+                alt={q.caption ?? `${title}, ${ui.gallery.screen[lang]} ${i + 1} ${ui.gallery.of[lang]} ${slides.length}`}
                 widths={[640, 1024, 1440]}
                 sizes="(min-width: 1100px) 64rem, 94vw"
                 format="webp"
                 quality={82}
                 loading="lazy"
               />
-              {q.legenda && <figcaption class="meta-line legenda">{q.legenda}</figcaption>}
+              {q.caption && <figcaption class="meta-line caption">{q.caption}</figcaption>}
             </figure>
           ))}
         </div>
 
       </div>
 
-      {quadros.length > 1 && (
-        <nav class="setas" aria-label={ui.galeria.titulo[lang]}>
-          <button type="button" class="botao seta seta-anterior" data-anterior>
-            <span class="sr-only">{ui.galeria.anterior[lang]}</span>
+      {slides.length > 1 && (
+        <nav class="arrows" aria-label={ui.gallery.title[lang]}>
+          <button type="button" class="button arrow arrow-prev" data-prev>
+            <span class="sr-only">{ui.gallery.previous[lang]}</span>
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4L6.5 10l6 6" /></svg>
           </button>
-          <button type="button" class="botao seta seta-proxima" data-proxima>
-            <span class="sr-only">{ui.galeria.proxima[lang]}</span>
+          <button type="button" class="button arrow arrow-next" data-next>
+            <span class="sr-only">{ui.gallery.next[lang]}</span>
             <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4l6 6-6 6" /></svg>
           </button>
         </nav>
@@ -101,7 +101,7 @@ const id = `telas-${slug}`;
 )}
 
 <style>
-  .gatilho {
+  .trigger {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
@@ -113,12 +113,12 @@ const id = `telas-${slug}`;
     transition: background-color 0.18s ease, color 0.18s ease;
   }
 
-  .gatilho:hover {
+  .trigger:hover {
     background: var(--ink);
     color: var(--paper);
   }
 
-  .olho {
+  .eye {
     width: 1rem;
     height: 1rem;
     fill: none;
@@ -128,7 +128,7 @@ const id = `telas-${slug}`;
     stroke-linejoin: round;
   }
 
-  .galeria {
+  .gallery {
     margin: auto;
     width: min(64rem, 90vw);
     max-height: 92vh;
@@ -146,12 +146,12 @@ const id = `telas-${slug}`;
       overlay 0.18s allow-discrete;
   }
 
-  .galeria[open] {
+  .gallery[open] {
     opacity: 1;
     transform: none;
   }
 
-  .galeria::backdrop {
+  .gallery::backdrop {
     background: rgb(10 8 6 / 0);
     transition:
       background-color 0.18s ease,
@@ -159,34 +159,34 @@ const id = `telas-${slug}`;
       overlay 0.18s allow-discrete;
   }
 
-  .galeria[open]::backdrop {
+  .gallery[open]::backdrop {
     background: rgb(10 8 6 / 0.72);
   }
 
   /* Ponto de partida da entrada. Navegador sem @starting-style só abre direto. */
   @starting-style {
-    .galeria[open] {
+    .gallery[open] {
       opacity: 0;
       transform: translateY(0.5rem);
     }
 
-    .galeria[open]::backdrop {
+    .gallery[open]::backdrop {
       background: rgb(10 8 6 / 0);
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .galeria,
-    .galeria::backdrop {
+    .gallery,
+    .gallery::backdrop {
       transition: none;
     }
 
-    .galeria {
+    .gallery {
       transform: none;
     }
   }
 
-  .painel {
+  .panel {
     display: flex;
     flex-direction: column;
     max-height: 92vh;
@@ -195,7 +195,7 @@ const id = `telas-${slug}`;
     overflow: hidden;
   }
 
-  .topo {
+  .top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -205,21 +205,21 @@ const id = `telas-${slug}`;
     flex: none;
   }
 
-  .contador {
+  .counter {
     margin: 0;
     color: var(--muted);
   }
 
-  .palco {
+  .stage {
     overflow-y: auto;
     padding: 1.25rem;
   }
 
-  .quadro {
+  .slide {
     margin: 0;
   }
 
-  .quadro[hidden] {
+  .slide[hidden] {
     display: none;
   }
 
@@ -228,7 +228,7 @@ const id = `telas-${slug}`;
      celular como um filete entre duas tarjas. A conta usa a proporção do
      arquivo, não a imagem carregada, então o painel já abre no tamanho final
      em vez de crescer quando ela chega. */
-  .tela {
+  .screen {
     display: block;
     width: min(100%, calc(64vh * var(--w) / var(--h)), calc(var(--w) * 1px));
     height: auto;
@@ -238,12 +238,12 @@ const id = `telas-${slug}`;
     background: var(--paper-2);
   }
 
-  .legenda {
+  .caption {
     margin-top: 0.75rem;
     text-align: center;
   }
 
-  .botao {
+  .button {
     display: grid;
     place-items: center;
     width: 2.75rem;
@@ -256,11 +256,11 @@ const id = `telas-${slug}`;
     transition: color 0.18s ease;
   }
 
-  .botao:hover {
-    color: var(--anil);
+  .button:hover {
+    color: var(--indigo);
   }
 
-  .botao svg {
+  .button svg {
     width: 1.25rem;
     height: 1.25rem;
     fill: none;
@@ -274,7 +274,7 @@ const id = `telas-${slug}`;
      tela estreita não existe margem do lado de fora, então elas encostam na
      borda da imagem, com chapa de papel atrás para não sumir no desenho.
      Vem depois de .botao de propósito: mesma especificidade, ganha na ordem. */
-  .seta {
+  .arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -283,16 +283,16 @@ const id = `telas-${slug}`;
     color: var(--ink);
   }
 
-  .seta:hover {
+  .arrow:hover {
     background: var(--ink);
     color: var(--paper);
   }
 
-  .seta-anterior {
+  .arrow-prev {
     left: 0.4rem;
   }
 
-  .seta-proxima {
+  .arrow-next {
     right: 0.4rem;
   }
 
@@ -301,17 +301,17 @@ const id = `telas-${slug}`;
   @media (min-width: 900px) {
     /* O painel abre mão de uma calha de 5,5rem de cada lado: é onde a seta
        pousa. Sem isso ela encosta na beira da janela e é cortada. */
-    .galeria {
+    .gallery {
       width: min(64rem, calc(100vw - 11rem));
     }
 
-    .seta,
-    .seta:hover {
+    .arrow,
+    .arrow:hover {
       background: none;
       border: 0;
     }
 
-    .seta {
+    .arrow {
       width: 3.25rem;
       height: 3.25rem;
       color: #e9e1ce;
@@ -319,20 +319,20 @@ const id = `telas-${slug}`;
 
     /* Solta no backdrop, sem moldura em volta, a seta precisa de mais corpo
        para ser vista; dentro do painel o filete já dava o contorno. */
-    .seta svg {
+    .arrow svg {
       width: 1.75rem;
       height: 1.75rem;
     }
 
-    .seta:hover {
+    .arrow:hover {
       color: #fff;
     }
 
-    .seta-anterior {
+    .arrow-prev {
       left: -3.75rem;
     }
 
-    .seta-proxima {
+    .arrow-next {
       right: -3.75rem;
     }
   }
@@ -351,40 +351,40 @@ const id = `telas-${slug}`;
 </style>
 
 <script>
-  for (const gatilho of document.querySelectorAll<HTMLAnchorElement>("[data-abre-galeria]")) {
-    const id = gatilho.dataset.abreGaleria!;
-    const dialogo = document.getElementById(id) as HTMLDialogElement | null;
-    if (!dialogo) continue;
+  for (const trigger of document.querySelectorAll<HTMLAnchorElement>("[data-open-gallery]")) {
+    const id = trigger.dataset.openGallery!;
+    const dialog = document.getElementById(id) as HTMLDialogElement | null;
+    if (!dialog) continue;
 
-    const quadros = [...dialogo.querySelectorAll<HTMLElement>("[data-quadro]")];
-    const contador = dialogo.querySelector<HTMLElement>("[data-contador]");
-    let atual = 0;
+    const slides = [...dialog.querySelectorAll<HTMLElement>("[data-slide]")];
+    const counter = dialog.querySelector<HTMLElement>("[data-counter]");
+    let current = 0;
 
-    const mostra = (i: number) => {
-      atual = (i + quadros.length) % quadros.length;
-      quadros.forEach((q, n) => (q.hidden = n !== atual));
-      if (contador) contador.textContent = `${atual + 1} / ${quadros.length}`;
+    const show = (i: number) => {
+      current = (i + slides.length) % slides.length;
+      slides.forEach((q, n) => (q.hidden = n !== current));
+      if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
     };
 
-    gatilho.addEventListener("click", (e) => {
+    trigger.addEventListener("click", (e) => {
       e.preventDefault(); // sem script o link abriria a imagem, que é o plano B
-      mostra(0);
-      dialogo.showModal();
+      show(0);
+      dialog.showModal();
     });
 
-    dialogo.querySelector("[data-fecha]")?.addEventListener("click", () => dialogo.close());
-    dialogo.querySelector("[data-anterior]")?.addEventListener("click", () => mostra(atual - 1));
-    dialogo.querySelector("[data-proxima]")?.addEventListener("click", () => mostra(atual + 1));
+    dialog.querySelector("[data-close]")?.addEventListener("click", () => dialog.close());
+    dialog.querySelector("[data-prev]")?.addEventListener("click", () => show(current - 1));
+    dialog.querySelector("[data-next]")?.addEventListener("click", () => show(current + 1));
 
-    dialogo.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") mostra(atual - 1);
-      if (e.key === "ArrowRight") mostra(atual + 1);
+    dialog.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") show(current - 1);
+      if (e.key === "ArrowRight") show(current + 1);
     });
 
     // Clique fora do painel fecha. O <dialog> recebe o clique do próprio
     // backdrop, então basta checar se o alvo foi ele mesmo.
-    dialogo.addEventListener("click", (e) => {
-      if (e.target === dialogo) dialogo.close();
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
     });
   }
 </script>

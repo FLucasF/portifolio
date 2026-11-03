@@ -17,25 +17,25 @@ const { lang } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const root = base.endsWith("/") ? base : `${base}/`;
 
-const opcoes = [
+const options = [
   { code: "pt-BR", lang: "pt" as Lang, href: root },
   { code: "en-US", lang: "en" as Lang, href: `${root}en/` },
 ];
 
-const atual = opcoes.find((o) => o.lang === lang)!;
+const current = options.find((o) => o.lang === lang)!;
 ---
 
 <div class="lang" data-lang-menu>
   <button
     type="button"
-    class="botao"
+    class="button"
     aria-haspopup="true"
     aria-expanded="false"
-    aria-controls="lista-idiomas"
+    aria-controls="language-list"
   >
-    <span class="atual">{atual.code}</span>
+    <span class="current">{current.code}</span>
     <span class="sr-only">— {ui.lang.label[lang]}</span>
-    <svg class="globo" viewBox="0 0 20 20" aria-hidden="true">
+    <svg class="globe" viewBox="0 0 20 20" aria-hidden="true">
       <circle cx="10" cy="10" r="8" />
       <path d="M2 10h16" />
       <ellipse cx="10" cy="10" rx="3.5" ry="8" />
@@ -44,17 +44,17 @@ const atual = opcoes.find((o) => o.lang === lang)!;
     </svg>
   </button>
 
-  <ul class="lista" id="lista-idiomas" hidden>
-    {opcoes.map((o) => (
+  <ul class="list" id="language-list" hidden>
+    {options.map((o) => (
       <li>
         <a
-          class="opcao tag"
+          class="option tag"
           href={o.href}
           hreflang={o.code}
           lang={o.code}
           aria-current={o.lang === lang ? "true" : undefined}
         >
-          <span class="marca" aria-hidden="true">{o.lang === lang ? "●" : ""}</span>
+          <span class="mark" aria-hidden="true">{o.lang === lang ? "●" : ""}</span>
           {o.code}
         </a>
       </li>
@@ -63,36 +63,36 @@ const atual = opcoes.find((o) => o.lang === lang)!;
 </div>
 
 <script>
-  for (const raiz of document.querySelectorAll<HTMLElement>("[data-lang-menu]")) {
-    const botao = raiz.querySelector<HTMLButtonElement>("button");
-    const lista = raiz.querySelector<HTMLElement>("ul");
-    if (!botao || !lista) continue;
+  for (const root of document.querySelectorAll<HTMLElement>("[data-lang-menu]")) {
+    const button = root.querySelector<HTMLButtonElement>("button");
+    const list = root.querySelector<HTMLElement>("ul");
+    if (!button || !list) continue;
 
-    const abrir = (sim: boolean) => {
-      botao.setAttribute("aria-expanded", String(sim));
-      lista.hidden = !sim;
+    const setOpen = (open: boolean) => {
+      button.setAttribute("aria-expanded", String(open));
+      list.hidden = !open;
     };
 
-    botao.addEventListener("click", () => {
-      abrir(botao.getAttribute("aria-expanded") !== "true");
+    button.addEventListener("click", () => {
+      setOpen(button.getAttribute("aria-expanded") !== "true");
     });
 
     // Clique fora fecha. O clique no próprio menu não conta.
-    document.addEventListener("click", (evento) => {
-      if (!raiz.contains(evento.target as Node)) abrir(false);
+    document.addEventListener("click", (event) => {
+      if (!root.contains(event.target as Node)) setOpen(false);
     });
 
     // Esc fecha e devolve o foco ao botão, senão ele se perde na página.
-    raiz.addEventListener("keydown", (evento) => {
-      if (evento.key !== "Escape") return;
-      abrir(false);
-      botao.focus();
+    root.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      button.focus();
     });
 
     // Sair da lista com Tab também fecha.
-    raiz.addEventListener("focusout", () => {
+    root.addEventListener("focusout", () => {
       window.setTimeout(() => {
-        if (!raiz.contains(document.activeElement)) abrir(false);
+        if (!root.contains(document.activeElement)) setOpen(false);
       }, 0);
     });
   }
@@ -104,7 +104,7 @@ const atual = opcoes.find((o) => o.lang === lang)!;
     display: flex;
   }
 
-  .botao {
+  .button {
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -117,12 +117,12 @@ const atual = opcoes.find((o) => o.lang === lang)!;
     transition: color 0.18s ease;
   }
 
-  .botao:hover,
-  .botao[aria-expanded="true"] {
-    color: var(--anil);
+  .button:hover,
+  .button[aria-expanded="true"] {
+    color: var(--indigo);
   }
 
-  .atual {
+  .current {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     font-weight: 500;
@@ -130,7 +130,7 @@ const atual = opcoes.find((o) => o.lang === lang)!;
     line-height: 1;
   }
 
-  .globo {
+  .globe {
     width: 1.125rem;
     height: 1.125rem;
     fill: none;
@@ -140,7 +140,7 @@ const atual = opcoes.find((o) => o.lang === lang)!;
   }
 
   /* A lista repete a moldura do folheto: canto vivo e filete de tinta. */
-  .lista {
+  .list {
     position: absolute;
     top: calc(100% + 0.5rem);
     right: 0;
@@ -151,15 +151,15 @@ const atual = opcoes.find((o) => o.lang === lang)!;
     list-style: none;
     background: var(--paper);
     border: 1px solid var(--ink);
-    box-shadow: 3px 4px 0 0 var(--anil);
+    box-shadow: 3px 4px 0 0 var(--indigo);
   }
 
-  .lista[hidden] {
+  .list[hidden] {
     display: none;
   }
 
   /* Código de idioma tem caixa própria: pt-BR, não PT-BR. */
-  .opcao {
+  .option {
     text-transform: none;
     letter-spacing: 0.06em;
     display: flex;
@@ -172,19 +172,19 @@ const atual = opcoes.find((o) => o.lang === lang)!;
     transition: background-color 0.15s ease, color 0.15s ease;
   }
 
-  .opcao:hover {
-    background: var(--anil-wash);
-    color: var(--anil);
+  .option:hover {
+    background: var(--indigo-wash);
+    color: var(--indigo);
   }
 
-  .opcao[aria-current] {
+  .option[aria-current] {
     color: var(--ink);
   }
 
-  .marca {
+  .mark {
     width: 0.5rem;
     font-size: 0.5rem;
-    color: var(--sol);
+    color: var(--sun);
   }
 
   .sr-only {

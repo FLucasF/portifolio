@@ -1,7 +1,7 @@
 ---
 import { work, person, type Lang } from "../data/site";
 import Section from "./Section.astro";
-import Galeria from "./Galeria.astro";
+import Gallery from "./Gallery.astro";
 
 interface Props {
   lang: Lang;
@@ -10,7 +10,7 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Section id="projetos" heading={work.heading[lang]} lede={work.lede[lang]} band>
+<Section id="projects" heading={work.heading[lang]} lede={work.lede[lang]} band>
   <ol class="ledger">
     {work.projects.map((p, i) => (
       <li class="entry settle" data-settle-delay={i * 70}>
@@ -22,10 +22,10 @@ const { lang } = Astro.props;
         <div class="entry-main">
           <div class="entry-title-row">
             <h3 class="display entry-title">{p.title[lang]}</h3>
-            <Galeria slug={p.slug} titulo={p.title[lang]} legendas={p.legendas} lang={lang} />
-            {p.emCurso && (
-              <span class="tag construindo">
-                <span class="lampada" aria-hidden="true"></span>
+            <Gallery slug={p.slug} title={p.title[lang]} captions={p.captions} lang={lang} />
+            {p.inProgress && (
+              <span class="tag building">
+                <span class="lamp" aria-hidden="true"></span>
                 {work.building[lang]}
               </span>
             )}
@@ -41,9 +41,9 @@ const { lang } = Astro.props;
             )}
           </div>
 
-          <p class="entry-body prose-measure texto-justo">{p.body[lang]}</p>
+          <p class="entry-body prose-measure text-justified">{p.body[lang]}</p>
 
-          {p.liveNote && <p class="meta-line ressalva">{p.liveNote[lang]}</p>}
+          {p.liveNote && <p class="meta-line caveat">{p.liveNote[lang]}</p>}
 
           {p.stack.length > 0 && (
             <ul class="chips">
@@ -118,19 +118,19 @@ const { lang } = Astro.props;
     font-weight: 800;
   }
 
-  .construindo {
+  .building {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
     color: var(--muted);
   }
 
-  .lampada {
+  .lamp {
     width: 6px;
     height: 6px;
     flex: none;
     border-radius: 50%;
-    background: var(--sol);
+    background: var(--sun);
   }
 
   .live {
@@ -138,7 +138,7 @@ const { lang } = Astro.props;
     align-items: center;
     gap: 0.35rem;
     min-height: 2rem;
-    color: var(--anil);
+    color: var(--indigo);
     text-decoration: none;
     border: 1px solid currentColor;
     padding: 0.3rem 0.6rem;
@@ -146,7 +146,7 @@ const { lang } = Astro.props;
   }
 
   .live:hover {
-    background: var(--anil);
+    background: var(--indigo);
     color: var(--paper);
   }
 
@@ -156,11 +156,11 @@ const { lang } = Astro.props;
   }
 
   /* Ressalva do endereço no ar: avisa antes de a pessoa achar que caiu. */
-  .ressalva {
+  .caveat {
     max-width: 52ch;
     margin: -0.5rem 0 1.125rem;
     padding-left: 0.75rem;
-    border-left: 2px solid var(--sol);
+    border-left: 2px solid var(--sun);
   }
 
   .chips {

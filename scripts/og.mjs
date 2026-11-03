@@ -18,7 +18,7 @@ const H = 630;
 
 const PAPER = "#e9e1ce";
 const INK = "#17140f";
-const ANIL = "#1b4a87";
+const INDIGO = "#1b4a87";
 const MUTED = "#6b6250";
 
 /* A ilustração é composta por cima deste fundo; a posição dela está no
@@ -49,9 +49,9 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
   <text x="80" y="152" font-family="${MONO}" font-size="19" letter-spacing="3.4" fill="${MUTED}">CIÊNCIA DA COMPUTAÇÃO · UFPB CAMPUS IV</text>
 
   <text x="76" y="272" font-family="${DISPLAY}" font-size="132" font-weight="900" letter-spacing="-1" fill="${INK}">LUCAS</text>
-  <text x="76" y="384" font-family="${DISPLAY}" font-size="132" font-weight="900" letter-spacing="-1" fill="${ANIL}">FELIPE</text>
+  <text x="76" y="384" font-family="${DISPLAY}" font-size="132" font-weight="900" letter-spacing="-1" fill="${INDIGO}">FELIPE</text>
 
-  <g fill="${ANIL}">${lozenges}</g>
+  <g fill="${INDIGO}">${lozenges}</g>
 
   <text x="76" y="478" font-family="${DISPLAY}" font-size="52" font-weight="700" letter-spacing="1" fill="${INK}">DESENVOLVEDOR FULL STACK</text>
 
@@ -59,13 +59,13 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
   <text x="80" y="568" font-family="${MONO}" font-size="20" letter-spacing="1.4" fill="${MUTED}">github.com/FLucasF</text>
 </svg>`;
 
-const FIG = resolve(HERE, "..", "src", "assets", "lucas-acenando.png");
-const figura = await sharp(FIG).resize({ height: 548 }).toBuffer();
-const figMeta = await sharp(figura).metadata();
+const FIG = resolve(HERE, "..", "src", "assets", "lucas-waving.png");
+const figure = await sharp(FIG).resize({ height: 548 }).toBuffer();
+const figMeta = await sharp(figure).metadata();
 
 await mkdir(dirname(OUT), { recursive: true });
 await sharp(Buffer.from(svg))
-  .composite([{ input: figura, left: Math.round(FIG_CX - figMeta.width * 0.478), top: 60 }])
+  .composite([{ input: figure, left: Math.round(FIG_CX - figMeta.width * 0.478), top: 60 }])
   .png()
   .toFile(OUT);
 console.log(`og.png escrito em ${OUT}`);

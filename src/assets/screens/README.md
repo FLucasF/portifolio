@@ -12,6 +12,6 @@ As telas seguem a ordem do nome do arquivo, então numere: `01-inicio.png`,
 
 A legenda é opcional. Para ter uma, adicione ao projeto em `site.ts`:
 
-    legendas: {
+    captions: {
       "01-inicio.png": { pt: "Tela inicial", en: "Home screen" },
     },

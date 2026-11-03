@@ -16,8 +16,8 @@
   --color-paper-2: #e1d7bd;
   --color-ink: #17140f;
   --color-muted: #5f5747;
-  --color-anil: #1b4a87;
-  --color-sol: #b8801a;
+  --color-indigo: #1b4a87;
+  --color-sun: #b8801a;
   --color-rule: #c6bba0;
 }
 
@@ -26,9 +26,9 @@
   --paper-2: #e1d7bd;
   --ink: #17140f;
   --muted: #5f5747;
-  --anil: #1b4a87;
-  --anil-wash: rgba(27, 74, 135, 0.09);
-  --sol: #b8801a;
+  --indigo: #1b4a87;
+  --indigo-wash: rgba(27, 74, 135, 0.09);
+  --sun: #b8801a;
   --rule: #c6bba0;
   --grain: 0.05;
 
@@ -41,9 +41,9 @@
     --paper-2: #1c1915;
     --ink: #e9e1ce;
     --muted: #968c78;
-    --anil: #85b5ef;
-    --anil-wash: rgba(133, 181, 239, 0.12);
-    --sol: #e0ac45;
+    --indigo: #85b5ef;
+    --indigo-wash: rgba(133, 181, 239, 0.12);
+    --sun: #e0ac45;
     --rule: #322c24;
     --grain: 0.07;
 
@@ -56,9 +56,9 @@
   --paper-2: #1c1915;
   --ink: #e9e1ce;
   --muted: #968c78;
-  --anil: #85b5ef;
-  --anil-wash: rgba(133, 181, 239, 0.12);
-  --sol: #e0ac45;
+  --indigo: #85b5ef;
+  --indigo-wash: rgba(133, 181, 239, 0.12);
+  --sun: #e0ac45;
   --rule: #322c24;
   --grain: 0.07;
 
@@ -102,12 +102,12 @@ body::after {
 }
 
 ::selection {
-  background: var(--anil);
+  background: var(--indigo);
   color: var(--paper);
 }
 
 :focus-visible {
-  outline: 2px solid var(--anil);
+  outline: 2px solid var(--indigo);
   outline-offset: 3px;
   border-radius: 1px;
 }
@@ -159,7 +159,7 @@ body::after {
    Blocos mais estreitos que isso, como a nota de um livro na grade de capas,
    ficam de fora de propósito: ali não há folga nem com hífen. */
 @media (max-width: 719px) {
-  .texto-justo {
+  .text-justified {
     text-align: justify;
     -webkit-hyphens: auto;
     hyphens: auto;
@@ -199,7 +199,7 @@ section[id] {
 .link-underline {
   color: inherit;
   text-decoration: none;
-  background-image: linear-gradient(var(--anil), var(--anil));
+  background-image: linear-gradient(var(--indigo), var(--indigo));
   background-repeat: no-repeat;
   background-position: 0 100%;
   background-size: 100% 1px;
@@ -207,7 +207,7 @@ section[id] {
 }
 
 .link-underline:hover {
-  color: var(--anil);
+  color: var(--indigo);
   background-size: 100% 2px;
 }
 

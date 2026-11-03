@@ -17,7 +17,7 @@ const channels = [
 ];
 ---
 
-<Section id="contato" heading={contact.heading[lang]} lede={contact.lede[lang]} band>
+<Section id="contact" heading={contact.heading[lang]} lede={contact.lede[lang]} band>
   <ul class="channels">
     {channels.map((c, i) => (
       <li class="channel settle" data-settle-delay={i * 80}>
@@ -55,7 +55,7 @@ const channels = [
   }
 
   .channel-link:hover {
-    color: var(--anil);
+    color: var(--indigo);
     padding-inline-start: 0.75rem;
   }
 
@@ -80,6 +80,6 @@ const channels = [
   }
 
   .channel-link:hover .channel-arrow {
-    color: var(--anil);
+    color: var(--indigo);
   }
 </style>

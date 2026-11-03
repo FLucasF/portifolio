@@ -9,16 +9,16 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Section id="certificados" heading={certificates.heading[lang]} lede={certificates.lede[lang]} band>
-  <ul class="lista">
+<Section id="certificates" heading={certificates.heading[lang]} lede={certificates.lede[lang]} band>
+  <ul class="list">
     {certificates.items.map((c, i) => (
       <li class="item settle" data-settle-delay={i * 70}>
         <a class="link" href={c.url} target="_blank" rel="noopener noreferrer">
-          <span class="nome display">{c.title}</span>
-          <span class="meta-line emissor">
+          <span class="name display">{c.title}</span>
+          <span class="meta-line issuer">
             {c.issuer}{c.date && <> · {c.date[lang]}</>}
           </span>
-          <span class="acao tag">
+          <span class="action tag">
             {certificates.verify[lang]} <span aria-hidden="true">↗</span>
           </span>
         </a>
@@ -28,7 +28,7 @@ const { lang } = Astro.props;
 </Section>
 
 <style>
-  .lista {
+  .list {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -50,21 +50,21 @@ const { lang } = Astro.props;
   }
 
   .link:hover {
-    color: var(--anil);
+    color: var(--indigo);
   }
 
-  .nome {
+  .name {
     font-size: clamp(1.25rem, 3vw, 1.625rem);
     font-weight: 700;
     line-height: 1.1;
   }
 
-  .emissor {
+  .issuer {
     color: var(--muted);
   }
 
-  .acao {
-    color: var(--anil);
+  .action {
+    color: var(--indigo);
     align-self: center;
   }
 
@@ -74,12 +74,12 @@ const { lang } = Astro.props;
       align-items: center;
     }
 
-    .nome,
-    .emissor {
+    .name,
+    .issuer {
       grid-column: 1;
     }
 
-    .acao {
+    .action {
       grid-column: 2;
       grid-row: 1 / span 2;
     }

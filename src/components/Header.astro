@@ -11,13 +11,13 @@ interface Props {
 const { lang } = Astro.props;
 
 const nav = [
-  { id: "sobre", label: ui.nav.about[lang] },
-  { id: "experiencia", label: ui.nav.experience[lang] },
-  { id: "projetos", label: ui.nav.work[lang] },
-  { id: "ferramentas", label: ui.nav.tools[lang] },
-  { id: "certificados", label: ui.nav.certificates[lang] },
-  { id: "livros", label: ui.nav.books[lang] },
-  { id: "contato", label: ui.nav.contact[lang] },
+  { id: "about", label: ui.nav.about[lang] },
+  { id: "experience", label: ui.nav.experience[lang] },
+  { id: "projects", label: ui.nav.work[lang] },
+  { id: "tools", label: ui.nav.tools[lang] },
+  { id: "certificates", label: ui.nav.certificates[lang] },
+  { id: "books", label: ui.nav.books[lang] },
+  { id: "contact", label: ui.nav.contact[lang] },
 ];
 ---
 
@@ -35,13 +35,13 @@ const nav = [
 
       <button
         type="button"
-        class="indice-botao"
-        data-indice-abre
+        class="index-button"
+        data-index-open
         aria-expanded="false"
-        aria-controls="indice"
+        aria-controls="index"
       >
         <span class="sr-only">{ui.nav.openIndex[lang]}</span>
-        <svg viewBox="0 0 20 20" aria-hidden="true" class="indice-icone">
+        <svg viewBox="0 0 20 20" aria-hidden="true" class="index-icon">
           <path d="M3 5.5h14M3 10h14M3 14.5h14" />
         </svg>
       </button>
@@ -50,57 +50,57 @@ const nav = [
 </header>
 
 <!-- Índice de bolso: a lista de seções para quem não tem a barra larga. -->
-<div class="indice" id="indice" hidden>
-  <div class="indice-topo shell">
-    <p class="tag indice-titulo">{ui.nav.index[lang]}</p>
-    <button type="button" class="indice-botao" data-indice-fecha>
+<div class="index" id="index" hidden>
+  <div class="index-top shell">
+    <p class="tag index-title">{ui.nav.index[lang]}</p>
+    <button type="button" class="index-button" data-index-close>
       <span class="sr-only">{ui.nav.closeIndex[lang]}</span>
-      <svg viewBox="0 0 20 20" aria-hidden="true" class="indice-icone">
+      <svg viewBox="0 0 20 20" aria-hidden="true" class="index-icon">
         <path d="M5 5l10 10M15 5L5 15" />
       </svg>
     </button>
   </div>
 
-  <nav class="indice-lista shell" aria-label={ui.nav.sections[lang]}>
+  <nav class="index-list shell" aria-label={ui.nav.sections[lang]}>
     {nav.map((item, i) => (
-      <a href={`#${item.id}`} class="indice-link">
-        <span class="tag indice-num">{String(i + 1).padStart(2, "0")}</span>
-        <span class="display indice-nome">{item.label}</span>
+      <a href={`#${item.id}`} class="index-link">
+        <span class="tag index-num">{String(i + 1).padStart(2, "0")}</span>
+        <span class="display index-name">{item.label}</span>
       </a>
     ))}
   </nav>
 </div>
 
 <script>
-  const painel = document.getElementById("indice");
-  const abre = document.querySelector<HTMLButtonElement>("[data-indice-abre]");
-  const fecha = document.querySelector<HTMLButtonElement>("[data-indice-fecha]");
+  const panel = document.getElementById("index");
+  const openButton = document.querySelector<HTMLButtonElement>("[data-index-open]");
+  const closeButton = document.querySelector<HTMLButtonElement>("[data-index-close]");
 
-  if (painel && abre) {
-    const alterna = (aberto: boolean) => {
-      painel.hidden = !aberto;
-      abre.setAttribute("aria-expanded", String(aberto));
+  if (panel && openButton) {
+    const toggle = (open: boolean) => {
+      panel.hidden = !open;
+      openButton.setAttribute("aria-expanded", String(open));
       // Trava a rolagem atrás do painel, senão a página desliza por baixo.
-      document.body.style.overflow = aberto ? "hidden" : "";
-      if (aberto) painel.querySelector<HTMLAnchorElement>("a")?.focus();
-      else abre.focus();
+      document.body.style.overflow = open ? "hidden" : "";
+      if (open) panel.querySelector<HTMLAnchorElement>("a")?.focus();
+      else openButton.focus();
     };
 
-    abre.addEventListener("click", () => alterna(true));
-    fecha?.addEventListener("click", () => alterna(false));
+    openButton.addEventListener("click", () => toggle(true));
+    closeButton?.addEventListener("click", () => toggle(false));
 
     // Escolher uma seção fecha o painel: o destino está atrás dele.
-    painel.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => alterna(false)),
+    panel.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => toggle(false)),
     );
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !painel.hidden) alterna(false);
+      if (e.key === "Escape" && !panel.hidden) toggle(false);
     });
 
     // Voltar à barra larga com o painel aberto o deixaria preso na tela.
     window.matchMedia("(min-width: 900px)").addEventListener("change", (e) => {
-      if (e.matches && !painel.hidden) alterna(false);
+      if (e.matches && !panel.hidden) toggle(false);
     });
   }
 </script>
@@ -137,7 +137,7 @@ const nav = [
   }
 
   .head-link:hover {
-    color: var(--anil);
+    color: var(--indigo);
   }
 
   .head-tools {
@@ -148,7 +148,7 @@ const nav = [
   }
 
   /* 44px de alvo, o mínimo para o polegar, sem inchar o desenho do ícone. */
-  .indice-botao {
+  .index-button {
     display: grid;
     place-items: center;
     width: 2.75rem;
@@ -161,11 +161,11 @@ const nav = [
     transition: color 0.18s ease;
   }
 
-  .indice-botao:hover {
-    color: var(--anil);
+  .index-button:hover {
+    color: var(--indigo);
   }
 
-  .indice-icone {
+  .index-icon {
     width: 1.25rem;
     height: 1.25rem;
     fill: none;
@@ -174,7 +174,7 @@ const nav = [
     stroke-linecap: round;
   }
 
-  .indice {
+  .index {
     position: fixed;
     inset: 0;
     z-index: 60;
@@ -184,11 +184,11 @@ const nav = [
     overflow-y: auto;
   }
 
-  .indice[hidden] {
+  .index[hidden] {
     display: none;
   }
 
-  .indice-topo {
+  .index-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -197,16 +197,16 @@ const nav = [
     border-bottom: 1px solid var(--rule);
   }
 
-  .indice-titulo {
+  .index-title {
     margin: 0;
     color: var(--muted);
   }
 
-  .indice-lista {
+  .index-list {
     padding-block: 1.5rem 3rem;
   }
 
-  .indice-link {
+  .index-link {
     display: flex;
     align-items: baseline;
     gap: 1rem;
@@ -216,17 +216,17 @@ const nav = [
     color: var(--ink);
   }
 
-  .indice-link:hover .indice-nome {
-    color: var(--anil);
+  .index-link:hover .index-name {
+    color: var(--indigo);
   }
 
   /* A numeração aqui é verdadeira: é a ordem das seções na página. */
-  .indice-num {
-    color: var(--anil);
+  .index-num {
+    color: var(--indigo);
     flex: none;
   }
 
-  .indice-nome {
+  .index-name {
     font-size: 2rem;
     font-weight: 800;
     transition: color 0.18s ease;
@@ -249,7 +249,7 @@ const nav = [
       display: flex;
     }
 
-    .indice-botao[data-indice-abre] {
+    .index-button[data-index-open] {
       display: none;
     }
   }

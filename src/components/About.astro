@@ -9,10 +9,10 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Section id="sobre" heading={about.heading[lang]} band>
+<Section id="about" heading={about.heading[lang]} band>
   <div class="about settle">
     {about.body[lang].map((paragraph, i) => (
-      <p class:list={["para", "texto-justo", i === 0 && "para-lead"]}>{paragraph}</p>
+      <p class:list={["para", "text-justified", i === 0 && "para-lead"]}>{paragraph}</p>
     ))}
   </div>
 </Section>
@@ -39,7 +39,7 @@ const { lang } = Astro.props;
     font-size: 4.25rem;
     line-height: 0.76;
     padding: 0.06em 0.14em 0 0;
-    color: var(--anil);
+    color: var(--indigo);
   }
 
   /* Texto corrido, numa coluna só. Em tela larga ele cresce junto com a

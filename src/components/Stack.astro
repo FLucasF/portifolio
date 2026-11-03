@@ -9,16 +9,16 @@ interface Props {
 const { lang } = Astro.props;
 ---
 
-<Section id="ferramentas" heading={stack.heading[lang]}>
-  {stack.blocks.map((bloco, b) => (
-    <div class:list={["bloco", b > 0 && "bloco-secundario"]}>
-      <h3 class="display bloco-titulo">{bloco.title[lang]}</h3>
+<Section id="tools" heading={stack.heading[lang]}>
+  {stack.blocks.map((tier, b) => (
+    <div class:list={["tier", b > 0 && "tier-secondary"]}>
+      <h3 class="display tier-title">{tier.title[lang]}</h3>
 
-      <div class="grupos">
-        {bloco.groups.map((g, i) => (
-          <div class="grupo settle" data-settle-delay={i * 80}>
-            <h4 class="tag grupo-titulo">{g.title[lang]}</h4>
-            <ul class="itens">
+      <div class="tool-groups">
+        {tier.groups.map((g, i) => (
+          <div class="tool-group settle" data-settle-delay={i * 80}>
+            <h4 class="tag group-title">{g.title[lang]}</h4>
+            <ul class="items">
               {g.items.map((item) => <li class="item">{item}</li>)}
             </ul>
           </div>
@@ -29,11 +29,11 @@ const { lang } = Astro.props;
 </Section>
 
 <style>
-  .bloco + .bloco {
+  .tier + .tier {
     margin-top: 3.5rem;
   }
 
-  .bloco-titulo {
+  .tier-title {
     margin: 0 0 1.5rem;
     padding-top: 0.75rem;
     border-top: 2px solid var(--ink);
@@ -41,19 +41,19 @@ const { lang } = Astro.props;
     font-weight: 800;
   }
 
-  .grupos {
+  .tool-groups {
     display: grid;
     gap: 2.5rem;
   }
 
-  .grupo-titulo {
+  .group-title {
     margin: 0 0 1rem;
     padding-bottom: 0.6rem;
     border-bottom: 2px solid var(--ink);
-    color: var(--anil);
+    color: var(--indigo);
   }
 
-  .itens {
+  .items {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -77,24 +77,24 @@ const { lang } = Astro.props;
   /* O segundo bloco tem a mesma estrutura e menos peso. É a diferença de
      corpo que faz a página dizer "estas eu uso" antes de "estas eu encostei",
      sem precisar de uma frase explicando. */
-  .bloco-secundario .bloco-titulo {
+  .tier-secondary .tier-title {
     border-top-width: 1px;
     font-size: clamp(1.125rem, 3vw, 1.375rem);
     color: var(--muted);
   }
 
-  .bloco-secundario .grupo-titulo {
+  .tier-secondary .group-title {
     border-bottom-width: 1px;
     border-bottom-color: var(--rule);
   }
 
-  .bloco-secundario .item {
+  .tier-secondary .item {
     font-size: 1.0625rem;
     color: var(--muted);
   }
 
   @media (min-width: 720px) {
-    .grupos {
+    .tool-groups {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 3rem;
     }

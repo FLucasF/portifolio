@@ -20,7 +20,7 @@ O site sobe em <http://localhost:4321>. A versão em inglês fica em `/en/`.
 | `npm run preview` | Serve o `dist/` para conferir antes de publicar |
 | `npm run og` | Regera `public/og.png`, a imagem de compartilhamento |
 | `npm run favicon` | Regera os ícones de aba a partir da ilustração |
-| `npm run capas` | Baixa a capa dos livros que ainda não têm arquivo |
+| `npm run covers` | Baixa a capa dos livros que ainda não têm arquivo |
 
 ## Onde mexer
 
@@ -33,7 +33,7 @@ editar um lado, edite o outro.
 
 As durações de cargo ("1 ano 5 meses") não são escritas à mão: cada entrada de
 `experience` guarda só `inicio` e `fim` no formato `AAAA-MM`, e
-[`src/lib/tempo.ts`](src/lib/tempo.ts) calcula o texto na build. Um cargo sem
+[`src/lib/time.ts`](src/lib/time.ts) calcula o texto na build. Um cargo sem
 `fim` conta até hoje. Por isso o workflow também roda no dia 1º de cada mês:
 sem essa reconstrução, o número congelaria na data do último push.
 
@@ -50,12 +50,12 @@ Outros pontos:
 - **Cores e fontes** — [`src/styles/global.css`](src/styles/global.css), no topo.
   Os tokens `--paper`, `--ink`, `--anil` e `--sol` definem os dois temas.
 - **Textos de navegação e rodapé** — [`src/i18n/ui.ts`](src/i18n/ui.ts).
-- **Ilustração da capa** — [`src/assets/lucas-acenando.png`](src/assets/lucas-acenando.png).
+- **Ilustração da capa** — [`src/assets/lucas-waving.png`](src/assets/lucas-waving.png).
   Para trocar, substitua o arquivo mantendo o fundo transparente. O Astro gera
   os WebP responsivos sozinho na build. Depois rode `npm run favicon` e
   `npm run og`, que recortam dela o ícone de aba e a imagem de compartilhamento.
 - **Livros** — acrescente o livro em `books.items` com o **ISBN-10** e rode
-  `npm run capas`. A capa é baixada uma vez para `src/assets/livros/<isbn>.jpg`
+  `npm run covers`. A capa é baixada uma vez para `src/assets/books/<isbn>.jpg`
   e versionada, então o site não depende de serviço externo no ar: o visitante
   nunca fala com a Amazon. Se a origem não tiver a capa daquele ISBN, o script
   avisa e o livro aparece sem imagem, sem quebrar a página.
@@ -111,14 +111,14 @@ servem.
 src/
   data/site.ts        conteúdo bilíngue, tipado
   i18n/ui.ts          textos de interface e ajudantes de idioma
-  lib/tempo.ts        duração e período dos cargos, calculados na build
+  lib/time.ts        duração e período dos cargos, calculados na build
   layouts/Base.astro  <head>, tema sem piscar, observador da animação
   components/
     Cover.astro       a capa: moldura, nome e ilustração
-    Personagem.astro  a ilustração, otimizada pelo <Image> do Astro
+    Character.astro  a ilustração, otimizada pelo <Image> do Astro
     Section.astro     cabeçalho de seção reaproveitado pelas quatro seguintes
     Header.astro      barra fixa e o índice de bolso abaixo de 900px
-    Experience.astro  cargos, com a duração vinda de lib/tempo.ts
+    Experience.astro  cargos, com a duração vinda de lib/time.ts
     Certificates.astro  credenciais
     Work.astro  Stack.astro  About.astro  Contact.astro
     Header.astro  Footer.astro  Page.astro

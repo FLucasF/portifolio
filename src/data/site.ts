@@ -59,10 +59,10 @@ export const cover = {
 
 /**
  * Os períodos guardam só o mês de início e o de fim. A duração em texto é
- * calculada na build por `src/lib/tempo.ts`, então nada aqui precisa ser
+ * calculada na build por `src/lib/time.ts`, então nada aqui precisa ser
  * reescrito conforme o tempo passa.
  */
-export type Cargo = {
+export type Role = {
   slug: string;
   role: Bi;
   /** Quem estava por trás. Cada parte leva o seu link, quando há um público. */
@@ -70,9 +70,9 @@ export type Cargo = {
   /** Vínculo e regime, como "Meio período · Remoto". */
   mode: Bi;
   place: Bi;
-  inicio: string;
+  start: string;
   /** Ausente quando o cargo está em andamento. */
-  fim?: string;
+  end?: string;
   body: Bi;
   skills: string[];
 };
@@ -92,7 +92,7 @@ export const experience = {
       ],
       mode: { pt: "Meio período · 30h · Remoto", en: "Part time · 30h · Remote" },
       place: { pt: "Paraíba, Brasil", en: "Paraíba, Brazil" },
-      inicio: "2025-04",
+      start: "2025-04",
       body: {
         pt: "O projeto AYTY é uma colaboração entre a UFPB Campus IV e a Phoebus. Atuo de forma versátil na solução de demandas: desenvolvo e mantenho componentes de back-end, implemento interfaces de front-end e escrevo a documentação técnica que garante a qualidade e a manutenção do software.",
         en: "The AYTY project is a partnership between UFPB Campus IV and Phoebus. I work across whatever a demand needs: building and maintaining back-end components, implementing front-end interfaces, and writing the technical documentation that keeps the software correct and maintainable.",
@@ -108,8 +108,8 @@ export const experience = {
         en: "Outreach project · Fellow · UFPB · Remote",
       },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
-      inicio: "2024-08",
-      fim: "2025-04",
+      start: "2024-08",
+      end: "2025-04",
       body: {
         pt: "Portei o Embaralhado Indígena do Android para a web e cuidei das duas pontas: a interface em Angular com TypeScript e um microsserviço em Spring Boot, com MySQL e MinIO para as imagens. O aplicativo original saiu do trabalho de conclusão de João Fidelis Freire de Oliveira.",
         en: "I ported Embaralhado Indígena from Android to the web and handled both ends: the Angular and TypeScript interface, and a Spring Boot microservice with MySQL and MinIO for the images. The original app came out of João Fidelis Freire de Oliveira's final-year project.",
@@ -117,7 +117,7 @@ export const experience = {
       skills: ["Angular", "TypeScript", "Spring Boot", "MySQL", "MinIO", "Scrum", "Kanban"],
     },
     {
-      slug: "monitoria-java",
+      slug: "java-teaching-assistant",
       role: { pt: "Monitor de programação em Java", en: "Java teaching assistant" },
       orgs: [{ name: "Universidade Federal da Paraíba" }],
       mode: {
@@ -125,8 +125,8 @@ export const experience = {
         en: "Teaching assistantship · Fellow · Hybrid",
       },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
-      inicio: "2024-03",
-      fim: "2024-08",
+      start: "2024-03",
+      end: "2024-08",
       body: {
         pt: "Corrigi atividades, apoiei as aulas práticas presenciais e a distância e gravei videoaulas sobre Git e GitHub, com os slides que as acompanham. Ajudei a organizar os horários de monitoria entre os monitores, participei dos testes do sistema githubclass para o semestre seguinte e apresentei a experiência no ENID.",
         en: "I graded coursework, supported practical classes on-site and online, and recorded video lessons on Git and GitHub with the slides that go with them. I helped schedule tutoring hours across the assistants, tested the githubclass system for the following term, and presented the experience at ENID.",
@@ -142,8 +142,8 @@ export const experience = {
         en: "Outreach project · Volunteer · UFPB",
       },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
-      inicio: "2024-02",
-      fim: "2024-08",
+      start: "2024-02",
+      end: "2024-08",
       body: {
         pt: "Ajudei a tirar o Evite o Golpe do MIT App Inventor e refazê-lo em React. Corrigi bugs, implementei a randomização das perguntas e o retorno visual, e montei o formulário de avaliação. Testamos com estudantes e pessoas idosas, e o que voltou desses testes guiou as mudanças.",
         en: "I helped move Evite o Golpe off MIT App Inventor and rebuild it in React. I fixed bugs, implemented question randomisation and visual feedback, and built the feedback form. We tested with students and older people, and what came back from those sessions drove the changes.",
@@ -151,7 +151,7 @@ export const experience = {
       skills: ["React", "JavaScript", "MIT App Inventor"],
     },
     {
-      slug: "pensamento-computacional",
+      slug: "computational-thinking",
       role: { pt: "Instrutor", en: "Instructor" },
       orgs: [{ name: "A4SMaker", url: "https://sites.google.com/dcx.ufpb.br/a4smaker" }],
       mode: {
@@ -159,22 +159,22 @@ export const experience = {
         en: "Outreach project · Volunteer · UFPB",
       },
       place: { pt: "Rio Tinto, Paraíba", en: "Rio Tinto, Paraíba, Brazil" },
-      inicio: "2023-06",
-      fim: "2023-12",
+      start: "2023-06",
+      end: "2023-12",
       body: {
         pt: "Oficinas e cursos de pensamento computacional para estudantes da educação básica de Rio Tinto, construindo aplicativos no MIT App Inventor 2. O alvo eram as habilidades por trás da programação: decompor um problema, reconhecer padrões, abstrair e montar o algoritmo. Ensinar isso foi o que mais me obrigou a entender o que eu achava que já sabia.",
         en: "Workshops and short courses on computational thinking for basic-education students in Rio Tinto, building apps in MIT App Inventor 2. The target was the thinking behind programming: breaking a problem apart, spotting patterns, abstracting, and assembling an algorithm. Teaching it is what forced me to actually understand what I thought I already knew.",
       },
       skills: ["MIT App Inventor 2", "Ensino"],
     },
-  ] satisfies Cargo[],
+  ] satisfies Role[] as Role[],
 };
 
 /* -------------------------------------------------------------------------- */
 /*  Certificados                                                              */
 /* -------------------------------------------------------------------------- */
 
-export type Certificado = {
+export type Certificate = {
   title: string;
   issuer: string;
   /** Só monta a URL. O código não aparece na tela: ninguém lê um UUID. */
@@ -210,7 +210,7 @@ export const certificates = {
       url: "https://www.udemy.com/certificate/UC-d2316daf-ccfb-45fe-bce1-b9f5dad386fc/",
       date: { pt: "jun de 2024", en: "Jun 2024" },
     },
-  ] satisfies Certificado[],
+  ] satisfies Certificate[],
 };
 
 /* -------------------------------------------------------------------------- */
@@ -231,12 +231,12 @@ export type Project = {
   /** Ressalva sobre o endereço no ar, como demora de primeira carga. */
   liveNote?: Bi;
   /** Ainda em desenvolvimento: acende o mesmo marcador âmbar da experiência. */
-  emCurso?: boolean;
+  inProgress?: boolean;
   /**
    * Legenda opcional de cada captura, pelo nome do arquivo. As capturas em si
-   * vêm sozinhas de src/assets/telas/<slug>/ e não precisam de cadastro aqui.
+   * vêm sozinhas de src/assets/screens/<slug>/ e não precisam de cadastro aqui.
    */
-  legendas?: Record<string, Bi>;
+  captions?: Record<string, Bi>;
 };
 
 const CODE: Bi = { pt: "Código", en: "Code" };
@@ -299,7 +299,7 @@ export const work = {
         pt: "Projeto pessoal",
         en: "Personal project",
       },
-      emCurso: true,
+      inProgress: true,
       body: {
         pt: "Sistema de gestão para consultório de nutrição: cadastro de paciente, agendamento, prontuário, montagem de plano alimentar e exportação em PDF. Autenticação por JWT e uma camada de domínio que não conhece a camada web. Construí com IA, mas sob método: requisitos, modelo de dados e cenários BDD escritos antes do código, testes de servidor com JUnit e Spring Boot Test, e Playwright cobrindo os fluxos de ponta a ponta.",
         en: "Practice-management system for a nutrition clinic: patient records, scheduling, charting, meal-plan building, and PDF export. JWT authentication, and a domain layer that knows nothing about the web layer. I built it with AI, but under method: requirements, data model, and BDD scenarios written before the code, server tests with JUnit and Spring Boot Test, and Playwright covering the flows end to end.",
@@ -379,16 +379,14 @@ export const work = {
       repos: [{ label: CODE, url: "https://github.com/FLucasF/EviteOgolpeWEB" }],
       live: "https://eviteogolpe.a4s.dev.br/EviteOgolpeWEB/",
     },
-  ] satisfies Project[],
+  ] satisfies Project[] as Project[],
 };
 
 /* -------------------------------------------------------------------------- */
 /*  Ferramentas                                                               */
 /* -------------------------------------------------------------------------- */
 
-export type GrupoFerramentas = { title: Bi; items: string[] };
-
-export type GrupoFerramentas = { title: Bi; items: string[] };
+export type ToolGroup = { title: Bi; items: string[] };
 
 export const stack = {
   heading: { pt: "Ferramentas", en: "Tools" } satisfies Bi,
@@ -413,7 +411,7 @@ export const stack = {
           title: { pt: "Gerais", en: "General" } satisfies Bi,
           items: ["Git", "GitLab", "Docker", "Maven", "Gradle", "JUnit", "Vitest", "Docusaurus"],
         },
-      ] satisfies GrupoFerramentas[],
+      ] satisfies ToolGroup[],
     },
     {
       title: { pt: "Já usei em projetos", en: "Used in projects" } satisfies Bi,
@@ -430,7 +428,7 @@ export const stack = {
           title: { pt: "Gerais", en: "General" } satisfies Bi,
           items: ["GitHub", "Playwright", "Cypress", "Zod", "Python"],
         },
-      ] satisfies GrupoFerramentas[],
+      ] satisfies ToolGroup[],
     },
   ],
 };
@@ -439,10 +437,10 @@ export const stack = {
 /*  Livros                                                                    */
 /* -------------------------------------------------------------------------- */
 
-export type Livro = {
+export type Book = {
   /**
-   * ISBN-10. É ele que nomeia o arquivo em src/assets/livros e que monta a
-   * URL de origem da capa. Rode `npm run capas` depois de acrescentar um.
+   * ISBN-10. É ele que nomeia o arquivo em src/assets/books e que monta a
+   * URL de origem da capa. Rode `npm run covers` depois de acrescentar um.
    */
   isbn: string;
   title: string;
@@ -462,7 +460,7 @@ export const books = {
       title: "Entendendo Algoritmos",
       author: "Aditya Y. Bhargava",
     },
-  ] satisfies Livro[],
+  ] satisfies Book[],
 };
 
 /* -------------------------------------------------------------------------- */

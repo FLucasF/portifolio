@@ -1,6 +1,6 @@
 ---
 /**
- * Estante. As capas vêm de src/assets/livros, nomeadas pelo ISBN, e o Astro
+ * Estante. As capas vêm de src/assets/books, nomeadas pelo ISBN, e o Astro
  * as otimiza na build — o visitante nunca fala com a Amazon.
  *
  * O glob é eager porque o nome do arquivo sai de um dado, e o <Image> precisa
@@ -17,30 +17,30 @@ interface Props {
 
 const { lang } = Astro.props;
 
-const capas = import.meta.glob<{ default: ImageMetadata }>("../assets/livros/*.jpg", {
+const covers = import.meta.glob<{ default: ImageMetadata }>("../assets/books/*.jpg", {
   eager: true,
 });
 
 /* O texto alternativo acompanha a língua da página; antes saía sempre em
    português, inclusive em /en/. */
-const descreve = (titulo: string, autor: string) =>
-  lang === "pt" ? `Capa de ${titulo}, de ${autor}` : `Cover of ${titulo} by ${autor}`;
+const describe = (title: string, author: string) =>
+  lang === "pt" ? `Capa de ${title}, de ${author}` : `Cover of ${title} by ${author}`;
 
-const estante = books.items.map((livro) => ({
-  ...livro,
-  capa: capas[`../assets/livros/${livro.isbn}.jpg`]?.default,
+const shelf = books.items.map((book) => ({
+  ...book,
+  cover: covers[`../assets/books/${book.isbn}.jpg`]?.default,
 }));
 ---
 
-<Section id="livros" heading={books.heading[lang]}>
-  <ul class="estante">
-    {estante.map((livro, i) => (
-      <li class="livro settle" data-settle-delay={i * 70}>
-        {livro.capa ? (
+<Section id="books" heading={books.heading[lang]}>
+  <ul class="shelf">
+    {shelf.map((book, i) => (
+      <li class="book settle" data-settle-delay={i * 70}>
+        {book.cover ? (
           <Image
-            class="capa"
-            src={livro.capa}
-            alt={descreve(livro.title, livro.author)}
+            class="cover"
+            src={book.cover}
+            alt={describe(book.title, book.author)}
             widths={[180, 260, 360]}
             sizes="(min-width: 720px) 11rem, 8rem"
             format="webp"
@@ -48,12 +48,12 @@ const estante = books.items.map((livro) => ({
             loading="lazy"
           />
         ) : (
-          <div class="capa capa-vazia" aria-hidden="true"></div>
+          <div class="cover cover-empty" aria-hidden="true"></div>
         )}
 
-        <div class="ficha">
-          <h3 class="display titulo">{livro.title}</h3>
-          <p class="meta-line autor">{livro.author}</p>
+        <div class="details">
+          <h3 class="display title">{book.title}</h3>
+          <p class="meta-line author">{book.author}</p>
         </div>
       </li>
     ))}
@@ -63,7 +63,7 @@ const estante = books.items.map((livro) => ({
 <style>
   /* Coluna de largura fixa em vez de 1fr: é o que permite centrar a fileira.
      Com 1fr a trilha se estica e "centrar" não teria efeito nenhum. */
-  .estante {
+  .shelf {
     display: grid;
     grid-template-columns: repeat(auto-fit, 9rem);
     justify-content: center;
@@ -73,7 +73,7 @@ const estante = books.items.map((livro) => ({
     padding: 0;
   }
 
-  .livro {
+  .book {
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
@@ -81,8 +81,8 @@ const estante = books.items.map((livro) => ({
 
   /* Filete em volta da capa: numa página de tinta chapada, uma foto impressa
      ganha fio de contorno. É o que impede a capa de flutuar no papel. */
-  .capa,
-  .capa-vazia {
+  .cover,
+  .cover-empty {
     width: 100%;
     aspect-ratio: 7 / 10;
     display: block;
@@ -96,30 +96,30 @@ const estante = books.items.map((livro) => ({
 
      O corte é de uns 2% na borda, onde capa de livro só tem margem: as
      proporções reais ficam todas entre 0,62 e 0,75, perto da caixa de 0,70. */
-  .capa {
+  .cover {
     height: auto;
     object-fit: cover;
   }
 
-  .ficha {
+  .details {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
   }
 
-  .titulo {
+  .title {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.1;
   }
 
-  .autor {
+  .author {
     margin: 0;
   }
 
   @media (min-width: 720px) {
-    .estante {
+    .shelf {
       grid-template-columns: repeat(auto-fit, 11rem);
       justify-content: start;
       gap: 3rem 2.25rem;
