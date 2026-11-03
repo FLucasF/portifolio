@@ -27,6 +27,11 @@ const { lang } = Astro.props;
                 {work.building[lang]}
               </span>
             )}
+            {p.download && (
+              <a class="tag live" href={p.download} target="_blank" rel="noopener noreferrer">
+                {work.download[lang]} <span aria-hidden="true">↓</span>
+              </a>
+            )}
             {p.live && (
               <a class="tag live" href={p.live} target="_blank" rel="noopener noreferrer">
                 {work.live[lang]} <span aria-hidden="true">↗</span>

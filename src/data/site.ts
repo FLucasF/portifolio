@@ -226,6 +226,8 @@ export type Project = {
   stack: string[];
   repos: { label: Bi; url: string }[];
   live?: string;
+  /** Página de download, para o que se instala em vez de abrir no navegador. */
+  download?: string;
   /** Ressalva sobre o endereço no ar, como demora de primeira carga. */
   liveNote?: Bi;
   /** Ainda em desenvolvimento: acende o mesmo marcador âmbar da experiência. */
@@ -245,7 +247,21 @@ export const work = {
   all: { pt: "Todos os repositórios", en: "All repositories" } satisfies Bi,
   live: { pt: "No ar", en: "Live" } satisfies Bi,
   building: { pt: "Em construção", en: "In progress" } satisfies Bi,
+  download: { pt: "Baixar", en: "Download" } satisfies Bi,
   projects: [    {
+      slug: "ordo",
+      year: "2026",
+      title: { pt: "Ordo", en: "Ordo" },
+      kind: { pt: "Projeto pessoal", en: "Personal project" },
+      body: {
+        pt: "App de produtividade para Windows e Android, no espírito do TickTick. Tarefas com áreas, sublistas e adição por linguagem natural, calendário, matriz de Eisenhower, Pomodoro, hábitos, finanças com cartão e parcela, dieta ligada à tabela TACO, diário e estatísticas. Roda sem conta, sem login e sem servidor: os dados ficam no aparelho, e a troca entre aparelhos vai por Wi-Fi ou backup.",
+        en: "A productivity app for Windows and Android, in the spirit of TickTick. Tasks with areas, sublists and natural-language entry, a calendar, an Eisenhower matrix, Pomodoro, habits, finances with cards and instalments, diet wired to the Brazilian TACO food table, a diary, and statistics. It runs with no account, no login and no server: the data stays on the device, and moving between devices goes over Wi-Fi or a backup.",
+      },
+      stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLite"],
+      repos: [{ label: CODE, url: "https://github.com/FLucasF/Ordo" }],
+      download: "https://github.com/FLucasF/Ordo/releases",
+    },
+    {
       slug: "ol-dcx",
       year: "2026",
       title: { pt: "OL DCX", en: "OL DCX" },
