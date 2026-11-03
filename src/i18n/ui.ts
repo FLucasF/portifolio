@@ -23,6 +23,15 @@ export const ui = {
   lang: {
     label: { pt: "Escolher idioma", en: "Choose language" },
   },
+  galeria: {
+    tela: { pt: "tela", en: "screen" },
+    telas: { pt: "telas", en: "screens" },
+    de: { pt: "de", en: "of" },
+    titulo: { pt: "Telas do projeto", en: "Project screens" },
+    fechar: { pt: "Fechar as telas", en: "Close the screens" },
+    anterior: { pt: "Tela anterior", en: "Previous screen" },
+    proxima: { pt: "Próxima tela", en: "Next screen" },
+  },
   skip: { pt: "Ir para o conteúdo", en: "Skip to content" },
   rights: {
     pt: "Feito com Astro",

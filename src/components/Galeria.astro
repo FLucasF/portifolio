@@ -1,0 +1,390 @@
+---
+/**
+ * Galeria de telas de um projeto, numa camada por cima da página.
+ *
+ * Fica em <dialog> nativo de propósito: ele já traz prisão de foco, fechar
+ * no Escape e fundo inerte. Refazer isso com div é onde esse componente
+ * costuma virar armadilha de acessibilidade.
+ *
+ * O gatilho é um link de verdade para a primeira imagem. O script o promove
+ * a galeria; sem script, a pessoa ainda abre a tela. E, como um <dialog>
+ * fechado não é renderizado, nenhuma imagem é baixada antes do clique.
+ *
+ * As capturas vêm da pasta src/assets/telas/<slug>/, na ordem do nome do
+ * arquivo. Projeto sem imagem na pasta não mostra botão nenhum.
+ */
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { type Bi, type Lang } from "../data/site";
+import { ui } from "../i18n/ui";
+
+interface Props {
+  slug: string;
+  titulo: string;
+  legendas?: Record<string, Bi>;
+  lang: Lang;
+}
+
+const { slug, titulo, legendas = {}, lang } = Astro.props;
+
+const arquivos = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/telas/*/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}",
+  { eager: true },
+);
+
+const pasta = `../assets/telas/${slug}/`;
+
+const quadros = Object.entries(arquivos)
+  .filter(([caminho]) => caminho.startsWith(pasta))
+  .map(([caminho, modulo]) => ({ nome: caminho.slice(pasta.length), img: modulo.default }))
+  .sort((a, b) => a.nome.localeCompare(b.nome, undefined, { numeric: true }))
+  .map((q) => ({ ...q, legenda: legendas[q.nome]?.[lang] }));
+
+const id = `telas-${slug}`;
+---
+
+{quadros.length > 0 && (
+  <>
+    <a class="tag gatilho" href={quadros[0].img.src} data-abre-galeria={id}>
+      <span>{quadros.length}&nbsp;{(quadros.length === 1 ? ui.galeria.tela : ui.galeria.telas)[lang]}</span>
+      <svg class="olho" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M2 10s3-5.5 8-5.5S18 10 18 10s-3 5.5-8 5.5S2 10 2 10z" />
+        <circle cx="10" cy="10" r="2.25" />
+      </svg>
+    </a>
+
+    <dialog class="galeria" id={id} aria-label={ui.galeria.titulo[lang]}>
+      <div class="painel">
+        <header class="topo">
+          <p class="tag contador" data-contador>1 / {quadros.length}</p>
+          <button type="button" class="botao" data-fecha>
+            <span class="sr-only">{ui.galeria.fechar[lang]}</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" /></svg>
+          </button>
+        </header>
+
+        <div class="palco">
+          {quadros.map((q, i) => (
+            <figure class="quadro" data-quadro hidden={i > 0}>
+              <Image
+                class="tela"
+                style={`--w: ${q.img.width}; --h: ${q.img.height}`}
+                src={q.img}
+                alt={q.legenda ?? `${titulo}, ${ui.galeria.tela[lang]} ${i + 1} ${ui.galeria.de[lang]} ${quadros.length}`}
+                widths={[640, 1024, 1440]}
+                sizes="(min-width: 1100px) 64rem, 94vw"
+                format="webp"
+                quality={82}
+                loading="lazy"
+              />
+              {q.legenda && <figcaption class="meta-line legenda">{q.legenda}</figcaption>}
+            </figure>
+          ))}
+        </div>
+
+      </div>
+
+      {quadros.length > 1 && (
+        <nav class="setas" aria-label={ui.galeria.titulo[lang]}>
+          <button type="button" class="botao seta seta-anterior" data-anterior>
+            <span class="sr-only">{ui.galeria.anterior[lang]}</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4L6.5 10l6 6" /></svg>
+          </button>
+          <button type="button" class="botao seta seta-proxima" data-proxima>
+            <span class="sr-only">{ui.galeria.proxima[lang]}</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4l6 6-6 6" /></svg>
+          </button>
+        </nav>
+      )}
+    </dialog>
+  </>
+)}
+
+<style>
+  .gatilho {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2rem;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid currentColor;
+    color: var(--ink);
+    text-decoration: none;
+    transition: background-color 0.18s ease, color 0.18s ease;
+  }
+
+  .gatilho:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .olho {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .galeria {
+    margin: auto;
+    width: min(64rem, 90vw);
+    max-height: 92vh;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    overflow: visible;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      display 0.18s allow-discrete,
+      overlay 0.18s allow-discrete;
+  }
+
+  .galeria[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .galeria::backdrop {
+    background: rgb(10 8 6 / 0);
+    transition:
+      background-color 0.18s ease,
+      display 0.18s allow-discrete,
+      overlay 0.18s allow-discrete;
+  }
+
+  .galeria[open]::backdrop {
+    background: rgb(10 8 6 / 0.72);
+  }
+
+  /* Ponto de partida da entrada. Navegador sem @starting-style só abre direto. */
+  @starting-style {
+    .galeria[open] {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+
+    .galeria[open]::backdrop {
+      background: rgb(10 8 6 / 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .galeria,
+    .galeria::backdrop {
+      transition: none;
+    }
+
+    .galeria {
+      transform: none;
+    }
+  }
+
+  .painel {
+    display: flex;
+    flex-direction: column;
+    max-height: 92vh;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    overflow: hidden;
+  }
+
+  .topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    flex: none;
+  }
+
+  .contador {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .palco {
+    overflow-y: auto;
+    padding: 1.25rem;
+  }
+
+  .quadro {
+    margin: 0;
+  }
+
+  .quadro[hidden] {
+    display: none;
+  }
+
+  /* Cada captura cabe no limite sem esticar até a largura. Uma tela de celular
+     é retrato e uma de desktop é paisagem: forçar largura igual deixaria a do
+     celular como um filete entre duas tarjas. A conta usa a proporção do
+     arquivo, não a imagem carregada, então o painel já abre no tamanho final
+     em vez de crescer quando ela chega. */
+  .tela {
+    display: block;
+    width: min(100%, calc(64vh * var(--w) / var(--h)), calc(var(--w) * 1px));
+    height: auto;
+    aspect-ratio: var(--w) / var(--h);
+    margin-inline: auto;
+    border: 1px solid var(--rule);
+    background: var(--paper-2);
+  }
+
+  .legenda {
+    margin-top: 0.75rem;
+    text-align: center;
+  }
+
+  .botao {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.18s ease;
+  }
+
+  .botao:hover {
+    color: var(--anil);
+  }
+
+  .botao svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* As setas flanqueiam o painel em vez de ocupar um rodapé dentro dele. Em
+     tela estreita não existe margem do lado de fora, então elas encostam na
+     borda da imagem, com chapa de papel atrás para não sumir no desenho.
+     Vem depois de .botao de propósito: mesma especificidade, ganha na ordem. */
+  .seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: color-mix(in srgb, var(--paper) 90%, transparent);
+    border: 1px solid var(--ink);
+    color: var(--ink);
+  }
+
+  .seta:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .seta-anterior {
+    left: 0.4rem;
+  }
+
+  .seta-proxima {
+    right: 0.4rem;
+  }
+
+  /* Fora do painel a seta fica sobre o backdrop, que é escuro nos dois temas.
+     Daí a cor de creme fixa em vez do token de papel, que inverte no escuro. */
+  @media (min-width: 900px) {
+    /* O painel abre mão de uma calha de 5,5rem de cada lado: é onde a seta
+       pousa. Sem isso ela encosta na beira da janela e é cortada. */
+    .galeria {
+      width: min(64rem, calc(100vw - 11rem));
+    }
+
+    .seta,
+    .seta:hover {
+      background: none;
+      border: 0;
+    }
+
+    .seta {
+      width: 3.25rem;
+      height: 3.25rem;
+      color: #e9e1ce;
+    }
+
+    /* Solta no backdrop, sem moldura em volta, a seta precisa de mais corpo
+       para ser vista; dentro do painel o filete já dava o contorno. */
+    .seta svg {
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+
+    .seta:hover {
+      color: #fff;
+    }
+
+    .seta-anterior {
+      left: -3.75rem;
+    }
+
+    .seta-proxima {
+      right: -3.75rem;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<script>
+  for (const gatilho of document.querySelectorAll<HTMLAnchorElement>("[data-abre-galeria]")) {
+    const id = gatilho.dataset.abreGaleria!;
+    const dialogo = document.getElementById(id) as HTMLDialogElement | null;
+    if (!dialogo) continue;
+
+    const quadros = [...dialogo.querySelectorAll<HTMLElement>("[data-quadro]")];
+    const contador = dialogo.querySelector<HTMLElement>("[data-contador]");
+    let atual = 0;
+
+    const mostra = (i: number) => {
+      atual = (i + quadros.length) % quadros.length;
+      quadros.forEach((q, n) => (q.hidden = n !== atual));
+      if (contador) contador.textContent = `${atual + 1} / ${quadros.length}`;
+    };
+
+    gatilho.addEventListener("click", (e) => {
+      e.preventDefault(); // sem script o link abriria a imagem, que é o plano B
+      mostra(0);
+      dialogo.showModal();
+    });
+
+    dialogo.querySelector("[data-fecha]")?.addEventListener("click", () => dialogo.close());
+    dialogo.querySelector("[data-anterior]")?.addEventListener("click", () => mostra(atual - 1));
+    dialogo.querySelector("[data-proxima]")?.addEventListener("click", () => mostra(atual + 1));
+
+    dialogo.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") mostra(atual - 1);
+      if (e.key === "ArrowRight") mostra(atual + 1);
+    });
+
+    // Clique fora do painel fecha. O <dialog> recebe o clique do próprio
+    // backdrop, então basta checar se o alvo foi ele mesmo.
+    dialogo.addEventListener("click", (e) => {
+      if (e.target === dialogo) dialogo.close();
+    });
+  }
+</script>

@@ -232,6 +232,11 @@ export type Project = {
   liveNote?: Bi;
   /** Ainda em desenvolvimento: acende o mesmo marcador âmbar da experiência. */
   emCurso?: boolean;
+  /**
+   * Legenda opcional de cada captura, pelo nome do arquivo. As capturas em si
+   * vêm sozinhas de src/assets/telas/<slug>/ e não precisam de cadastro aqui.
+   */
+  legendas?: Record<string, Bi>;
 };
 
 const CODE: Bi = { pt: "Código", en: "Code" };
@@ -258,7 +263,7 @@ export const work = {
         en: "A productivity app for Windows and Android. Tasks with areas, sublists and natural-language entry, a calendar, an Eisenhower matrix, Pomodoro, habits, finances with cards and instalments, diet wired to the Brazilian TACO food table, a diary, and statistics. It runs with no account, no login and no server: the data stays on the device, and moving between devices goes over Wi-Fi or a backup. Tested with flutter_test and integration_test, along the same layers as the code.",
       },
       stack: ["Flutter", "Dart", "Riverpod", "Drift", "SQLite"],
-      repos: [{ label: CODE, url: "https://github.com/FLucasF/Ordo" }],
+      repos: [],
       download: "https://github.com/FLucasF/Ordo/releases",
     },
     {
@@ -266,7 +271,6 @@ export const work = {
       year: "2026",
       title: { pt: "OL DCX", en: "OL DCX" },
       kind: { pt: "Projeto pessoal", en: "Personal project" },
-      emCurso: true,
       body: {
         pt: "Classificados fechado para a comunidade do DCX, inspirado na OLX e sem pagamento dentro do site: doação, item usado, livro de disciplina, geladinho e brigadeiro. Substitui a lista de e-mails do Mercado DCX por um catálogo buscável com chat, e o acordo segue entre as pessoas. Comecei rápido e sem método, só para aprender a conduzir a IA, e recomecei com contrato para entender na prática o que um harness muda no desenvolvimento: hierarquia de autoridade entre os documentos, spec aprovada antes de qualquer código e dois agentes revisores separados de quem implementa.",
         en: "A classifieds board closed to the DCX community, modelled on OLX and with no payment inside the site: donations, used items, course books, ice pops and brigadeiros. It replaces the Mercado DCX mailing list with a searchable catalogue and chat, and the deal stays between the people involved. I started fast and without method, just to learn how to drive the AI, then started over with a contract to see first-hand what a harness changes in development: an authority hierarchy between documents, a spec approved before any code, and two review agents kept apart from the one that implements.",

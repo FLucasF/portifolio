@@ -1,6 +1,7 @@
 ---
 import { work, person, type Lang } from "../data/site";
 import Section from "./Section.astro";
+import Galeria from "./Galeria.astro";
 
 interface Props {
   lang: Lang;
@@ -21,6 +22,7 @@ const { lang } = Astro.props;
         <div class="entry-main">
           <div class="entry-title-row">
             <h3 class="display entry-title">{p.title[lang]}</h3>
+            <Galeria slug={p.slug} titulo={p.title[lang]} legendas={p.legendas} lang={lang} />
             {p.emCurso && (
               <span class="tag construindo">
                 <span class="lampada" aria-hidden="true"></span>
