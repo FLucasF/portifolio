@@ -368,28 +368,30 @@ export const work = {
 
 export type GrupoFerramentas = { title: Bi; items: string[] };
 
+export type GrupoFerramentas = { title: Bi; items: string[] };
+
 export const stack = {
   heading: { pt: "Ferramentas", en: "Tools" } satisfies Bi,
   /**
-   * Dois blocos pela mesma divisão de camada. O primeiro é o que está em uso
-   * nos projetos de agora; o segundo, o que já rendeu projeto e hoje está
-   * parado. O componente dá peso tipográfico menor ao segundo.
+   * Dois blocos pela mesma divisão de camada: o que o trabalho usa todo dia e
+   * o que já rendeu projeto fora dele. O componente dá corpo menor ao segundo,
+   * para a ordem de leitura sair sozinha.
    */
   blocks: [
     {
-      title: { pt: "Uso agora", en: "Using now" } satisfies Bi,
+      title: { pt: "Uso no trabalho", en: "Use at work" } satisfies Bi,
       groups: [
         {
           title: { pt: "Front-end", en: "Frontend" } satisfies Bi,
-          items: ["TypeScript", "React", "Flutter", "Dart", "Electron", "Astro", "Vite", "Tailwind CSS"],
+          items: ["Angular", "React", "TypeScript", "HTML", "CSS"],
         },
         {
           title: { pt: "Back-end", en: "Backend" } satisfies Bi,
-          items: ["Java", "Spring Boot", "PostgreSQL", "SQLite", "Flyway", "JPA", "OAuth2", "Maven"],
+          items: ["Java", "Spring Boot", "Oracle SQL", "MongoDB", "Kafka"],
         },
         {
           title: { pt: "Gerais", en: "General" } satisfies Bi,
-          items: ["Git", "GitHub", "Docker", "Playwright", "Vitest", "JUnit", "Zod", "Docusaurus"],
+          items: ["Docker", "Docusaurus"],
         },
       ] satisfies GrupoFerramentas[],
     },
@@ -398,15 +400,15 @@ export const stack = {
       groups: [
         {
           title: { pt: "Front-end", en: "Frontend" } satisfies Bi,
-          items: ["Angular", "Next.js", "SCSS", "Cypress"],
+          items: ["Flutter", "Dart", "Electron", "Next.js", "Astro", "Vite", "Tailwind CSS", "SCSS"],
         },
         {
           title: { pt: "Back-end", en: "Backend" } satisfies Bi,
-          items: ["Javalin", "Thymeleaf", "MySQL", "MinIO", "Prisma", "Spring Cloud"],
+          items: ["PostgreSQL", "MySQL", "SQLite", "Prisma", "JPA", "Flyway", "OAuth2", "Maven", "Javalin", "Thymeleaf", "MinIO", "Spring Cloud"],
         },
         {
           title: { pt: "Gerais", en: "General" } satisfies Bi,
-          items: ["Python"],
+          items: ["Git", "GitHub", "Playwright", "Vitest", "JUnit", "Cypress", "Zod", "Python"],
         },
       ] satisfies GrupoFerramentas[],
     },
