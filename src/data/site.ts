@@ -373,13 +373,13 @@ export type GrupoFerramentas = { title: Bi; items: string[] };
 export const stack = {
   heading: { pt: "Ferramentas", en: "Tools" } satisfies Bi,
   /**
-   * Dois blocos pela mesma divisão de camada: o que o trabalho usa todo dia e
-   * o que já rendeu projeto fora dele. O componente dá corpo menor ao segundo,
-   * para a ordem de leitura sair sozinha.
+   * Dois blocos pela mesma divisão de camada: o que ele usa no dia a dia e o
+   * que já rendeu projeto e hoje está parado. O componente dá corpo menor ao
+   * segundo, para a ordem de leitura sair sozinha.
    */
   blocks: [
     {
-      title: { pt: "Uso no trabalho", en: "Use at work" } satisfies Bi,
+      title: { pt: "Uso no cotidiano", en: "Day to day" } satisfies Bi,
       groups: [
         {
           title: { pt: "Front-end", en: "Frontend" } satisfies Bi,
