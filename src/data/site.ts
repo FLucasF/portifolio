@@ -391,7 +391,7 @@ export const stack = {
         },
         {
           title: { pt: "Gerais", en: "General" } satisfies Bi,
-          items: ["Docker", "Maven", "Gradle", "Docusaurus"],
+          items: ["Git", "GitLab", "Docker", "Maven", "Gradle", "JUnit", "Vitest", "Docusaurus"],
         },
       ] satisfies GrupoFerramentas[],
     },
@@ -408,7 +408,7 @@ export const stack = {
         },
         {
           title: { pt: "Gerais", en: "General" } satisfies Bi,
-          items: ["Git", "GitHub", "Playwright", "Vitest", "JUnit", "Cypress", "Zod", "Python"],
+          items: ["GitHub", "Playwright", "Cypress", "Zod", "Python"],
         },
       ] satisfies GrupoFerramentas[],
     },
