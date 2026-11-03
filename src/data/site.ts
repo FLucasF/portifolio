@@ -374,7 +374,7 @@ export const stack = {
   heading: { pt: "Ferramentas", en: "Tools" } satisfies Bi,
   /**
    * Dois blocos pela mesma divisão de camada: o que ele usa no dia a dia e o
-   * que já rendeu projeto e hoje está parado. O componente dá corpo menor ao
+   * que já rendeu projeto fora dele. O componente dá corpo menor ao
    * segundo, para a ordem de leitura sair sozinha.
    */
   blocks: [
@@ -396,7 +396,7 @@ export const stack = {
       ] satisfies GrupoFerramentas[],
     },
     {
-      title: { pt: "Já estudei", en: "Studied" } satisfies Bi,
+      title: { pt: "Já usei em projetos", en: "Used in projects" } satisfies Bi,
       groups: [
         {
           title: { pt: "Front-end", en: "Frontend" } satisfies Bi,
