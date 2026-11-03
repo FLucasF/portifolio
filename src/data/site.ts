@@ -366,24 +366,49 @@ export const work = {
 /*  Ferramentas                                                               */
 /* -------------------------------------------------------------------------- */
 
+export type GrupoFerramentas = { title: Bi; items: string[] };
+
 export const stack = {
   heading: { pt: "Ferramentas", en: "Tools" } satisfies Bi,
-  lede: {
-    pt: "O que eu uso hoje.",
-    en: "What I reach for today.",
-  } satisfies Bi,
-  groups: [
+  /**
+   * Dois blocos pela mesma divisão de camada. O primeiro é o que está em uso
+   * nos projetos de agora; o segundo, o que já rendeu projeto e hoje está
+   * parado. O componente dá peso tipográfico menor ao segundo.
+   */
+  blocks: [
     {
-      title: { pt: "Front-end", en: "Frontend" } satisfies Bi,
-      items: ["TypeScript", "React", "Angular", "Astro", "Tailwind CSS", "SCSS", "Vite", "Cypress"],
+      title: { pt: "Uso agora", en: "Using now" } satisfies Bi,
+      groups: [
+        {
+          title: { pt: "Front-end", en: "Frontend" } satisfies Bi,
+          items: ["TypeScript", "React", "Flutter", "Dart", "Electron", "Astro", "Vite", "Tailwind CSS"],
+        },
+        {
+          title: { pt: "Back-end", en: "Backend" } satisfies Bi,
+          items: ["Java", "Spring Boot", "PostgreSQL", "SQLite", "Flyway", "JPA", "OAuth2", "Maven"],
+        },
+        {
+          title: { pt: "Gerais", en: "General" } satisfies Bi,
+          items: ["Git", "GitHub", "Docker", "Playwright", "Vitest", "JUnit", "Zod", "Docusaurus"],
+        },
+      ] satisfies GrupoFerramentas[],
     },
     {
-      title: { pt: "Back-end", en: "Backend" } satisfies Bi,
-      items: ["Java", "Spring Boot", "Javalin", "Thymeleaf", "PostgreSQL", "MySQL", "JWT", "MinIO", "Maven", "JUnit"],
-    },
-    {
-      title: { pt: "Gerais", en: "General" } satisfies Bi,
-      items: ["Git", "GitHub", "Docker", "Python", "Scrum", "Kanban"],
+      title: { pt: "Já estudei", en: "Studied" } satisfies Bi,
+      groups: [
+        {
+          title: { pt: "Front-end", en: "Frontend" } satisfies Bi,
+          items: ["Angular", "Next.js", "SCSS", "Cypress"],
+        },
+        {
+          title: { pt: "Back-end", en: "Backend" } satisfies Bi,
+          items: ["Javalin", "Thymeleaf", "MySQL", "MinIO", "Prisma", "Spring Cloud"],
+        },
+        {
+          title: { pt: "Gerais", en: "General" } satisfies Bi,
+          items: ["Python"],
+        },
+      ] satisfies GrupoFerramentas[],
     },
   ],
 };
