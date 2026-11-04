@@ -65,7 +65,7 @@ const figMeta = await sharp(figure).metadata();
 
 await mkdir(dirname(OUT), { recursive: true });
 await sharp(Buffer.from(svg))
-  .composite([{ input: figure, left: Math.round(FIG_CX - figMeta.width * 0.478), top: 60 }])
+  .composite([{ input: figure, left: Math.round(FIG_CX - figMeta.width * 0.456), top: 60 }])
   .png()
   .toFile(OUT);
 console.log(`og.png escrito em ${OUT}`);

@@ -22,8 +22,8 @@ const PUBLIC_DIR = resolve(HERE, "..", "public");
 
 const PAPER = { r: 0xe9, g: 0xe1, b: 0xce, alpha: 1 };
 
-/* Enquadramento do rosto na arte de 900x1189, medido a partir do alfa. */
-const CROP = { left: 202, top: 0, width: 432, height: 432 };
+/* Enquadramento do rosto na arte de 802x1021, medido a partir do alfa. */
+const CROP = { left: 192, top: 0, width: 354, height: 354 };
 
 /** Uma borda de papel em volta, para o cabelo não encostar no limite. */
 const MARGIN = 34;

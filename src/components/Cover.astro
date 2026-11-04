@@ -199,18 +199,9 @@ const { lang } = Astro.props;
   /* A ilustração ganha um chão chapado. Sem ele ela flutua no papel, e o
      sombreado suave dela briga com a moldura de filete duro em volta. */
   .cover-block {
-    position: relative;
     order: -1;
     max-width: 15rem;
     margin-inline: auto;
-  }
-
-  .cover-block::before {
-    content: "";
-    position: absolute;
-    inset: 22% -1rem 0 -1rem;
-    background: var(--paper-2);
-    z-index: 0;
   }
 
   @media (min-width: 880px) {
