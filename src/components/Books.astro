@@ -1,6 +1,6 @@
 ---
 /**
- * Estante. As capas vêm de src/assets/books, nomeadas pelo ISBN, e o Astro
+ * Estante. As capas vêm de src/assets/books, pelo `coverName` do livro, e o Astro
  * as otimiza na build — o visitante nunca fala com a Amazon.
  *
  * O glob é eager porque o nome do arquivo sai de um dado, e o <Image> precisa
@@ -28,7 +28,7 @@ const describe = (title: string, author: string) =>
 
 const shelf = books.items.map((book) => ({
   ...book,
-  cover: covers[`../assets/books/${book.isbn}.jpg`]?.default,
+  cover: covers[`../assets/books/${book.coverName}.jpg`]?.default,
 }));
 ---
 

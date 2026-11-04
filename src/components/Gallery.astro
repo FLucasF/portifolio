@@ -283,6 +283,10 @@ const id = `screens-${slug}`;
     color: var(--ink);
   }
 
+  .arrow[hidden] {
+    display: none;
+  }
+
   .arrow:hover {
     background: var(--ink);
     color: var(--paper);
@@ -360,10 +364,23 @@ const id = `screens-${slug}`;
     const counter = dialog.querySelector<HTMLElement>("[data-counter]");
     let current = 0;
 
+    const prev = dialog.querySelector<HTMLButtonElement>("[data-prev]");
+    const next = dialog.querySelector<HTMLButtonElement>("[data-next]");
+
+    // A galeria tem começo e fim: nada de dar a volta. A seta que não leva a
+    // lugar nenhum some, e o foco passa para a outra, senão ele cairia fora do
+    // diálogo junto com o botão e as setas do teclado parariam de responder.
     const show = (i: number) => {
-      current = (i + slides.length) % slides.length;
+      current = Math.min(Math.max(i, 0), slides.length - 1);
       slides.forEach((q, n) => (q.hidden = n !== current));
       if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
+      if (!prev || !next) return;
+      // Lido antes de esconder: um botão escondido já perde o foco na hora.
+      const focused = document.activeElement;
+      prev.hidden = current === 0;
+      next.hidden = current === slides.length - 1;
+      if (prev.hidden && focused === prev) next.focus();
+      if (next.hidden && focused === next) prev.focus();
     };
 
     trigger.addEventListener("click", (e) => {
@@ -373,8 +390,8 @@ const id = `screens-${slug}`;
     });
 
     dialog.querySelector("[data-close]")?.addEventListener("click", () => dialog.close());
-    dialog.querySelector("[data-prev]")?.addEventListener("click", () => show(current - 1));
-    dialog.querySelector("[data-next]")?.addEventListener("click", () => show(current + 1));
+    prev?.addEventListener("click", () => show(current - 1));
+    next?.addEventListener("click", () => show(current + 1));
 
     dialog.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") show(current - 1);

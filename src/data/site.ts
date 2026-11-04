@@ -9,6 +9,13 @@ export const LANGS: Lang[] = ["pt", "en"];
 /*  Identidade                                                                */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Contagem privada de visitas, no painel do GoatCounter: nada aparece na página.
+ * Preencha com o código da conta (o `seucodigo` de seucodigo.goatcounter.com).
+ * Vazio não carrega script nenhum.
+ */
+export const goatCounterCode = "flucasf";
+
 export const person = {
   name: "Lucas Felipe",
   fullName: "Lucas Felipe Gomes Pedrosa",
@@ -255,6 +262,47 @@ export const work = {
   download: { pt: "Baixar", en: "Download" } satisfies Bi,
   projects: [    {
       slug: "ordo",
+      captions: {
+        "01-today-tasks.png": { pt: "Tarefas de hoje, com listas, atrasadas e hábitos", en: "Today's tasks, with lists, overdue items and habits" },
+        "02-inbox-task-details.png": { pt: "Caixa de entrada com o detalhe da tarefa", en: "Inbox with the task details" },
+        "03-next-7-days.png": { pt: "Tarefas dos próximos 7 dias", en: "Tasks for the next 7 days" },
+        "04-kanban-board.png": { pt: "Lista em quadro kanban", en: "List as a kanban board" },
+        "05-timeline.png": { pt: "Lista em linha do tempo", en: "List as a timeline" },
+        "06-eisenhower-matrix.png": { pt: "Matriz de Eisenhower", en: "Eisenhower matrix" },
+        "07-calendar-month.png": { pt: "Calendário por mês", en: "Monthly calendar" },
+        "08-calendar-week.png": { pt: "Calendário por semana", en: "Weekly calendar" },
+        "09-calendar-day.png": { pt: "Calendário por dia", en: "Daily calendar" },
+        "10-calendar-agenda.png": { pt: "Calendário em formato de agenda", en: "Calendar as an agenda" },
+        "11-calendar-year.png": { pt: "Calendário por ano", en: "Yearly calendar" },
+        "12-habit-details.png": { pt: "Detalhe de um hábito", en: "Habit details" },
+        "13-pomodoro-timer.png": { pt: "Temporizador Pomodoro", en: "Pomodoro timer" },
+        "14-focus-timers.png": { pt: "Temporizadores de foco", en: "Focus timers" },
+        "15-countdowns.png": { pt: "Contagens regressivas", en: "Countdowns" },
+        "16-finance-entries.png": { pt: "Finanças: lançamentos do mês", en: "Finances: monthly entries" },
+        "17-finance-cards.png": { pt: "Finanças: cartões, com fatura e parcelas", en: "Finances: cards, with statements and instalments" },
+        "18-finance-recurring-bills.png": { pt: "Finanças: contas fixas", en: "Finances: recurring bills" },
+        "19-finance-loans.png": { pt: "Finanças: empréstimos", en: "Finances: loans" },
+        "20-finance-report.png": { pt: "Finanças: relatório do mês", en: "Finances: monthly report" },
+        "21-finance-categories.png": { pt: "Finanças: categorias de gastos e receitas", en: "Finances: spending and income categories" },
+        "22-diet-diary.png": { pt: "Diário de dieta", en: "Diet diary" },
+        "23-taco-food-table.png": { pt: "Alimentos da tabela TACO", en: "Foods from the TACO table" },
+        "24-journal-day.png": { pt: "Diário: humor, energia e notas do dia", en: "Journal: the day's mood, energy and notes" },
+        "25-journal-timeline.png": { pt: "Diário: linha do tempo com os dias anteriores", en: "Journal: timeline of past days" },
+        "26-journal-mood-calendar.png": { pt: "Diário: calendário e evolução de humor e energia", en: "Journal: calendar and trend of mood and energy" },
+        "27-period-summary.png": { pt: "Resumo do período", en: "Period summary" },
+        "28-statistics-overview.png": { pt: "Estatísticas gerais", en: "Overall statistics" },
+        "29-task-statistics.png": { pt: "Estatísticas de tarefas", en: "Task statistics" },
+        "30-task-search.png": { pt: "Busca de tarefas", en: "Task search" },
+        "31-command-palette.png": { pt: "Paleta de comandos", en: "Command palette" },
+        "32-appearance-settings.png": { pt: "Configurações de aparência", en: "Appearance settings" },
+        "33-feature-settings.png": { pt: "Funcionalidades que podem ser ligadas", en: "Features that can be toggled" },
+        "50-calendar-week-phone.png": { pt: "Calendário por semana (celular)", en: "Weekly calendar (phone)" },
+        "51-eisenhower-matrix-phone.png": { pt: "Matriz de Eisenhower (celular)", en: "Eisenhower matrix (phone)" },
+        "52-pomodoro-timer-phone.png": { pt: "Temporizador Pomodoro (celular)", en: "Pomodoro timer (phone)" },
+        "53-finance-report-phone.png": { pt: "Finanças: relatório do mês (celular)", en: "Finances: monthly report (phone)" },
+        "54-diet-diary-phone.png": { pt: "Diário de dieta (celular)", en: "Diet diary (phone)" },
+        "55-journal-day-phone.png": { pt: "Diário: humor, energia e notas do dia (celular)", en: "Journal: the day's mood, energy and notes (phone)" },
+      },
       year: "2026",
       title: { pt: "Ordo", en: "Ordo" },
       kind: { pt: "Projeto pessoal", en: "Personal project" },
@@ -268,6 +316,27 @@ export const work = {
     },
     {
       slug: "ol-dcx",
+      captions: {
+        "01-catalogue.png": { pt: "Catálogo com busca e categorias", en: "Catalogue with search and categories" },
+        "02-catalogue-filters.png": { pt: "Filtros do catálogo", en: "Catalogue filters" },
+        "03-listing-page.png": { pt: "Página do anúncio", en: "Listing page" },
+        "04-seller-profile.png": { pt: "Perfil de quem anuncia", en: "Seller profile" },
+        "05-following-feed.png": { pt: "Feed de quem você segue", en: "Feed of people you follow" },
+        "06-favourite-listings.png": { pt: "Anúncios favoritos", en: "Favourite listings" },
+        "07-conversation-list.png": { pt: "Lista de conversas", en: "Conversation list" },
+        "08-conversation.png": { pt: "Conversa entre quem vende e quem compra", en: "Chat between seller and buyer" },
+        "09-notifications.png": { pt: "Avisos, sem nada novo", en: "Notifications, with nothing new" },
+        "10-publish-listing.png": { pt: "Formulário para publicar um anúncio", en: "Form to publish a listing" },
+        "11-my-listings.png": { pt: "Meus anúncios", en: "My listings" },
+        "12-edit-listing.png": { pt: "Edição de anúncio", en: "Editing a listing" },
+        "13-moderation-panel.png": { pt: "Painel de moderação, sem denúncias", en: "Moderation panel, with no reports" },
+        "14-first-sign-in.png": { pt: "Primeiro acesso: escolha do nome", en: "First sign-in: choosing a name" },
+        "15-sign-in.png": { pt: "Entrada com e-mail do departamento", en: "Sign-in with a department e-mail" },
+        "50-catalogue-phone.png": { pt: "Catálogo (celular)", en: "Catalogue (phone)" },
+        "51-listing-page-phone.png": { pt: "Página do anúncio (celular)", en: "Listing page (phone)" },
+        "52-conversation-phone.png": { pt: "Conversa entre quem vende e quem compra (celular)", en: "Chat between seller and buyer (phone)" },
+        "53-publish-listing-phone.png": { pt: "Formulário para publicar um anúncio (celular)", en: "Form to publish a listing (phone)" },
+      },
       year: "2026",
       title: { pt: "OL DCX", en: "OL DCX" },
       kind: { pt: "Projeto pessoal", en: "Personal project" },
@@ -280,6 +349,18 @@ export const work = {
     },
     {
       slug: "coranil",
+      captions: {
+        "01-home-colour-chart.png": { pt: "Início, com a cartela de cores", en: "Home, with the colour chart" },
+        "02-product-catalogue.png": { pt: "Catálogo de produtos", en: "Product catalogue" },
+        "03-brands-in-stock.png": { pt: "Marcas em estoque", en: "Brands in stock" },
+        "04-about-the-shop.png": { pt: "Sobre a loja", en: "About the shop" },
+        "05-customer-reviews.png": { pt: "Avaliações de clientes", en: "Customer reviews" },
+        "06-quote-request.png": { pt: "Pedido de orçamento pelo WhatsApp", en: "Quote request through WhatsApp" },
+        "07-footer.png": { pt: "Rodapé com endereço e contatos", en: "Footer with address and contacts" },
+        "50-home-colour-chart-phone.png": { pt: "Início, com a cartela de cores (celular)", en: "Home, with the colour chart (phone)" },
+        "51-product-catalogue-phone.png": { pt: "Catálogo de produtos (celular)", en: "Product catalogue (phone)" },
+        "52-quote-request-phone.png": { pt: "Pedido de orçamento pelo WhatsApp (celular)", en: "Quote request through WhatsApp (phone)" },
+      },
       year: "2026",
       title: { pt: "Tintas Coranil", en: "Tintas Coranil" },
       kind: { pt: "Site para cliente", en: "Client website" },
@@ -293,6 +374,38 @@ export const work = {
     },
     {
       slug: "nutriplan",
+      captions: {
+        "01-patient-list.png": { pt: "Lista de pacientes", en: "Patient list" },
+        "02-patient-record.png": { pt: "Ficha do paciente", en: "Patient record" },
+        "03-patient-anamneses.png": { pt: "Anamneses do paciente", en: "Patient anamneses" },
+        "04-energy-calculation.png": { pt: "Cálculo energético", en: "Energy calculation" },
+        "05-anthropometric-assessment.png": { pt: "Avaliação antropométrica", en: "Anthropometric assessment" },
+        "06-lab-tests.png": { pt: "Exames e evolução", en: "Lab tests and progress" },
+        "07-practice-schedule.png": { pt: "Agenda do consultório", en: "Practice schedule" },
+        "08-prescription-list.png": { pt: "Lista de prescrições", en: "Prescription list" },
+        "09-meal-plan-editor.png": { pt: "Editor de cardápio, com metas e nutrientes", en: "Meal plan editor, with targets and nutrients" },
+        "10-food-database.png": { pt: "Acervo de alimentos", en: "Food database" },
+        "11-food-details.png": { pt: "Detalhe de um alimento", en: "Food details" },
+        "12-recipe-editor.png": { pt: "Editor de receita", en: "Recipe editor" },
+        "13-patient-handouts.png": { pt: "Orientações ao paciente", en: "Patient handouts" },
+        "14-questionnaire-templates.png": { pt: "Modelos de questionário", en: "Questionnaire templates" },
+        "15-saved-meals-and-lab-panels.png": { pt: "Refeições salvas e painéis de exames favoritos", en: "Saved meals and favourite lab test panels" },
+        "16-practice-finances.png": { pt: "Financeiro do consultório", en: "Practice finances" },
+        "17-practice-statistics.png": { pt: "Estatísticas do consultório", en: "Practice statistics" },
+        "18-partners-and-referrals.png": { pt: "Parceiros e relatório de indicações", en: "Partners and referral report" },
+        "19-care-packages.png": { pt: "Pacotes de atendimento", en: "Care packages" },
+        "20-practice-team.png": { pt: "Equipe do consultório", en: "Practice team" },
+        "21-patient-meal-plan.png": { pt: "O plano como o paciente recebe", en: "The plan as the patient receives it" },
+        "22-patient-questionnaire.png": { pt: "Questionário respondido pelo paciente", en: "Questionnaire answered by the patient" },
+        "23-sign-in.png": { pt: "Tela de acesso", en: "Sign-in screen" },
+        "24-sign-up.png": { pt: "Criação de conta", en: "Account creation" },
+        "50-patient-list-phone.png": { pt: "Lista de pacientes (celular)", en: "Patient list (phone)" },
+        "51-patient-record-phone.png": { pt: "Ficha do paciente (celular)", en: "Patient record (phone)" },
+        "52-practice-schedule-phone.png": { pt: "Agenda do consultório (celular)", en: "Practice schedule (phone)" },
+        "53-meal-plan-editor-phone.png": { pt: "Editor de cardápio (celular)", en: "Meal plan editor (phone)" },
+        "54-patient-meal-plan-phone.png": { pt: "O plano como o paciente recebe (celular)", en: "The plan as the patient receives it (phone)" },
+        "55-practice-finances-phone.png": { pt: "Financeiro do consultório (celular)", en: "Practice finances (phone)" },
+      },
       year: "2026",
       title: { pt: "NutriPlan", en: "NutriPlan" },
       kind: {
@@ -314,6 +427,21 @@ export const work = {
       },
     },    {
       slug: "ayty",
+      captions: {
+        "01-login.png": { pt: "Tela de acesso", en: "Sign-in screen" },
+        "02-registered-users.png": { pt: "Usuários cadastrados", en: "Registered users" },
+        "03-user-registration.png": { pt: "Cadastro de usuário", en: "User registration" },
+        "04-class-management.png": { pt: "Gerenciamento de turmas", en: "Class management" },
+        "05-class-enrolment.png": { pt: "Matrículas de alunos na turma", en: "Student enrolment in a class" },
+        "06-teacher-classes.png": { pt: "Turmas da professora", en: "The teacher's classes" },
+        "07-class-details.png": { pt: "Turma, com os alunos matriculados", en: "Class, with enrolled students" },
+        "08-class-board.png": { pt: "Mural da turma, com os avisos da professora", en: "Class board, with the teacher's notices" },
+        "09-board-notice-opened.png": { pt: "Aviso do mural aberto", en: "Board notice opened" },
+        "50-login-phone.png": { pt: "Tela de acesso (celular)", en: "Sign-in screen (phone)" },
+        "51-class-management-phone.png": { pt: "Gerenciamento de turmas (celular)", en: "Class management (phone)" },
+        "52-teacher-classes-phone.png": { pt: "Turmas da professora (celular)", en: "The teacher's classes (phone)" },
+        "53-class-board-phone.png": { pt: "Mural da turma (celular)", en: "Class board (phone)" },
+      },
       year: "2025",
       title: {
         pt: "Gerenciador Escolar AYTY",
@@ -349,6 +477,20 @@ export const work = {
     },
     {
       slug: "embaralhado",
+      captions: {
+        "01-game-home.png": { pt: "Tela inicial do jogo", en: "Game home screen" },
+        "02-word-contexts.png": { pt: "Escolha do contexto das palavras", en: "Choosing the word context" },
+        "03-game-tutorial.png": { pt: "Tutorial do jogo", en: "Game tutorial" },
+        "04-gameplay.png": { pt: "A partida: montar a palavra a partir da imagem", en: "Gameplay: building the word from the picture" },
+        "05-correct-word.png": { pt: "Palavra montada corretamente", en: "Word built correctly" },
+        "06-enter-name.png": { pt: "Nome para finalizar a partida", en: "Name to finish the game" },
+        "07-final-score.png": { pt: "Fim da partida: todas certas e 5 estrelas", en: "End of the game: all correct and 5 stars" },
+        "50-game-home-phone.png": { pt: "Tela inicial do jogo (celular)", en: "Game home screen (phone)" },
+        "51-word-contexts-phone.png": { pt: "Escolha do contexto (celular)", en: "Choosing the context (phone)" },
+        "52-gameplay-phone.png": { pt: "A partida: montar a palavra (celular)", en: "Gameplay: building the word (phone)" },
+        "53-correct-word-phone.png": { pt: "Palavra montada corretamente (celular)", en: "Word built correctly (phone)" },
+        "54-final-score-phone.png": { pt: "Fim da partida com 5 estrelas (celular)", en: "End of the game with 5 stars (phone)" },
+      },
       year: "2024",
       title: {
         pt: "Embaralhado Indígena",
@@ -368,6 +510,17 @@ export const work = {
     },
     {
       slug: "evite-o-golpe",
+      captions: {
+        "01-home.png": { pt: "Tela inicial", en: "Home screen" },
+        "02-quiz-question.png": { pt: "Pergunta do quiz sobre segurança digital", en: "Quiz question on digital safety" },
+        "03-quiz-result.png": { pt: "Resultado do quiz", en: "Quiz result" },
+        "04-quiz-tutorial.png": { pt: "Tutorial do quiz", en: "Quiz tutorial" },
+        "05-scam-tips.png": { pt: "Dicas e materiais sobre golpes", en: "Tips and resources on scams" },
+        "06-project-team.png": { pt: "Quem fez o projeto", en: "The people behind the project" },
+        "50-home-phone.png": { pt: "Tela inicial (celular)", en: "Home screen (phone)" },
+        "51-quiz-question-phone.png": { pt: "Pergunta do quiz (celular)", en: "Quiz question (phone)" },
+        "52-scam-tips-phone.png": { pt: "Dicas e materiais sobre golpes (celular)", en: "Tips and resources on scams (phone)" },
+      },
       year: "2024",
       title: { pt: "Evite o Golpe", en: "Evite o Golpe" },
       kind: { pt: "Apps4Society · UFPB", en: "Apps4Society · UFPB" },
@@ -377,7 +530,6 @@ export const work = {
       },
       stack: ["React", "JavaScript", "Vite"],
       repos: [{ label: CODE, url: "https://github.com/FLucasF/EviteOgolpeWEB" }],
-      live: "https://eviteogolpe.a4s.dev.br/EviteOgolpeWEB/",
     },
   ] satisfies Project[] as Project[],
 };
@@ -438,11 +590,10 @@ export const stack = {
 /* -------------------------------------------------------------------------- */
 
 export type Book = {
-  /**
-   * ISBN-10. É ele que nomeia o arquivo em src/assets/books e que monta a
-   * URL de origem da capa. Rode `npm run covers` depois de acrescentar um.
-   */
+  /** ISBN-10. Monta a URL de origem da capa. Rode `npm run covers` depois de acrescentar um. */
   isbn: string;
+  /** Nome do arquivo em src/assets/books, em inglês e sem extensão: o título original do livro. */
+  coverName: string;
   title: string;
   author: string;
 };
@@ -452,11 +603,13 @@ export const books = {
   items: [
     {
       isbn: "8582603371",
+      coverName: "java-a-beginners-guide",
       title: "Java para Iniciantes",
       author: "Herbert Schildt",
     },
     {
       isbn: "8575225634",
+      coverName: "grokking-algorithms",
       title: "Entendendo Algoritmos",
       author: "Aditya Y. Bhargava",
     },

@@ -54,8 +54,11 @@ Outros pontos:
   Para trocar, substitua o arquivo mantendo o fundo transparente. O Astro gera
   os WebP responsivos sozinho na build. Depois rode `npm run favicon` e
   `npm run og`, que recortam dela o ícone de aba e a imagem de compartilhamento.
-- **Livros** — acrescente o livro em `books.items` com o **ISBN-10** e rode
-  `npm run covers`. A capa é baixada uma vez para `src/assets/books/<isbn>.jpg`
+- **Visitas** — a contagem é privada e fica no painel do 
+  [GoatCounter](https://www.goatcounter.com/). Preencha `goatCounterCode` em
+  `src/data/site.ts` com o código da conta; vazio, o site não carrega o script.
+- **Livros** — acrescente o livro em `books.items` com o **ISBN-10** e o `coverName` (o título original, em inglês) e rode
+  `npm run covers`. A capa é baixada uma vez para `src/assets/books/<coverName>.jpg`
   e versionada, então o site não depende de serviço externo no ar: o visitante
   nunca fala com a Amazon. Se a origem não tiver a capa daquele ISBN, o script
   avisa e o livro aparece sem imagem, sem quebrar a página.

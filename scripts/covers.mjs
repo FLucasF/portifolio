@@ -5,7 +5,7 @@
  * versionadas em src/assets/books, então o site não depende da Amazon estar
  * no ar: ela é consultada uma vez, aqui, e nunca pelo visitante.
  *
- * O nome do arquivo é o ISBN-10, que é também o que monta a URL de origem.
+ * O ISBN-10 monta a URL de origem, e o arquivo leva o `coverName` do livro.
  */
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -29,11 +29,14 @@ const exists = (path) =>
 
 const source = await readFile(DATA, "utf8");
 
-/* Os ISBNs saem do próprio arquivo de conteúdo, para não existir uma segunda
+/* Os livros saem do próprio arquivo de conteúdo, para não existir uma segunda
    lista aqui que possa divergir daquela. */
-const isbns = [...source.matchAll(/isbn:\s*"([0-9Xx]{10})"/g)].map((m) => m[1]);
+const entries = [...source.matchAll(/isbn:\s*"([0-9Xx]{10})",\s*coverName:\s*"([^"]+)"/g)].map((m) => ({
+  isbn: m[1],
+  coverName: m[2],
+}));
 
-if (isbns.length === 0) {
+if (entries.length === 0) {
   console.log("Nenhum livro em src/data/site.ts.");
   process.exit(0);
 }
@@ -42,8 +45,8 @@ await mkdir(TARGET, { recursive: true });
 
 let downloaded = 0;
 
-for (const isbn of isbns) {
-  const file = resolve(TARGET, `${isbn}.jpg`);
+for (const { isbn, coverName } of entries) {
+  const file = resolve(TARGET, `${coverName}.jpg`);
 
   if (await exists(file)) {
     console.log(`${isbn}  já estava aqui`);
@@ -70,4 +73,4 @@ for (const isbn of isbns) {
   downloaded += 1;
 }
 
-console.log(`\n${isbns.length} livro(s), ${downloaded} capa(s) nova(s).`);
+console.log(`\n${entries.length} livro(s), ${downloaded} capa(s) nova(s).`);
