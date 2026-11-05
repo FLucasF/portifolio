@@ -129,6 +129,7 @@ const id = `screens-${slug}`;
   }
 
   .gallery {
+    --screen-max-height: 64vh;
     margin: auto;
     width: min(64rem, 90vw);
     max-height: 92vh;
@@ -230,7 +231,7 @@ const id = `screens-${slug}`;
      em vez de crescer quando ela chega. */
   .screen {
     display: block;
-    width: min(100%, calc(64vh * var(--w) / var(--h)), calc(var(--w) * 1px));
+    width: min(100%, calc(var(--screen-max-height) * var(--w) / var(--h)), calc(var(--w) * 1px));
     height: auto;
     aspect-ratio: var(--w) / var(--h);
     margin-inline: auto;
@@ -270,16 +271,8 @@ const id = `screens-${slug}`;
     stroke-linejoin: round;
   }
 
-  /* As setas flanqueiam o painel em vez de ocupar um rodapé dentro dele. Em
-     tela estreita não existe margem do lado de fora, então elas encostam na
-     borda da imagem, com chapa de papel atrás para não sumir no desenho.
-     Vem depois de .botao de propósito: mesma especificidade, ganha na ordem. */
+  /* Vem depois de .button de propósito: mesma especificidade, ganha na ordem. */
   .arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: color-mix(in srgb, var(--paper) 90%, transparent);
-    border: 1px solid var(--ink);
     color: var(--ink);
   }
 
@@ -287,21 +280,74 @@ const id = `screens-${slug}`;
     display: none;
   }
 
-  .arrow:hover {
-    background: var(--ink);
-    color: var(--paper);
+  /* No toque, o :hover fica preso depois do clique e a seta parece acesa. */
+  @media (hover: hover) {
+    .arrow:hover {
+      background: var(--ink);
+      color: var(--paper);
+    }
   }
 
-  .arrow-prev {
-    left: 0.4rem;
+  /* No celular a foto é pequena demais para dividir espaço com as setas, e não
+     há margem do lado de fora do painel: elas ficam numa barra abaixo da foto.
+     O painel tem altura fixa para a barra não mudar de lugar quando a altura da
+     captura muda; um toque fora do lugar cairia no fundo e fecharia a galeria. */
+  @media (max-width: 899.98px) {
+    .gallery {
+      --screen-max-height: calc(88dvh - 13rem);
+      height: 88dvh;
+      max-height: none;
+    }
+
+    .gallery[open] {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel {
+      flex: 1;
+      min-height: 0;
+      max-height: none;
+    }
+
+    .stage {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      padding: 0.75rem;
+    }
+
+    .slide {
+      width: 100%;
+      margin-block: auto;
+    }
+
+    /* Duas linhas reservadas: legenda curta ou longa não mexe na foto. */
+    .caption {
+      min-height: 2lh;
+    }
+
+    .arrows {
+      display: flex;
+      flex: none;
+      padding: 0.4rem;
+      border: 2px solid var(--ink);
+      border-top: 0;
+      background: var(--paper);
+    }
+
+    .arrow {
+      border: 1px solid var(--rule);
+    }
+
+    /* Empurrada à direita: não anda quando a seta anterior some na primeira tela. */
+    .arrow-next {
+      margin-inline-start: auto;
+    }
   }
 
-  .arrow-next {
-    right: 0.4rem;
-  }
-
-  /* Fora do painel a seta fica sobre o backdrop, que é escuro nos dois temas.
-     Daí a cor de creme fixa em vez do token de papel, que inverte no escuro. */
+  /* No desktop as setas flanqueiam o painel, soltas sobre o backdrop, que é escuro
+     nos dois temas. Daí o creme fixo em vez do token de papel, que inverte no escuro. */
   @media (min-width: 900px) {
     /* O painel abre mão de uma calha de 5,5rem de cada lado: é onde a seta
        pousa. Sem isso ela encosta na beira da janela e é cortada. */
@@ -309,26 +355,24 @@ const id = `screens-${slug}`;
       width: min(64rem, calc(100vw - 11rem));
     }
 
-    .arrow,
-    .arrow:hover {
-      background: none;
-      border: 0;
-    }
-
     .arrow {
+      position: absolute;
+      top: 50%;
       width: 3.25rem;
       height: 3.25rem;
+      transform: translateY(-50%);
       color: #e9e1ce;
     }
 
     /* Solta no backdrop, sem moldura em volta, a seta precisa de mais corpo
-       para ser vista; dentro do painel o filete já dava o contorno. */
+       para ser vista. */
     .arrow svg {
       width: 1.75rem;
       height: 1.75rem;
     }
 
     .arrow:hover {
+      background: none;
       color: #fff;
     }
 
